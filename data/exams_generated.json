@@ -1,0 +1,1458 @@
+{
+ "_note": "امتحانات مكتوبة من الصفر بصيغة الأميرنت — لا حقوق طرف ثالث عليها. النصوص مكتوبة كمصفوفة أسطر ليكون ترقيمها مضبوطاً، لأن الأسئلة تشير إلى «line N».",
+ "source": "مكتوبة خصيصاً لهذا التطبيق",
+ "exams": [
+  {
+   "id": "g1",
+   "title": "امتحان ١",
+   "sections": [
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "The committee's report was deliberately ______ : it named no one and recommended nothing.",
+       "options": [
+        "decisive",
+        "evasive",
+        "urgent",
+        "detailed"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "Three days of heavy rain ______ the already unstable hillside, and part of it collapsed overnight.",
+       "options": [
+        "alleviated",
+        "aggravated",
+        "postponed",
+        "measured"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "Although the treaty was signed in 1994, several of its clauses were never ______.",
+       "options": [
+        "enacted",
+        "abridged",
+        "rehearsed",
+        "inherited"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The desert fox is strictly ______ , leaving its burrow only after the temperature drops.",
+       "options": [
+        "nocturnal",
+        "migratory",
+        "domestic",
+        "territorial"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "Critics dismissed the theory as ______ , but three later studies supported it.",
+       "options": [
+        "preposterous",
+        "conventional",
+        "established",
+        "verified"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Water scarcity is ______ in the region, affecting nearly every village in the valley.",
+       "options": [
+        "rampant",
+        "negligible",
+        "seasonal",
+        "declining"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "She spoke so quietly that her answer was almost ______ to those at the back of the hall.",
+       "options": [
+        "inaudible",
+        "illegible",
+        "invisible",
+        "unavoidable"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The new regulations will ______ the older ones, which remain in force only until January.",
+       "options": [
+        "supplant",
+        "reinforce",
+        "postpone",
+        "duplicate"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "type": "reading",
+     "passage": [
+      "In 1901, sponge divers exploring a shipwreck off the Greek island of",
+      "Antikythera recovered a corroded lump of bronze that was set aside for",
+      "decades as a curiosity. When researchers finally examined it closely, they",
+      "found something nobody expected: a system of at least thirty interlocking",
+      "gears, cut with a precision that would not be matched in Europe for another",
+      "fourteen centuries. The device, now called the Antikythera mechanism, is",
+      "widely described as the oldest known analogue computer.",
+      "Its purpose was astronomical. By turning a handle, a user could track the",
+      "positions of the sun and the moon, predict eclipses, and follow the four-year",
+      "cycle of the games held at Olympia. The mechanism did not merely record",
+      "observations; it modelled them, reproducing the irregular motion of the moon",
+      "through a clever arrangement of pins and slots.",
+      "What makes the object so puzzling is its isolation. No comparable device",
+      "survives from the ancient world, and no classical text describes one in any",
+      "detail. Some scholars argue that the mechanism must have belonged to a",
+      "tradition of instrument-making whose other products were melted down for",
+      "their metal. Others suspect it was a singular achievement, the work of one",
+      "workshop that left no successors.",
+      "The debate matters because it bears on a larger question: whether ancient",
+      "technology advanced steadily and was later lost, or whether it produced",
+      "occasional brilliant objects that never took root. The gears of Antikythera",
+      "offer no answer, only the reminder that what survives from antiquity is a",
+      "matter of accident as much as of importance."
+     ],
+     "questions": [
+      {
+       "text": "What is the main point of the passage?",
+       "options": [
+        "Ancient Greek astronomy was more accurate than modern astronomy.",
+        "A remarkable ancient device survives, but historians disagree about what it means.",
+        "Sponge divers have made most of the important archaeological discoveries.",
+        "European clockmakers copied the Antikythera mechanism."
+       ],
+       "correct": 1
+      },
+      {
+       "text": "According to the second paragraph, a user of the mechanism could -",
+       "options": [
+        "measure the weight of bronze objects",
+        "record the results of athletic games",
+        "predict eclipses and follow the Olympic cycle",
+        "correct errors in the classical calendar"
+       ],
+       "correct": 2
+      },
+      {
+       "text": "The word \"isolation\" (line 13) refers to the fact that the mechanism -",
+       "options": [
+        "was found far from any settlement",
+        "has no known counterpart from its era",
+        "was kept apart from other museum objects",
+        "was built by a workshop working in secret"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "According to lines 15-18, scholars disagree about whether the mechanism was -",
+       "options": [
+        "genuine or a modern forgery",
+        "used for astronomy or for navigation",
+        "built in Greece or imported from Egypt",
+        "one of many such devices or a unique one"
+       ],
+       "correct": 3
+      },
+      {
+       "text": "In the final paragraph, the writer suggests that -",
+       "options": [
+        "what has survived from antiquity is partly a matter of chance",
+        "ancient technology clearly advanced in a straight line",
+        "the mechanism settles the debate about ancient progress",
+        "classical texts should be trusted over physical evidence"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "type": "restatement",
+     "questions": [
+      {
+       "text": "Not until the results had been independently replicated did the journal agree to publish the paper.",
+       "options": [
+        "The journal published the paper first and only later asked for the results to be replicated.",
+        "The journal agreed to publish the paper only after other researchers had reproduced the results.",
+        "The journal rejected the paper even though independent researchers had successfully reproduced its results.",
+        "The results were replicated precisely because the journal had already agreed to publish the paper."
+       ],
+       "correct": 1
+      },
+      {
+       "text": "The city would almost certainly have flooded had the flood barrier not been raised in time.",
+       "options": [
+        "Because the barrier was raised before the water rose, the city escaped the flooding.",
+        "The barrier was raised far too late, and as a result much of the city flooded.",
+        "No barrier was ever raised at all, which is why the city suffered such extensive flooding.",
+        "The city will be flooded unless someone manages to raise the barrier within the next few hours."
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Far from discouraging her, the criticism she received made her work considerably harder than before.",
+       "options": [
+        "The criticism upset her so much that she produced far less work than she had previously.",
+        "She paid no attention whatsoever to the criticism and carried on working exactly as before.",
+        "Rather than putting her off, the criticism led her to put in significantly more effort.",
+        "She worked harder mainly in order to avoid being criticised by the same people again."
+       ],
+       "correct": 2
+      }
+     ]
+    },
+    {
+     "type": "restatement",
+     "questions": [
+      {
+       "text": "The scheme has little chance of succeeding unless the money allocated to it is doubled.",
+       "options": [
+        "The scheme will succeed comfortably even if no further money is allocated to it.",
+        "Doubling the money allocated to the scheme would almost certainly cause it to fail.",
+        "Unless twice as much money is provided, the scheme is unlikely to succeed.",
+        "The money has already been doubled, so the scheme is now certain to succeed."
+       ],
+       "correct": 2
+      },
+      {
+       "text": "Few of the candidates interviewed had any experience relevant to the position on offer.",
+       "options": [
+        "Most of the candidates who were interviewed lacked experience relevant to the post.",
+        "Every candidate interviewed brought a great deal of relevant experience to the position.",
+        "The candidates had relevant experience but none of the qualifications the post required.",
+        "Only a small number of people applied for the position that was on offer."
+       ],
+       "correct": 0
+      },
+      {
+       "text": "He is said to have turned down the award on three separate occasions before finally accepting it.",
+       "options": [
+        "According to reports, he refused the award three times and then accepted it at last.",
+        "He accepted the award immediately on all three occasions on which it was offered.",
+        "The committee refused to give him the award three times before eventually agreeing.",
+        "He announced well in advance that he intended to refuse the award three times."
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "The report's conclusions were badly ______ by the discovery of an error in its calculations.",
+       "options": [
+        "undermined",
+        "confirmed",
+        "published",
+        "endorsed"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Bamboo is remarkably ______ : it is used for scaffolding, flooring, paper and even food.",
+       "options": [
+        "versatile",
+        "fragile",
+        "scarce",
+        "obsolete"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The two accounts of the accident are ______ ; at least one witness must be mistaken.",
+       "options": [
+        "identical",
+        "contradictory",
+        "detailed",
+        "plausible"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "After the scandal broke, the minister was ______ to resign and had to be pressured for weeks.",
+       "options": [
+        "reluctant",
+        "eligible",
+        "prone",
+        "adequate"
+       ],
+       "correct": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "g2",
+   "title": "امتحان ٢",
+   "sections": [
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "Concrete and asphalt ______ heat throughout the day and release it slowly after dark.",
+       "options": [
+        "absorb",
+        "reflect",
+        "dilute",
+        "repel"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The mayor's plan to plant fifty thousand trees was ______ by residents of every district.",
+       "options": [
+        "denounced",
+        "welcomed",
+        "ignored",
+        "postponed"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "Rooftop gardens can ______ indoor temperatures by several degrees in summer.",
+       "options": [
+        "moderate",
+        "magnify",
+        "record",
+        "conceal"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Elderly residents living alone are especially ______ to heat stress.",
+       "options": [
+        "vulnerable",
+        "resistant",
+        "indifferent",
+        "accustomed"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "The study found a ______ link between night-time temperatures and hospital admissions.",
+       "options": [
+        "trivial",
+        "significant",
+        "imaginary",
+        "reversed"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "Painting roofs white is a ______ measure: cheap, quick and surprisingly effective.",
+       "options": [
+        "pragmatic",
+        "elaborate",
+        "controversial",
+        "obsolete"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Without a single tree for shade, the plaza becomes ______ by midday in July.",
+       "options": [
+        "scorching",
+        "humid",
+        "porous",
+        "vacant"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Planners must ______ the cost of the scheme against the savings it will produce over time.",
+       "options": [
+        "weigh",
+        "dismiss",
+        "inflate",
+        "conceal"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "type": "reading",
+     "passage": [
+      "On a summer night, the centre of a large city can be five degrees warmer",
+      "than the farmland that surrounds it. The effect has a name — the urban heat",
+      "island — and a straightforward cause. Stone, brick and asphalt absorb solar",
+      "radiation through the day and give it back slowly through the night, while",
+      "vegetation, which cools the air by releasing water vapour, has been largely",
+      "removed. Add the waste heat of engines and air conditioners, and the city",
+      "becomes a reservoir that never fully empties before morning.",
+      "For a long time this was treated as a curiosity of urban climate rather than a",
+      "public health problem. That view has changed. Studies across several",
+      "continents have found that hospital admissions rise sharply when night-time",
+      "temperatures stay high, because the body relies on cool nights to recover",
+      "from daytime heat. The elderly, the poor and those living on upper floors",
+      "without air conditioning bear most of the burden.",
+      "The remedies are neither complicated nor expensive. Trees along streets",
+      "provide shade and evaporative cooling at once. Roofs painted a reflective",
+      "white can lower the temperature of the room beneath them by several",
+      "degrees. Small parks, distributed widely, cool their surroundings far more",
+      "effectively than a single large one.",
+      "What has proved difficult is not the engineering but the distribution.",
+      "Detailed heat maps of many cities show the hottest districts are consistently",
+      "the poorest, with the fewest trees and the least shade — the legacy of decades",
+      "of planning decisions. Cooling a city, it turns out, is less a technical problem",
+      "than a question of where the money is spent."
+     ],
+     "questions": [
+      {
+       "text": "What is the passage mainly about?",
+       "options": [
+        "Why air conditioning should be banned in cities",
+        "A well-understood urban problem whose solutions are unevenly applied",
+        "The difficulty of measuring temperature in large cities",
+        "How farmland is cooler than cities in every season"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "According to the first paragraph, cities stay warm at night mainly because -",
+       "options": [
+        "engines run continuously through the night",
+        "hard surfaces store heat and there is little vegetation",
+        "the air above cities is more humid than elsewhere",
+        "buildings block the wind that would cool the streets"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "In line 12, \"bear most of the burden\" means that these groups -",
+       "options": [
+        "carry equipment for others",
+        "are blamed for the problem",
+        "suffer the worst consequences",
+        "pay the highest energy bills"
+       ],
+       "correct": 2
+      },
+      {
+       "text": "According to the third paragraph, several small parks are preferable to one large park because they -",
+       "options": [
+        "are cheaper to maintain",
+        "cool a much wider area",
+        "require fewer trees in total",
+        "attract more visitors"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "The last sentence of the passage suggests that the main obstacle is -",
+       "options": [
+        "a lack of scientific understanding",
+        "the absence of suitable technology",
+        "how resources are allocated between districts",
+        "opposition from city residents"
+       ],
+       "correct": 2
+      }
+     ]
+    },
+    {
+     "type": "restatement",
+     "questions": [
+      {
+       "text": "Hardly anyone at the meeting raised any objection to the proposal that had been put forward.",
+       "options": [
+        "Almost none of those present at the meeting objected to the proposal.",
+        "Everyone at the meeting objected strongly to the proposal that was put forward.",
+        "The proposal was withdrawn before anyone at the meeting had a chance to discuss it.",
+        "Only the most difficult parts of the proposal attracted any criticism at the meeting."
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Only by planting large numbers of street trees can the city hope to reduce its summer temperatures.",
+       "options": [
+        "Planting street trees is one of several methods the city could use to cool itself.",
+        "Planting large numbers of street trees is the only way the city can lower summer temperatures.",
+        "There is nothing at all the city can do to reduce its temperatures in summer.",
+        "Street trees have been shown to raise rather than lower temperatures during the summer."
+       ],
+       "correct": 1
+      },
+      {
+       "text": "The scheme had to be postponed indefinitely owing to a severe shortage of public funds.",
+       "options": [
+        "The scheme was abandoned altogether because it had been very badly designed from the start.",
+        "A serious lack of public money forced the scheme to be delayed with no new date set.",
+        "The scheme went ahead exactly as planned in spite of the shortage of public funds.",
+        "The shortage of public funds was itself caused by the enormous cost of the scheme."
+       ],
+       "correct": 1
+      }
+     ]
+    },
+    {
+     "type": "restatement",
+     "questions": [
+      {
+       "text": "She would sooner resign from her post than compromise the principles she has always held.",
+       "options": [
+        "She resigned from her post shortly after abandoning the principles she once held.",
+        "She would rather give up her position than act against her long-held principles.",
+        "She compromised her principles in order to hold on to the post she valued.",
+        "She was forced out of her post because of the principles she insisted on keeping."
+       ],
+       "correct": 1
+      },
+      {
+       "text": "It was not until 1980 that the practice was finally outlawed throughout the country.",
+       "options": [
+        "The practice remained perfectly legal everywhere in the country until 1980.",
+        "The practice had already been banned across the country long before 1980 arrived.",
+        "Despite repeated attempts, the practice has never actually been made illegal anywhere.",
+        "The practice was made legal throughout the country for the first time in 1980."
+       ],
+       "correct": 0
+      },
+      {
+       "text": "No matter how carefully the data had been collected, the conclusion drawn from them was flawed.",
+       "options": [
+        "The data were gathered carelessly, which is precisely why the conclusion turned out wrong.",
+        "The conclusion was perfectly sound because such great care had been taken over the data.",
+        "The conclusion was mistaken despite all the care that went into collecting the data.",
+        "Collecting data carefully is simply not possible in this particular field of research."
+       ],
+       "correct": 2
+      }
+     ]
+    },
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "Green roofs ______ rainwater that would otherwise overwhelm the city's drains.",
+       "options": [
+        "retain",
+        "release",
+        "contaminate",
+        "evaporate"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The findings were ______ enough to persuade the government to change national policy.",
+       "options": [
+        "compelling",
+        "tentative",
+        "obscure",
+        "trivial"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Heat maps show that the poorest neighbourhoods are ______ affected by high temperatures.",
+       "options": [
+        "disproportionately",
+        "rarely",
+        "equally",
+        "barely"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "After sustained public pressure, the council ______ the tree-planting budget.",
+       "options": [
+        "boosted",
+        "abolished",
+        "concealed",
+        "audited"
+       ],
+       "correct": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "g3",
+   "title": "امتحان ٣",
+   "sections": [
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "The lantern fish produces its own light, a trait it shares with many ______ species.",
+       "options": [
+        "marine",
+        "terrestrial",
+        "domestic",
+        "extinct"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Sunlight ______ almost completely below two hundred metres, leaving the deep ocean dark.",
+       "options": [
+        "intensifies",
+        "vanishes",
+        "reflects",
+        "accumulates"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "Because the samples were ______ , the laboratory had to repeat the entire experiment.",
+       "options": [
+        "contaminated",
+        "abundant",
+        "labelled",
+        "sealed"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The expedition's findings ______ everything biologists had assumed about life at that depth.",
+       "options": [
+        "overturned",
+        "confirmed",
+        "recorded",
+        "summarised"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "Deep-sea creatures must ______ pressures that would crush a submarine.",
+       "options": [
+        "withstand",
+        "generate",
+        "avoid",
+        "measure"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Funding for the survey was ______ , so only two of the six planned dives took place.",
+       "options": [
+        "scarce",
+        "excessive",
+        "unconditional",
+        "renewed"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The glow is produced by a chemical reaction rather than by any ______ source of heat.",
+       "options": [
+        "external",
+        "internal",
+        "artificial",
+        "renewable"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Her account of the dive was so ______ that listeners felt they had been there themselves.",
+       "options": [
+        "vivid",
+        "vague",
+        "brief",
+        "technical"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "type": "reading",
+     "passage": [
+      "Below about two hundred metres, the ocean receives no useful sunlight. Yet",
+      "this is not a world of total darkness. An estimated three-quarters of the",
+      "animals living there produce light of their own, a phenomenon known as",
+      "bioluminescence. The light comes not from heat but from a chemical",
+      "reaction, in which a molecule called luciferin is oxidised in the presence of",
+      "an enzyme. Almost none of the energy is wasted as warmth, which is why",
+      "biologists sometimes describe it as cold light.",
+      "The uses to which animals put this light are strikingly varied. The anglerfish",
+      "dangles a glowing lure in front of its jaws, exploiting the curiosity of smaller",
+      "fish. Certain squid do the opposite, matching the faint light filtering down",
+      "from above so that their silhouettes disappear when seen from below — a",
+      "technique known as counter-illumination. Others release a cloud of glowing",
+      "fluid and escape while a predator is distracted by it.",
+      "Perhaps the most surprising use is social. Several species flash in patterns",
+      "specific to their kind, and the patterns differ between males and females. In",
+      "an environment where sound carries poorly over short distances and scent",
+      "drifts unpredictably, light appears to be the most reliable way of finding a",
+      "mate.",
+      "Bioluminescence is therefore not a curiosity at the margins of ocean life but",
+      "one of its organising principles. Any account of the deep sea that treats it as",
+      "an empty, silent void has, quite literally, missed what is happening in front",
+      "of it."
+     ],
+     "questions": [
+      {
+       "text": "An appropriate title for this passage would be -",
+       "options": [
+        "Why the Deep Ocean Is Dark",
+        "Living Light: How the Deep Sea Sees",
+        "The Chemistry of Luciferin",
+        "Dangers Facing Deep-Sea Fish"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "According to the first paragraph, bioluminescent light is called \"cold light\" because -",
+       "options": [
+        "it is produced only in cold water",
+        "it makes the surrounding water cooler",
+        "almost no energy escapes as heat",
+        "it is visible only to cold-blooded animals"
+       ],
+       "correct": 2
+      },
+      {
+       "text": "The technique described in lines 10-12 helps squid by -",
+       "options": [
+        "attracting prey towards their jaws",
+        "making them hard to see from underneath",
+        "warning other squid of danger",
+        "producing a cloud that hides them"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "According to the third paragraph, light is used for finding a mate because -",
+       "options": [
+        "other signals are unreliable at those depths",
+        "it can be seen from the surface",
+        "females cannot produce sound",
+        "predators are attracted by scent"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The writer's attitude towards the idea that the deep sea is an \"empty, silent void\" is -",
+       "options": [
+        "cautiously supportive",
+        "clearly dismissive",
+        "entirely neutral",
+        "undecided"
+       ],
+       "correct": 1
+      }
+     ]
+    },
+    {
+     "type": "restatement",
+     "questions": [
+      {
+       "text": "So dark is the deep ocean that the majority of its inhabitants generate light of their own.",
+       "options": [
+        "The deep ocean is so dark that most creatures living there produce their own light.",
+        "Most deep-sea creatures deliberately avoid light because the ocean around them is dark.",
+        "The ocean is dark precisely because its inhabitants absorb all the light reaching them.",
+        "Very few of the animals living in the dark ocean produce any light at all."
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Had the funding not been cut halfway through, the survey would have covered all six sites.",
+       "options": [
+        "Because the funding was cut, fewer than six sites were eventually surveyed.",
+        "All six sites were surveyed despite the cut that was made to the funding.",
+        "The funding was increased halfway through, which allowed all six sites to be surveyed.",
+        "The survey was called off completely as soon as the funding was reduced."
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Scarcely had the submersible reached the seabed when its main camera stopped working.",
+       "options": [
+        "The camera had already failed long before the submersible began its descent.",
+        "The main camera failed almost immediately after the submersible arrived at the seabed.",
+        "The submersible never reached the seabed at all because its main camera had failed.",
+        "The camera continued working perfectly throughout the whole of the dive to the seabed."
+       ],
+       "correct": 1
+      }
+     ]
+    },
+    {
+     "type": "restatement",
+     "questions": [
+      {
+       "text": "The species is by no means as rare as biologists once believed it to be.",
+       "options": [
+        "The species has turned out to be far rarer than biologists had ever suspected.",
+        "The species is considerably less rare than biologists used to think it was.",
+        "No biologist has ever seriously believed this particular species to be a rare one.",
+        "The species has become rare only within the last few decades of study."
+       ],
+       "correct": 1
+      },
+      {
+       "text": "Rather than publishing the findings immediately, the team waited until they had been independently confirmed.",
+       "options": [
+        "The team published straight away and only sought independent confirmation afterwards.",
+        "The team decided in the end never to publish any of the findings at all.",
+        "The team held the findings back until other researchers had confirmed them.",
+        "The team confirmed the findings themselves but then refused to publish them."
+       ],
+       "correct": 2
+      },
+      {
+       "text": "The glow serves both to attract unsuspecting prey and to deter approaching predators.",
+       "options": [
+        "The glow draws prey in but has no effect whatsoever on approaching predators.",
+        "The glow has two purposes: luring prey closer and driving predators away.",
+        "The glow attracts predators towards the animal and frightens its prey away.",
+        "The glow is of use only as a defence against predators, not for hunting."
+       ],
+       "correct": 1
+      }
+     ]
+    },
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "The submersible is designed to ______ at depths of six thousand metres.",
+       "options": [
+        "operate",
+        "float",
+        "dissolve",
+        "expand"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Species that live in complete darkness often have ______ eyes or none at all.",
+       "options": [
+        "enlarged",
+        "impaired",
+        "coloured",
+        "protruding"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "The team's conclusions remain ______ until the samples have been analysed.",
+       "options": [
+        "tentative",
+        "definitive",
+        "published",
+        "irrelevant"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Deep-sea mining could ______ habitats that took thousands of years to form.",
+       "options": [
+        "devastate",
+        "cultivate",
+        "illuminate",
+        "designate"
+       ],
+       "correct": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "g4",
+   "title": "امتحان ٤",
+   "sections": [
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "Before printing, every copy of a book had to be produced by hand, which made books ______.",
+       "options": [
+        "expensive",
+        "portable",
+        "durable",
+        "identical"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The invention spread through Europe with ______ speed for the fifteenth century.",
+       "options": [
+        "remarkable",
+        "negligible",
+        "steady",
+        "declining"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Authorities were quick to ______ books they considered dangerous.",
+       "options": [
+        "ban",
+        "translate",
+        "distribute",
+        "reprint"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The printing shop's output was ______ : almanacs, sermons, poetry and legal forms alike.",
+       "options": [
+        "diverse",
+        "uniform",
+        "modest",
+        "secret"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "Literacy rates rose ______ once cheap printed material became widely available.",
+       "options": [
+        "sharply",
+        "barely",
+        "temporarily",
+        "artificially"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Manuscript copying was slow and errors ______ with every new copy made.",
+       "options": [
+        "accumulated",
+        "disappeared",
+        "stabilised",
+        "reversed"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The guild tried to ______ the new trade, but printers simply moved to other cities.",
+       "options": [
+        "regulate",
+        "encourage",
+        "finance",
+        "advertise"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "His claim that printing caused the Reformation is widely regarded as ______.",
+       "options": [
+        "oversimplified",
+        "undisputed",
+        "verified",
+        "unremarkable"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "type": "reading",
+     "passage": [
+      "It is often said that the printing press caused the Reformation. The claim is",
+      "tempting, and it is not entirely wrong, but it compresses a complicated story",
+      "into a single cause. What the press changed first was arithmetic. A scribe",
+      "working steadily could produce perhaps two books a year; a printing shop in",
+      "the 1470s could produce several hundred. The price of a book fell by roughly",
+      "four-fifths within a generation.",
+      "That fall mattered less for scholars, who had always found ways to borrow",
+      "books, than for people who had never owned one. The early presses did not",
+      "print mainly great works of theology. They printed almanacs, medical",
+      "advice, legal forms, school primers and short political pamphlets — cheap,",
+      "disposable material that has largely not survived precisely because nobody",
+      "thought it worth keeping.",
+      "The consequence was a slow change in who counted as a reader. Literacy",
+      "had previously been a professional skill, concentrated among clergy and",
+      "clerks. Within a century it had become something a merchant, a craftsman",
+      "or an unusually determined farmer might reasonably acquire. Reading aloud",
+      "in workshops and taverns extended the reach of a printed page well beyond",
+      "those who could read it themselves.",
+      "Seen this way, the press did not deliver a message so much as enlarge the",
+      "audience. Ideas that had once circulated among a few hundred people could",
+      "now reach tens of thousands, and could do so faster than any authority could",
+      "respond. That, rather than any particular book, is what made the sixteenth",
+      "century so difficult to govern."
+     ],
+     "questions": [
+      {
+       "text": "The writer's main argument is that the printing press -",
+       "options": [
+        "had almost no effect on European society",
+        "mattered chiefly by widening the reading public rather than by spreading one message",
+        "was invented specifically to promote the Reformation",
+        "was less important than the work of individual scribes"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "In the first paragraph, the writer says the claim about the Reformation -",
+       "options": [
+        "is completely false",
+        "has never been made by historians",
+        "is partly true but too simple",
+        "was invented by printers themselves"
+       ],
+       "correct": 2
+      },
+      {
+       "text": "According to the second paragraph, much early printed material has not survived because -",
+       "options": [
+        "it was deliberately destroyed by the authorities",
+        "it was printed on poor-quality paper",
+        "it was considered too valuable to circulate",
+        "nobody at the time thought it worth preserving"
+       ],
+       "correct": 3
+      },
+      {
+       "text": "According to lines 16-18, reading aloud was important because it -",
+       "options": [
+        "improved the accuracy of printed texts",
+        "reached people who could not read themselves",
+        "was the only way to read in poor light",
+        "allowed printers to check their work"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "The phrase \"difficult to govern\" (last line) refers to the fact that ideas could now -",
+       "options": [
+        "be printed only with official permission",
+        "spread faster than authorities could react",
+        "be understood only by educated readers",
+        "be stored safely for future generations"
+       ],
+       "correct": 1
+      }
+     ]
+    },
+    {
+     "type": "restatement",
+     "questions": [
+      {
+       "text": "Not only did the printing press drive prices down, it also widened the reading public considerably.",
+       "options": [
+        "The press lowered prices without having any real effect on the number of readers.",
+        "The press both reduced the price of books and greatly increased the number of readers.",
+        "The press pushed prices up and consequently reduced the size of the reading public.",
+        "The press widened the reading public but made books considerably more expensive than before."
+       ],
+       "correct": 1
+      },
+      {
+       "text": "Very little of this cheap printed material has come down to us in any form.",
+       "options": [
+        "Most of the cheap printed material from that period survives to this day.",
+        "Hardly any of this cheap printed material has survived until the present day.",
+        "This kind of cheap material was in fact never actually printed at all.",
+        "The material was so expensive that it was carefully preserved by its owners."
+       ],
+       "correct": 1
+      },
+      {
+       "text": "It was the sheer scale of circulation, rather than the content itself, that alarmed the authorities.",
+       "options": [
+        "The authorities were disturbed by what the books said, not by how many circulated.",
+        "The authorities were entirely untroubled by printing, whatever its scale or its content.",
+        "What worried the authorities was how widely material spread, not what it actually said.",
+        "Both the content and the scale of circulation left the authorities completely indifferent."
+       ],
+       "correct": 2
+      }
+     ]
+    },
+    {
+     "type": "restatement",
+     "questions": [
+      {
+       "text": "Were it not for the sharp fall in prices, very few new readers would have appeared.",
+       "options": [
+        "Prices fell sharply, and as a direct result a great many new readers appeared.",
+        "Prices did not fall at all, and yet large numbers of new readers appeared.",
+        "New readers had already appeared in large numbers well before prices began to fall.",
+        "The sharp fall in prices actually discouraged new readers from buying any books."
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Printers moved to other cities rather than submit to the rules imposed by the guild.",
+       "options": [
+        "Printers accepted the rules laid down by the guild and remained in the city.",
+        "Printers left for other cities instead of accepting the rules the guild imposed.",
+        "The guild forced the printers to leave the city against their own wishes.",
+        "Printers negotiated an entirely new set of rules with the guild before staying."
+       ],
+       "correct": 1
+      },
+      {
+       "text": "By no means every book printed in the early period dealt with religious subjects.",
+       "options": [
+        "Every single book printed in the early period was religious in its subject matter.",
+        "Religious books were never printed at all during the early period of printing.",
+        "Not all of the books printed in the early period were about religion.",
+        "Only books on religious subjects were considered worth the cost of printing."
+       ],
+       "correct": 2
+      }
+     ]
+    },
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "A scribe's output was ______ compared with that of even a small printing shop.",
+       "options": [
+        "negligible",
+        "enormous",
+        "identical",
+        "unpredictable"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The pamphlet was so ______ that copies were passed from hand to hand until they fell apart.",
+       "options": [
+        "popular",
+        "obscure",
+        "lengthy",
+        "expensive"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Early printers had to ______ typefaces that imitated the handwriting readers expected.",
+       "options": [
+        "devise",
+        "abolish",
+        "borrow",
+        "conceal"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The censor's list was ______ , naming hundreds of titles across a dozen languages.",
+       "options": [
+        "extensive",
+        "brief",
+        "confidential",
+        "provisional"
+       ],
+       "correct": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "g5",
+   "title": "امتحان ٥",
+   "sections": [
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "The route was never a single road but a ______ network of overlapping paths.",
+       "options": [
+        "vast",
+        "narrow",
+        "paved",
+        "temporary"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Few merchants travelled the whole distance; most goods changed hands ______.",
+       "options": [
+        "repeatedly",
+        "rarely",
+        "secretly",
+        "reluctantly"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Silk was valuable enough to ______ the enormous cost of transporting it.",
+       "options": [
+        "justify",
+        "increase",
+        "conceal",
+        "double"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Ideas travelled along the same routes as goods, often ______ by the merchants themselves.",
+       "options": [
+        "carried",
+        "forbidden",
+        "invented",
+        "purchased"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "Oases were ______ to the trade: without them, whole stretches were impassable.",
+       "options": [
+        "essential",
+        "irrelevant",
+        "hostile",
+        "invisible"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Political instability could ______ a route for decades at a time.",
+       "options": [
+        "close",
+        "shorten",
+        "pave",
+        "widen"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The term \"Silk Road\" is ______ ; it was coined in the nineteenth century, not in antiquity.",
+       "options": [
+        "misleading",
+        "ancient",
+        "precise",
+        "official"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Archaeologists have ______ coins from four different empires at a single site.",
+       "options": [
+        "unearthed",
+        "minted",
+        "forged",
+        "melted"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "type": "reading",
+     "passage": [
+      "The phrase \"Silk Road\" was invented in 1877 by a German geographer. No",
+      "merchant of the second century would have recognised it, and no map of the",
+      "period shows a road. What existed instead was a shifting web of routes",
+      "across deserts, mountain passes and grasslands, linking oasis towns whose",
+      "fortunes rose and fell with the water table and the local balance of power.",
+      "The image of a caravan travelling from China to Rome is equally",
+      "misleading. Almost no one made that journey. Goods moved in short stages,",
+      "sold and resold at each town along the way, so that a bolt of silk arriving in",
+      "Antioch might have passed through a dozen hands and doubled in price at",
+      "every exchange. The traders who profited most were often those who never",
+      "left their own region.",
+      "What travelled alongside the goods proved more consequential than the",
+      "goods themselves. Buddhism reached China along these routes; paper",
+      "making moved west; techniques of glassmaking, irrigation and metallurgy",
+      "spread in both directions. So did disease, and some historians argue that the",
+      "same connections that carried paper also carried the plague.",
+      "The routes declined not because they were forgotten but because they were",
+      "undercut. Once ships could carry bulk cargo between Asia and Europe more",
+      "cheaply than pack animals, the overland trade lost its advantage. The towns",
+      "that had grown rich on it were left with monuments they could no longer",
+      "maintain, standing beside roads that no longer led anywhere in particular."
+     ],
+     "questions": [
+      {
+       "text": "According to the first paragraph, the term \"Silk Road\" is inaccurate because -",
+       "options": [
+        "silk was not among the goods traded",
+        "there was no single road and the name is modern",
+        "the routes ran only through China",
+        "geographers never studied the routes"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "The second paragraph suggests that the price of silk rose because -",
+       "options": [
+        "it became increasingly rare over time",
+        "each merchant along the way added a profit",
+        "transport by sea was extremely expensive",
+        "Roman buyers competed with Chinese buyers"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "In line 12, \"more consequential\" means that these things were -",
+       "options": [
+        "more expensive",
+        "more important in their effects",
+        "easier to transport",
+        "more carefully recorded"
+       ],
+       "correct": 1
+      },
+      {
+       "text": "All of the following are given as things that spread along the routes EXCEPT -",
+       "options": [
+        "paper making",
+        "glassmaking",
+        "printing presses",
+        "disease"
+       ],
+       "correct": 2
+      },
+      {
+       "text": "According to the last paragraph, the overland routes declined because -",
+       "options": [
+        "the oasis towns ran out of water",
+        "sea transport became cheaper",
+        "the monuments were destroyed",
+        "merchants forgot where the routes ran"
+       ],
+       "correct": 1
+      }
+     ]
+    },
+    {
+     "type": "restatement",
+     "questions": [
+      {
+       "text": "Hardly any merchant ever travelled the entire length of the route from one end to the other.",
+       "options": [
+        "Almost no merchant covered the whole route from one end of it to the other.",
+        "Every merchant travelled the full length of the route at least once in his life.",
+        "Merchants travelled the route in one direction only and never made the return journey.",
+        "The route was far too short to require more than a single merchant."
+       ],
+       "correct": 0
+      },
+      {
+       "text": "It was not the goods themselves but the ideas travelling with them that had the greater effect.",
+       "options": [
+        "The goods that were traded mattered a great deal more than any ideas did.",
+        "Neither the goods nor the ideas had much lasting effect on the regions involved.",
+        "The ideas carried along the routes proved more influential than the goods themselves.",
+        "Ideas and goods turned out to have had exactly the same degree of influence."
+       ],
+       "correct": 2
+      },
+      {
+       "text": "Once sea routes had proved cheaper, the overland trade was no longer able to compete.",
+       "options": [
+        "The overland trade remained considerably cheaper than transporting the same goods by sea.",
+        "As soon as shipping became the cheaper option, the overland trade lost its advantage.",
+        "Sea routes were always far more expensive than the equivalent routes overland.",
+        "Both routes cost much the same and continued side by side for many centuries."
+       ],
+       "correct": 1
+      }
+     ]
+    },
+    {
+     "type": "restatement",
+     "questions": [
+      {
+       "text": "The towns were left with monuments they could no longer afford to maintain properly.",
+       "options": [
+        "The towns pulled their monuments down in order to save money on their upkeep.",
+        "The towns kept monuments that had become too expensive for them to look after.",
+        "The towns put up entirely new monuments once the overland trade had come to an end.",
+        "The monuments were maintained instead by merchants who came from other regions."
+       ],
+       "correct": 1
+      },
+      {
+       "text": "Not a single map surviving from the period marks a road of the kind later described.",
+       "options": [
+        "Several maps from the period show the road clearly and in considerable detail.",
+        "No surviving map from that period shows any road of the kind described.",
+        "Exactly one map from the period marks the road, though not very accurately.",
+        "Maps were simply never drawn at all during the period in question."
+       ],
+       "correct": 1
+      },
+      {
+       "text": "Some historians contend that the very routes which carried paper westwards also carried the plague.",
+       "options": [
+        "All historians are agreed that the routes carried paper and nothing else besides.",
+        "Certain historians argue that the routes transmitted disease as well as paper.",
+        "Historians firmly deny that the routes ever carried anything harmful at all.",
+        "Paper and plague are known to have travelled by entirely separate routes."
+       ],
+       "correct": 1
+      }
+     ]
+    },
+    {
+     "type": "sentence-completion",
+     "questions": [
+      {
+       "text": "The fortunes of an oasis town could ______ within a single generation.",
+       "options": [
+        "collapse",
+        "endure",
+        "multiply",
+        "stabilise"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Caravans depended on wells whose supply was ______ and often unreliable.",
+       "options": [
+        "seasonal",
+        "constant",
+        "artificial",
+        "unlimited"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "The two accounts of the journey are hard to ______ , since they disagree on almost every date.",
+       "options": [
+        "reconcile",
+        "translate",
+        "publish",
+        "abbreviate"
+       ],
+       "correct": 0
+      },
+      {
+       "text": "Trade did not disappear overnight; it ______ slowly over more than a century.",
+       "options": [
+        "waned",
+        "surged",
+        "resumed",
+        "expanded"
+       ],
+       "correct": 0
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

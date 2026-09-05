@@ -1,0 +1,26 @@
+# ── مفاتيح المشروع ──
+# config.js يحمل مفاتيح Supabase الخاصة بكل نشر.
+# انسخ web/config.example.js إليه واملأه محلياً.
+web/config.js
+keepalive-url.txt
+
+# ── محتوى المصدر ──
+# ملفات المستخدم الخام (كتب، PDF) — قد تكون محميّة بحقوق نشر.
+content/
+
+# ── مخرجات البناء ──
+# تُولَّد كلها بأمر: python update.py
+app.html
+web/index.html
+*.zip
+data/vocab.json
+data/exams.json
+
+# ── نظام التشغيل والمحررات ──
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+__pycache__/
+*.pyc

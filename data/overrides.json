@@ -1,0 +1,20 @@
+{
+  "_note": "أسئلة لا يمكن استخراجها آلياً من الـPDF لأن خياراتها جداول مرسومة. منقولة يدوياً من الكتاب حرفياً. تُدرج قبل إسناد الإجابات حتى يبقى مفتاح الكتاب مُحاذياً.",
+  "insert": [
+    {
+      "exam": 3,
+      "section": 3,
+      "position": 4,
+      "why": "خياراتها أربعة جداول في شبكة ٢×٢ (صفحة ٥١ من الـPDF)",
+      "question": {
+        "text": "Out of the four tables, which one contains information that is not accurate?",
+        "options": [
+          "The Battle of Thermopylae — Between: Greeks and the Persians — Winners: the Persians",
+          "The Battle of Stalingrad — Between: Germans and the Soviets — Winners: the Soviets",
+          "Part of World War I — Between: the Central Powers and France, Britain, the United States — Winners: the Central Powers",
+          "The American Civil War — Between: the Union and the Confederacy — Winners: the Union"
+        ]
+      }
+    }
+  ]
+}
