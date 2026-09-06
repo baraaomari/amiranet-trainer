@@ -171,10 +171,11 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
 .tile.sage{background:var(--c-sage)}
 .tile.lilac{background:var(--c-lilac)}
 .tile.blush{background:var(--c-blush)}
-.tile .scribble{
-  position:absolute; top:8px; inset-inline-start:10px;
-  width:calc(100% - 20px); height:96px;   /* صريح: <svg> عنصر مُستبدَل يتجاهل left+right */
-  z-index:-1; opacity:var(--scribble-a);
+/* رسم موضوعي لكل قسم — يوضّح وظيفته قبل قراءة العنوان */
+.tile-art{
+  position:absolute; top:14px; inset-inline-start:14px;
+  width:74px; height:50px; z-index:-1;
+  color:var(--on-pastel); opacity:.20;
 }
 .tile-badge{
   width:36px;height:36px;border-radius:50%; background:var(--surface); color:var(--text);
@@ -236,6 +237,17 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
 @media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .bar{background:rgba(21,23,27,.11)}}
 .bar i{display:block; height:100%; border-radius:99px; background:var(--ink); transition:width .4s}
 .level-foot{display:flex; align-items:center; justify-content:space-between; margin-top:9px; font-size:12px; font-weight:600}
+
+/* ───────── دائرة التقدّم ───────── */
+.ring{flex:none; display:block}
+.ring .track{stroke:rgba(21,23,27,.13)}
+:root[data-theme="dark"] .ring .track{stroke:rgba(255,255,255,.15)}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .ring .track{stroke:rgba(255,255,255,.15)}
+}
+.ring .bar{transition:stroke-dashoffset .6s cubic-bezier(.4,0,.2,1)}
+.ring text{font-family:var(--font); font-variant-numeric:tabular-nums}
+.level.locked .ring{opacity:.45}
 
 /* ───────── flashcard ───────── */
 .fc-wrap{display:flex; flex-direction:column; gap:16px}
@@ -487,9 +499,10 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
 
     <div class="tiles">
       <button class="tile butter" data-go="vocab">
-        <svg class="scribble" viewBox="0 0 200 90" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M14 60C56 16 92 76 140 32s44-14 48 12" fill="none" stroke="var(--scribble)" stroke-width="15" stroke-linecap="round"/>
-          <path d="M10 40C48 12 104 62 152 24" fill="none" stroke="var(--scribble)" stroke-width="11" stroke-linecap="round"/>
+        <svg class="tile-art" viewBox="0 0 120 80" aria-hidden="true">
+          <path d="M60 22C60 22 48 14 30 16v46c18-2 30 6 30 6s12-8 30-6V16c-18-2-30 6-30 6Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M60 22v46" stroke="currentColor" stroke-width="3"/>
+          <path d="M38 30h14M38 40h14M68 30h14M68 40h14M38 50h9M68 50h9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
         </svg>
         <div class="tile-badge" data-icon="book"></div>
         <div class="tile-title"><span data-i18n="vocabTitle">القاموس</span></div>
@@ -498,9 +511,12 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
       </button>
 
       <button class="tile sage" data-go="exams">
-        <svg class="scribble" viewBox="0 0 200 90" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M12 54C58 22 88 72 138 36s46-8 50 16" fill="none" stroke="var(--scribble)" stroke-width="15" stroke-linecap="round"/>
-          <path d="M16 34C56 8 100 58 156 20" fill="none" stroke="var(--scribble)" stroke-width="11" stroke-linecap="round"/>
+        <svg class="tile-art" viewBox="0 0 120 80" aria-hidden="true">
+          <rect x="34" y="10" width="52" height="62" rx="5" fill="none" stroke="currentColor" stroke-width="3"/>
+          <circle cx="46" cy="26" r="4" fill="none" stroke="currentColor" stroke-width="2.6"/>
+          <circle cx="46" cy="42" r="4" fill="currentColor"/>
+          <circle cx="46" cy="58" r="4" fill="none" stroke="currentColor" stroke-width="2.6"/>
+          <path d="M58 26h18M58 42h18M58 58h12" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
         </svg>
         <div class="tile-badge" data-icon="doc"></div>
         <div class="tile-title"><span data-i18n="examsTitle">الامتحانات</span></div>
@@ -509,9 +525,10 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
       </button>
 
       <button class="tile lilac" data-go="tutor">
-        <svg class="scribble" viewBox="0 0 200 90" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M14 58C52 18 96 74 142 30s42-10 46 14" fill="none" stroke="var(--scribble)" stroke-width="15" stroke-linecap="round"/>
-          <path d="M12 38C54 10 98 60 150 22" fill="none" stroke="var(--scribble)" stroke-width="11" stroke-linecap="round"/>
+        <svg class="tile-art" viewBox="0 0 120 80" aria-hidden="true">
+          <path d="M26 20h44a5 5 0 0 1 5 5v20a5 5 0 0 1-5 5H44l-12 10V50h-6a5 5 0 0 1-5-5V25a5 5 0 0 1 5-5Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M86 34h8a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4h-3v8l-9-8h-4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M38 30h20M38 40h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
         </svg>
         <div class="tile-badge" data-icon="chat"></div>
         <div class="tile-title"><span data-i18n="tutorTitle">المدرّس</span></div>
@@ -520,9 +537,12 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
       </button>
 
       <button class="tile blush" data-go="calc">
-        <svg class="scribble" viewBox="0 0 200 90" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M10 56C54 20 90 70 140 34s48-12 50 14" fill="none" stroke="var(--scribble)" stroke-width="15" stroke-linecap="round"/>
-          <path d="M14 36C58 6 102 56 154 18" fill="none" stroke="var(--scribble)" stroke-width="11" stroke-linecap="round"/>
+        <svg class="tile-art" viewBox="0 0 120 80" aria-hidden="true">
+          <rect x="36" y="8" width="48" height="64" rx="6" fill="none" stroke="currentColor" stroke-width="3"/>
+          <rect x="45" y="17" width="30" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="2.6"/>
+          <circle cx="48" cy="42" r="3.2" fill="currentColor"/><circle cx="60" cy="42" r="3.2" fill="currentColor"/><circle cx="72" cy="42" r="3.2" fill="currentColor"/>
+          <circle cx="48" cy="54" r="3.2" fill="currentColor"/><circle cx="60" cy="54" r="3.2" fill="currentColor"/><circle cx="72" cy="54" r="3.2" fill="currentColor"/>
+          <circle cx="48" cy="64" r="3.2" fill="currentColor"/><circle cx="60" cy="64" r="3.2" fill="currentColor"/><circle cx="72" cy="64" r="3.2" fill="currentColor"/>
         </svg>
         <div class="tile-badge" data-icon="calc"></div>
         <div class="tile-title"><span data-i18n="calcRow">حاسبة العلامة</span></div>
@@ -580,6 +600,8 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
   <!-- ═══════════ exams ═══════════ -->
   <section id="s-exams" hidden>
     <h1 class="page-title">الامتحانات</h1>
+    <div class="stack" id="practiceEntry" style="margin-bottom:24px"></div>
+    <div class="sec-head"><h2 data-i18n="fullExams">امتحانات كاملة</h2></div>
     <div class="stack" id="examList" style="margin-bottom:24px"></div>
     <button class="rowcard" data-go="calc">
       <span class="rowcard-ic blush" data-icon="calc"></span>
@@ -618,6 +640,27 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
       <div style="width:46px"></div>
     </div>
     <div id="reviewBody"></div>
+  </section>
+
+  <!-- ═══════════ practice ═══════════ -->
+  <section id="s-practice" hidden>
+    <div class="runner-top">
+      <button class="icon-btn" data-go="exams" data-i18n-aria-label="back" aria-label="رجوع" data-icon="back"></button>
+      <div class="eyebrow" id="pracTitle">—</div>
+      <div style="width:46px"></div>
+    </div>
+    <div id="pracBody"></div>
+  </section>
+
+  <!-- ═══════════ practice runner ═══════════ -->
+  <section id="s-drill" hidden>
+    <div class="runner-top">
+      <button class="icon-btn" id="drillBack" data-i18n-aria-label="back" aria-label="رجوع" data-icon="back"></button>
+      <div class="eyebrow" id="drillTitle">—</div>
+      <div class="timer num" id="drillCount">١/١</div>
+    </div>
+    <div class="progline" style="margin-bottom:16px"><i id="drillProg" style="width:0%"></i></div>
+    <div id="drillBody"></div>
   </section>
 
   <!-- ═══════════ tutor ═══════════ -->
@@ -1012,6 +1055,18 @@ const STR = {
   errGeneric:{ar:'صار خطأ بالاتصال. جرّب كمان مرة.',en:'A connection error occurred. Try again.'},
   errNotDeployed:{ar:'المدرّس مش منشور بعد. لتشغيله: انشر دالة Edge باسم tutor على Supabase وأضف السرّ ANTHROPIC_API_KEY — الخطوات في DEPLOY.md. باقي أقسام الأبب شغّالة عادي.',
                   en:'The tutor is not deployed yet. To enable it, deploy an Edge Function named tutor on Supabase and add the ANTHROPIC_API_KEY secret — steps are in DEPLOY.md. Everything else works normally.'},
+  practiceTitle:{ar:'تدريب بالأقسام',en:'Skill practice'},
+  practiceSub:{ar:'{0} سؤال مقسّمة على المهارات',en:'{0} questions grouped by skill'},
+  practiceIntro:{ar:'كل نوع سؤال لحاله، بلا مؤقّت ومع تصحيح فوري. اتمرّن على المهارة أول، وبعدين ادخل الامتحان الكامل وأنت مرتاح.',
+                 en:'One skill at a time, untimed, with instant feedback. Train the skill first, then take a full exam without surprises.'},
+  fullExams:{ar:'امتحانات كاملة',en:'Full exams'},
+  allSkills:{ar:'كل المهارات',en:'All skills'},
+  drillMeta:{ar:'{0} مستويات · {1} سؤال',en:'{0} levels · {1} questions'},
+  questionsN:{ar:'{0} سؤال',en:'{0} questions'},
+  bestScore:{ar:'أفضل نتيجة {0}٪',en:'best {0}%'},
+  drillDone:{ar:'خلّصت المستوى',en:'Level complete'},
+  finish:{ar:'أنهِ',en:'Finish'},
+  overallProgress:{ar:'تقدّمك بالتدريب',en:'Practice progress'},
   dbReadFail:{ar:'تعذّرت قراءة قاعدة البيانات',en:'Could not read the database'},
 
   /* بوابة الحساب */
@@ -1106,6 +1161,20 @@ const isMastered = w => cardOf(w).box >= MAX_BOX;
 const isDue = w => { const c = cardOf(w); return c.box === 0 || c.due <= Date.now(); };
 const dueWords = () => ALL_WORDS.filter(w => isUnlocked(w.levelId) && isDue(w));
 const isUnlocked = id => S.meta.unlocked.includes(id);
+
+/* حلقة نسبة مئوية: الرقم في المنتصف، والقوس يمثّل التقدّم */
+function ring(pct, label, size){
+  const R = 19, C = 2 * Math.PI * R;
+  const off = C * (1 - Math.max(0, Math.min(100, pct)) / 100);
+  return '<svg class="ring" viewBox="0 0 46 46" width="' + size + '" height="' + size + '" aria-hidden="true">' +
+    '<circle class="track" cx="23" cy="23" r="' + R + '" fill="none" stroke-width="4"/>' +
+    '<circle class="bar" cx="23" cy="23" r="' + R + '" fill="none" stroke="currentColor" stroke-width="4" ' +
+      'stroke-linecap="round" stroke-dasharray="' + C.toFixed(1) + '" stroke-dashoffset="' + off.toFixed(1) + '" ' +
+      'transform="rotate(-90 23 23)"/>' +
+    '<text x="23" y="23" text-anchor="middle" dominant-baseline="central" ' +
+      'font-size="' + (String(label).length > 2 ? 12 : 15) + '" font-weight="700" fill="currentColor">' +
+      esc(label) + '</text></svg>';
+}
 
 const levelName = l => t('levelName', ar(l.id));
 function levelBand(l){
@@ -1390,8 +1459,9 @@ const TABS = [
   {id:'home', icon:'home'}, {id:'vocab', icon:'book'}, {id:'exams', icon:'doc'},
   {id:'tutor', icon:'chat'}, {id:'schedule', icon:'cal'}
 ];
-const TAB_OF = { study:'vocab', levelTest:'vocab', examRun:'exams', examReview:'exams', calc:'home' };
-const SCREENS = ['home','vocab','study','levelTest','exams','examRun','examReview','tutor','schedule','calc'];
+const TAB_OF = { study:'vocab', levelTest:'vocab', examRun:'exams', examReview:'exams',
+                 practice:'exams', drill:'exams', calc:'home' };
+const SCREENS = ['home','vocab','study','levelTest','exams','practice','drill','examRun','examReview','tutor','schedule','calc'];
 let current = 'home';
 
 /* التسميات تُضبط في applyLang حسب اللغة */
@@ -1411,6 +1481,7 @@ function go(name){
   window.scrollTo({top:0, behavior:'instant'});
   if(name === 'vocab')    renderVocab();
   if(name === 'exams')    renderExams();
+  if(name === 'practice') renderPractice();
   if(name === 'schedule') renderSchedule();
   if(name === 'calc')     renderCalc();
   if(name === 'tutor')    renderChat();
@@ -1547,7 +1618,8 @@ function renderVocab(){
     const doneAll = st.mastered === st.total && st.total > 0;
     return '<button class="level ' + (open ? 'open c' + (i % 4) : 'locked') + '" data-level="' + l.id + '">' +
       '<div class="level-top">' +
-        '<span class="level-n">' + (open ? ar(l.id) : svg('lock',19)) + '</span>' +
+        (open ? ring(st.pct, ar(st.pct) + '٪', 46)
+              : '<span class="level-n">' + svg('lock',19) + '</span>') +
         '<span style="flex:1"><h3>' + esc(levelName(l)) + '</h3><small>' + esc(levelBand(l)) + '</small></span>' +
         (doneAll ? '<span class="rowcard-ic" style="background:var(--surface)">' + svg('check',19) + '</span>' : '') +
       '</div>' +
@@ -1809,6 +1881,26 @@ function renderExams(){
     : '<div class="empty">' + t('noExams') + '</div>';
 
   $$('#examList [data-exam]').forEach(b => b.addEventListener('click', () => startExam(b.dataset.exam)));
+
+  /* التدريب يسبق الامتحانات: يتمرّن على كل مهارة وحدها قبل المؤقّت */
+  const dTotal = DRILL_TYPES.reduce((a, ty) =>
+    a + drillLevels(ty).reduce((n, x) => n + x.questions.length, 0), 0);
+  const dPct = Math.round(DRILL_TYPES.reduce((a, ty) => {
+    const lv = drillLevels(ty);
+    return a + (lv.length ? lv.reduce((n, _, i) => n + drillBest(drillKey(ty, i)), 0) / lv.length : 0);
+  }, 0) / DRILL_TYPES.length);
+  $('#practiceEntry').innerHTML =
+    '<button class="tile sage" data-go="practice" style="min-height:150px">' +
+      '<svg class="tile-art" viewBox="0 0 120 80" aria-hidden="true">' +
+        '<path d="M22 58h16V34H22zM52 58h16V18H52zM82 58h16V44H82z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>' +
+        '<path d="M16 66h88" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>' +
+      '</svg>' +
+      '<div class="tile-title">' + t('practiceTitle') + '</div>' +
+      '<div class="tile-meta">' + t('practiceSub', ar(dTotal)) + '</div>' +
+      '<span class="tile-go">' + svg('arrow',22) + '</span>' +
+    '</button>' +
+    (dPct ? '<div class="level-foot" style="padding:0 4px"><span>' + t('overallProgress') + '</span>' +
+            '<span>' + ar(dPct) + '٪</span></div>' : '');
 
   $('#attempts').innerHTML = S.attempts.length
     ? S.attempts.slice(0,10).map(a =>
@@ -2123,6 +2215,172 @@ function showReview(a){
   paintTutorAvail();   /* أزرار «ليش هاد الجواب؟» تُولَّد الآن — أخفِها إن كان المدرّس غير متاح */
   go('examReview');
 }
+
+/* ════════════════════════ التدريب حسب نوع السؤال ════════════════════════
+   كل نوع سؤال يصير مساراً مستقلاً مقسّماً لمستويات، بلا مؤقّت ومع تصحيح
+   فوري — ليتمرّن على المهارة وحدها قبل أن يواجهها داخل امتحان مؤقّت. */
+const DRILL_SIZE = { 'sentence-completion': 15, 'restatement': 8 };
+
+/* يجمع أسئلة النوع من كل الامتحانات ويقسّمها مستويات.
+   الاستيعاب المقروء يُقسّم بالنص لا بالعدد: كل نص مع أسئلته مستوى. */
+function drillLevels(type){
+  const out = [];
+  if(type === 'reading'){
+    (EXAMS.exams || []).forEach(ex => ex.sections.forEach(sec => {
+      if(sec.type === 'reading')
+        out.push({ passage: sec.passage, questions: sec.questions.slice() });
+    }));
+    return out;
+  }
+  const pool = [];
+  (EXAMS.exams || []).forEach(ex => ex.sections.forEach(sec => {
+    if(sec.type === type) sec.questions.forEach(q => pool.push(q));
+  }));
+  const per = DRILL_SIZE[type] || 10;
+  for(let i = 0; i < pool.length; i += per) out.push({ questions: pool.slice(i, i + per) });
+  return out;
+}
+
+const DRILL_TYPES = ['sentence-completion', 'restatement', 'reading'];
+const drillKey = (type, i) => 'd:' + type + ':' + i;
+const drillBest = key => (S.meta.drills && S.meta.drills[key]) || 0;
+
+function renderPractice(){
+  const rows = DRILL_TYPES.map(type => {
+    const lv = drillLevels(type);
+    const sum = lv.reduce((a, _, i) => a + drillBest(drillKey(type, i)), 0);
+    return { type, levels: lv, pct: lv.length ? Math.round(sum / lv.length) : 0 };
+  });
+
+  $('#pracTitle').textContent = t('practiceTitle');
+  $('#pracBody').innerHTML =
+    '<p class="empty" style="padding:0 4px 18px; text-align:start">' + t('practiceIntro') + '</p>' +
+    '<div class="levels">' + rows.map((d, i) =>
+      '<button class="level open c' + (i % 4) + '" data-drill="' + d.type + '">' +
+        '<div class="level-top">' + ring(d.pct, ar(d.pct) + '٪', 46) +
+          '<span style="flex:1"><h3>' + esc(t('secTitle' + SEC_KEY[d.type])) + '</h3>' +
+          '<small>' + t('drillMeta', ar(d.levels.length),
+                        ar(d.levels.reduce(function(a, x){ return a + x.questions.length; }, 0))) + '</small></span>' +
+          svg('chev', 19) +
+        '</div>' +
+      '</button>').join('') + '</div>';
+
+  $$('#pracBody [data-drill]').forEach(b =>
+    b.addEventListener('click', () => openDrillType(b.dataset.drill)));
+}
+
+function openDrillType(type){
+  const levels = drillLevels(type);
+  $('#pracTitle').textContent = t('secTitle' + SEC_KEY[type]);
+  $('#pracBody').innerHTML =
+    '<button class="btn ghost sm" id="pracBack" style="margin-bottom:16px">' + svg('chev', 17) + ' ' + t('allSkills') + '</button>' +
+    '<div class="levels">' + levels.map((lv, i) => {
+      const pct = drillBest(drillKey(type, i));
+      return '<button class="level open c' + (i % 4) + '" data-i="' + i + '">' +
+        '<div class="level-top">' + ring(pct, ar(pct) + '٪', 46) +
+          '<span style="flex:1"><h3>' + t('levelName', ar(i + 1)) + '</h3>' +
+          '<small>' + t('questionsN', ar(lv.questions.length)) +
+            (pct ? ' · ' + t('bestScore', ar(pct)) : '') + '</small></span>' +
+          svg('chev', 19) +
+        '</div></button>';
+    }).join('') + '</div>';
+
+  $('#pracBack').addEventListener('click', renderPractice);
+  $$('#pracBody [data-i]').forEach(b =>
+    b.addEventListener('click', () => startDrill(type, +b.dataset.i)));
+}
+
+/* ── تشغيل التدريب: تصحيح فوري، بلا مؤقّت ── */
+let drill = null;
+
+function startDrill(type, idx){
+  const lv = drillLevels(type)[idx];
+  if(!lv) return;
+  drill = { type: type, idx: idx, lv: lv, i: 0, right: 0, answered: null };
+  $('#drillTitle').textContent = t('secTitle' + SEC_KEY[type]) + ' · ' + t('levelName', ar(idx + 1));
+  go('drill');
+  paintDrill();
+}
+
+function paintDrill(){
+  if(!drill) return;
+  const qs = drill.lv.questions;
+  if(drill.i >= qs.length) return finishDrill();
+  const q = qs[drill.i];
+  const picked = drill.answered;
+  const last = drill.i === qs.length - 1;
+
+  $('#drillCount').textContent = ar(drill.i + 1) + '/' + ar(qs.length);
+  $('#drillProg').style.width = (drill.i / qs.length * 100) + '%';
+
+  $('#drillBody').innerHTML =
+    renderPassage(drill.lv.passage) +
+    '<div class="q-card">' +
+      '<div class="q-text en">' + esc(q.text) + '</div>' +
+      '<div class="opts">' + q.options.map((o, i) => {
+        let cls = '';
+        if(picked != null) cls = i === q.correct ? ' correct' : (i === picked ? ' wrong' : '');
+        return '<button class="opt' + cls + '" data-i="' + i + '"' + (picked != null ? ' disabled' : '') + '>' +
+          '<span class="opt-k">' + 'ABCD'[i] + '</span><span class="en" style="flex:1">' + esc(o) + '</span></button>';
+      }).join('') + '</div>' +
+    '</div>' +
+    (picked != null
+      ? '<div class="row" style="gap:10px; margin-top:16px">' +
+          '<button class="btn ghost ask-drill" style="flex:1">' + t('whyAnswer') + '</button>' +
+          '<button class="btn" id="drillNext" style="flex:1">' + t(last ? 'finish' : 'next') + '</button>' +
+        '</div>'
+      : '');
+
+  if(picked == null){
+    $('#drillBody').querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+      drill.answered = +b.dataset.i;
+      if(drill.answered === q.correct) drill.right++;
+      paintDrill();
+    }));
+    return;
+  }
+
+  $('#drillNext').addEventListener('click', () => { drill.i++; drill.answered = null; paintDrill(); });
+  const ask = $('#drillBody .ask-drill');
+  ask.hidden = sampleState !== 'ready';
+  ask.addEventListener('click', () => askAboutQuestion({
+    section: t('secTitle' + SEC_KEY[drill.type]),
+    passage: passageText(drill.lv.passage),
+    text: q.text, options: q.options, correct: q.correct, mine: picked
+  }));
+}
+
+function finishDrill(){
+  const qs = drill.lv.questions;
+  const pct = Math.round(drill.right / qs.length * 100);
+  const key = drillKey(drill.type, drill.idx);
+  S.meta.drills = S.meta.drills || {};
+  if(pct > (S.meta.drills[key] || 0)){ S.meta.drills[key] = pct; save('meta'); }
+
+  $('#drillProg').style.width = '100%';
+  $('#drillBody').innerHTML =
+    '<div class="score-hero">' +
+      '<div class="eyebrow">' + t('drillDone') + '</div>' +
+      '<div style="display:flex;justify-content:center;margin:14px 0 6px">' + ring(pct, ar(pct) + '٪', 96) + '</div>' +
+      '<div class="score-of">' + t('ofN', ar(drill.right), ar(qs.length)) + '</div>' +
+    '</div>' +
+    '<div class="row" style="gap:10px; margin-top:20px">' +
+      '<button class="btn ghost" id="drillAgain" style="flex:1">' + t('retakeTest') + '</button>' +
+      '<button class="btn" id="drillDone" style="flex:1">' + t('back') + '</button>' +
+    '</div>';
+
+  const type = drill.type, idx = drill.idx;
+  drill = null;
+  $('#drillAgain').addEventListener('click', () => startDrill(type, idx));
+  $('#drillDone').addEventListener('click', () => { go('practice'); openDrillType(type); });
+}
+
+$('#drillBack').addEventListener('click', () => {
+  const type = drill ? drill.type : null;
+  drill = null;
+  go('practice');
+  if(type) openDrillType(type);
+});
 
 /* ════════════════════════ calculator ════════════════════════ */
 let calcMode = 'total';

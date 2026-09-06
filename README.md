@@ -4,7 +4,7 @@ A study web app for **Amiranet (אמירנט)** — the computerised English pla
 Israeli universities, scored 50–150. Arabic-first interface, full English translation, spaced
 repetition, timed mock exams, and an optional AI tutor.
 
-**Live:** https://thriving-paprenjak-abb7f7.netlify.app
+**Live:** https://amiranet-trainer.netlify.app
 
 ---
 
@@ -12,9 +12,10 @@ repetition, timed mock exams, and an optional AI tutor.
 
 | Feature | Detail |
 |---|---|
-| **Vocabulary** | 359 exam-level words across 8 difficulty-ordered levels, each with an Arabic gloss, a worked example sentence, and synonyms |
+| **Vocabulary** | 359 exam-level words across 4 difficulty-ordered levels, each with an Arabic gloss, a worked example sentence, and synonyms |
 | **Spaced repetition** | Leitner system, 5 boxes: 1 → 3 → 7 → 14 → 30 days. Wrong answers return to box 1 and reappear in the same session |
 | **Level gating** | A level test of 15–20 mixed-format questions; 80% unlocks the next level |
+| **Skill practice** | Every question in the bank regrouped by type — sentence completion, restatement, reading — into 13 untimed levels with instant feedback, so each skill is trained before it is tested |
 | **Mock exams** | 5 full exams in the real Amiranet structure — 6 sections, 23 questions, 39 minutes |
 | **Per-section timers** | Each section runs its own clock and **locks when it expires**, matching the real exam |
 | **Scoring** | Mistakes → score on the published 50–150 conversion curve, with the exemption threshold marked |
@@ -130,6 +131,11 @@ against the original before trusting several hundred extracted rows.
 **Questions that reference line numbers.** Reading passages ask about "line 7" literally, so
 line numbering is content, not decoration. Passages are stored as numbered line arrays and
 rendered with a gutter every fifth line, matching the printed original.
+
+**Practice before pressure.** The same 115 questions serve two modes. In a mock exam they run
+under a per-section clock that locks on expiry; in practice they are regrouped by skill, untimed,
+and marked the instant you answer. Reading is split by passage rather than by count, since a
+passage and its questions are one unit.
 
 **Measuring question difficulty instead of guessing.** The first generated exams felt right
 but measured wrong: restatement options averaged 8.8 words against 14.7 in the reference
