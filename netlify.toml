@@ -1,0 +1,16 @@
+# نشر تلقائي: كل دفعة إلى الفرع main تبني الموقع وتنشره.
+# مفاتيح Supabase تأتي من متغيّرات البيئة في لوحة Netlify،
+# فلا تدخل المستودع أبداً — راجع build_web.py.
+
+[build]
+  command = "python3 update.py"
+  publish = "web"
+
+[build.environment]
+  PYTHON_VERSION = "3.11"
+
+# ملف واحد لتطبيق أحادي الصفحة: أي مسار يعيد الصفحة نفسها.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

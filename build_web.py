@@ -8,6 +8,7 @@
 يستعمل Supabase، وبدون الاثنين يحفظ محلياً.
 """
 
+import os
 import shutil
 import zipfile
 import sys
@@ -88,8 +89,24 @@ def main():
 
     cfg = WEB / "config.js"
     if not cfg.exists():
-        shutil.copy(WEB / "config.example.js", cfg)
-        print("أُنشئ web/config.js من المثال — املأه بقيم مشروعك.")
+        # على خادم البناء لا يوجد config.js (مستثنى من المستودع)، فيُبنى
+        # من متغيّرات البيئة. محلياً بلا متغيّرات يُنسخ المثال ليُملأ يدوياً.
+        env_url = os.environ.get("SUPABASE_URL", "").strip()
+        env_key = os.environ.get("SUPABASE_ANON_KEY", "").strip()
+        if env_url and env_key:
+            cfg.write_text(
+                '/* مولَّد وقت البناء من متغيّرات البيئة — لا تعدّله يدوياً. */\n'
+                'window.SUPABASE_CONFIG = {\n'
+                '  url: "%s",\n'
+                '  anonKey: "%s",\n'
+                '  tutorFunction: "%s"\n'
+                '};\n' % (env_url.rstrip("/"), env_key,
+                          os.environ.get("TUTOR_FUNCTION", "tutor").strip()),
+                encoding="utf-8")
+            print("أُنشئ web/config.js من متغيّرات البيئة.")
+        else:
+            shutil.copy(WEB / "config.example.js", cfg)
+            print("أُنشئ web/config.js من المثال — املأه بقيم مشروعك.")
 
     size = (WEB / "index.html").stat().st_size / 1024
     print("تم بناء web/index.html  (%.0f KB)" % size)
