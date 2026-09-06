@@ -109,7 +109,8 @@ def main():
             z.write(WEB / name, name)
     print("وحُزم كل شيء في: %s  (%.0f KB)"
           % (zip_path.name, zip_path.stat().st_size / 1024))
-    print("اسحب هذا الملف الواحد إلى app.netlify.com/drop")
+    print("لتحديث موقعك القائم: Netlify ← مشروعك ← Deploys ← منطقة السحب")
+    print("(‏app.netlify.com/drop ينشئ موقعاً جديداً برابط جديد — للمرة الأولى فقط)")
 
 
 if __name__ == "__main__":

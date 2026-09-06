@@ -88,7 +88,7 @@ input,textarea,select{font:inherit; color:inherit}
 /* ───────── header ───────── */
 .top{display:flex; align-items:center; gap:12px; margin-bottom:22px}
 .avatar{
-  width:52px;height:52px;border-radius:50%;flex:none;
+  width:52px;height:52px;border-radius:50%;flex:none; border:0; cursor:pointer;
   background:var(--c-lilac); color:var(--on-pastel);
   display:grid;place-items:center; font-weight:700; font-size:19px;
   box-shadow:var(--shadow);
@@ -479,9 +479,9 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
 
   <!-- ═══════════ header ═══════════ -->
   <header class="top">
-    <div class="avatar" id="avatar">ب</div>
+    <button class="avatar" id="avatar" data-i18n-title="askName" title="شو الاسم اللي بدك يظهر؟">★</button>
     <div style="flex:1;min-width:0">
-      <div class="top-name" id="greetName"><span data-i18n="greet">أهلاً بَراء!</span></div>
+      <div class="top-name" id="greetName"></div>
       <div class="top-sub" id="greetSub"><span data-i18n="subStart">يلا نكمّل الحفظ</span></div>
     </div>
     <button class="icon-btn" id="signOut" hidden data-i18n-aria-label="authSignOut" aria-label="تسجيل خروج" data-icon="out"></button>
@@ -782,6 +782,10 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
     </div>
 
     <form id="authForm" novalidate>
+      <div id="authNameRow" hidden>
+        <label class="lbl" for="authName" data-i18n="authName">اسمك (اختياري)</label>
+        <input class="field" type="text" id="authName" autocomplete="name" maxlength="24" style="margin-bottom:14px">
+      </div>
       <label class="lbl" for="authEmail" data-i18n="authEmail">البريد الإلكتروني</label>
       <input class="field" type="email" id="authEmail" autocomplete="email" required>
       <label class="lbl" for="authPass" style="margin-top:14px" data-i18n="authPass">كلمة السر</label>
@@ -851,7 +855,10 @@ const STR = {
   navHome:{ar:'الرئيسية',en:'Home'}, navVocab:{ar:'القاموس',en:'Vocabulary'},
   navExams:{ar:'الامتحانات',en:'Exams'}, navTutor:{ar:'المدرّس',en:'Tutor'},
   navSchedule:{ar:'الجدول',en:'Planner'},
-  greet:{ar:'أهلاً بَراء!',en:'Hi Baraa!'},
+  greet:{ar:'أهلاً {0}!',en:'Hi {0}!'},
+  greetAnon:{ar:'أهلاً بيك!',en:'Welcome!'},
+  askName:{ar:'شو الاسم اللي بدك يظهر؟',en:'What name should we show?'},
+  authName:{ar:'اسمك (اختياري)',en:'Your name (optional)'},
   subStart:{ar:'يلا نبدأ الحفظ',en:"Let's start learning"},
   subDue:{ar:'عندك {0} كلمة للمراجعة',en:'{0} words due for review'},
   subStreak:{ar:'سلسلة {0} يوم — كمّل',en:'{0}-day streak — keep going'},
@@ -1387,6 +1394,7 @@ function setAuthMode(m){
   $('#authGo').dataset.i18n = m === 'in' ? 'authSignIn' : 'authSignUp';
   $('#authGo').textContent = t(m === 'in' ? 'authSignIn' : 'authSignUp');
   $('#authPass').autocomplete = m === 'in' ? 'current-password' : 'new-password';
+  $('#authNameRow').hidden = m !== 'up';
   authMsg('');
 }
 $('#authTabs').addEventListener('click', e => {
@@ -1420,7 +1428,10 @@ $('#authForm').addEventListener('submit', async e => {
   btn.disabled = true; btn.textContent = t('authWorking'); authMsg('');
   try {
     if(authMode === 'up'){
-      const { data, error } = await sb.auth.signUp({ email, password });
+      const name = $('#authName').value.trim().slice(0, 24);
+      const { data, error } = await sb.auth.signUp({
+        email, password, options: name ? { data: { name } } : undefined
+      });
       if(error) throw error;
       /* بلا جلسة فوراً = المشروع يطلب تأكيد البريد */
       if(!data.session){ setAuthMode('in'); authMsg(t('authCheckMail'), true); }
@@ -1516,6 +1527,7 @@ function applyLang(){
     $$('[data-i18n-' + a + ']').forEach(el => el.setAttribute(a, t(el.getAttribute('data-i18n-' + a))));
   });
   $('#langBtn').textContent = t('langToggle');
+  if(typeof paintGreeting === 'function') paintGreeting();
   $$('#tabbar .tab').forEach(b => {
     const key = 'nav' + b.dataset.go.charAt(0).toUpperCase() + b.dataset.go.slice(1);
     b.setAttribute('aria-label', t(key)); b.setAttribute('title', t(key));
@@ -1534,6 +1546,15 @@ function currentTheme(){
   return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 function paintThemeBtn(){ $('#themeBtn').innerHTML = svg(currentTheme() === 'dark' ? 'sun' : 'moon', 21); }
+/* الحسابات القائمة أُنشئت بلا اسم، فيُغيَّر من هنا في أي وقت */
+$('#avatar').addEventListener('click', () => {
+  const now = prompt(t('askName'), displayName());
+  if(now === null) return;
+  S.meta.name = now.trim().slice(0, 24);
+  save('meta');
+  paintGreeting();
+});
+
 $('#themeBtn').addEventListener('click', () => {
   document.documentElement.setAttribute('data-theme', currentTheme() === 'dark' ? 'light' : 'dark');
   paintThemeBtn();
@@ -1547,7 +1568,27 @@ function daysToExam(){
   if(!S.schedule.examDate) return null;
   return Math.ceil((startOfDay(S.schedule.examDate + 'T00:00:00') - startOfDay(Date.now())) / DAY);
 }
+/* اسم العرض: ما اختاره المستخدم، وإلا بداية بريده، وإلا تحية بلا اسم */
+function displayName(){
+  if(S.meta.name) return S.meta.name;
+  const meta = sbUser && sbUser.user_metadata;
+  if(meta && meta.name) return String(meta.name).slice(0, 24);
+  const mail = sbUser && sbUser.email;
+  if(mail){
+    const head = mail.split('@')[0].replace(/[._\-]+/g, ' ').replace(/\d+/g, '').trim();
+    if(head) return head.charAt(0).toUpperCase() + head.slice(1);
+  }
+  return '';
+}
+
+function paintGreeting(){
+  const n = displayName();
+  $('#greetName').textContent = n ? t('greet', n) : t('greetAnon');
+  $('#avatar').textContent = n ? n.trim().charAt(0).toUpperCase() : '★';
+}
+
 function renderHome(){
+  paintGreeting();
   const due = dueWords().length;
   const mastered = ALL_WORDS.filter(isMastered).length;
   const d = daysToExam();
