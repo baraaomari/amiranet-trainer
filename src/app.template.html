@@ -171,12 +171,18 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
 .tile.sage{background:var(--c-sage)}
 .tile.lilac{background:var(--c-lilac)}
 .tile.blush{background:var(--c-blush)}
-/* رسم موضوعي لكل قسم — يوضّح وظيفته قبل قراءة العنوان */
+/* رسم موضوعي لكل قسم — يوضّح وظيفته قبل قراءة العنوان.
+   محسوس لا خافت: الخفوت الشديد يجعل الأربعة تبدو متطابقة. */
 .tile-art{
-  position:absolute; top:14px; inset-inline-start:14px;
-  width:74px; height:50px; z-index:-1;
-  color:var(--on-pastel); opacity:.20;
+  position:absolute; top:8px; inset-inline-start:6px;
+  width:104px; height:70px; z-index:-1;
+  color:var(--on-pastel); opacity:.34;
 }
+:root[data-theme="dark"] .tile-art{opacity:.46}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .tile-art{opacity:.46}
+}
+.tile:hover .tile-art{opacity:.5; transition:opacity .2s}
 .tile-badge{
   width:36px;height:36px;border-radius:50%; background:var(--surface); color:var(--text);
   display:grid;place-items:center; flex:none;
@@ -1088,6 +1094,8 @@ const STR = {
   authNeedConfirm:{ar:'لازم تؤكّد بريدك أولاً. افحص رسائلك.',en:'Confirm your email first — check your inbox.'},
   authOffline:{ar:'تعذّر الاتصال بالخادم. تأكد من اتصالك وحاول مجدداً.',
                en:'Could not reach the server. Check your connection and try again.'},
+  authNoBackend:{ar:'هذه نسخة محلية بلا قاعدة بيانات، فلا يوجد مكان يُسجَّل فيه الحساب. افتح رابط موقعك المنشور.',
+                 en:'This is a local copy with no database, so there is nowhere to register. Open your published site instead.'},
   setupSub:{ar:'الإعداد لم يكتمل بعد',en:'Setup is not finished yet'},
   setupMsg:{ar:'ملف config.js ما زال يحمل القيم النموذجية. افتحه وضع Project URL ومفتاح anon من مشروعك في Supabase، ثم شغّل build_web.py وارفع المجلد من جديد. الخطوات كاملة في DEPLOY.md.',
             en:'config.js still has the example values. Put your Supabase Project URL and anon key in it, run build_web.py, and upload the folder again. Full steps are in DEPLOY.md.'}
@@ -1402,7 +1410,8 @@ function authError(err){
 
 $('#authForm').addEventListener('submit', async e => {
   e.preventDefault();
-  if(!sb) return;
+  /* بلا عميل Supabase لا يوجد خادم نسجّل عنده — نقولها بدل الخروج بصمت */
+  if(!sb){ authMsg(t('authNoBackend')); return; }
   const email = $('#authEmail').value.trim();
   const password = $('#authPass').value;
   if(password.length < 6){ authMsg(t('authShortPass')); return; }
