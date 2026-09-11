@@ -27,6 +27,7 @@ OUT = ROOT / "app.html"
 SLOTS = {
     "__VOCAB_DATA__": ROOT / "data" / "vocab.json",
     "__EXAMS_DATA__": ROOT / "data" / "exams.json",
+    "__PRACTICE_DATA__": ROOT / "data" / "practice.json",
 }
 
 
@@ -35,6 +36,8 @@ def load(path):
     try:
         raw = path.read_text(encoding="utf-8")
     except FileNotFoundError:
+        if path.name == "practice.json":   # اختياري: بلا أسئلة تدريب إضافية
+            return '{"sets":[]}'
         sys.exit(f"ملف مفقود: {path.relative_to(ROOT)}")
     try:
         data = json.loads(raw)

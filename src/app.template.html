@@ -468,9 +468,15 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
   .app{padding-inline:26px}
   .page-title{font-size:44px}
 }
-@media (max-width:359px){
+/* ستة تبويبات: تُصغَّر على الشاشات الضيقة لتتسع الشريط دون تمرير */
+@media (max-width:440px){
+  .tabbar{gap:4px; padding:8px 9px}
   .tab{width:44px;height:44px}
   .tab[aria-current="page"]{width:56px;height:56px}
+}
+@media (max-width:359px){
+  .tab{width:40px;height:40px}
+  .tab[aria-current="page"]{width:50px;height:50px}
   .tiles{gap:11px}
 }
 </style>
@@ -606,8 +612,6 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
   <!-- ═══════════ exams ═══════════ -->
   <section id="s-exams" hidden>
     <h1 class="page-title">الامتحانات</h1>
-    <div class="stack" id="practiceEntry" style="margin-bottom:24px"></div>
-    <div class="sec-head"><h2 data-i18n="fullExams">امتحانات كاملة</h2></div>
     <div class="stack" id="examList" style="margin-bottom:24px"></div>
     <button class="rowcard" data-go="calc">
       <span class="rowcard-ic blush" data-icon="calc"></span>
@@ -650,11 +654,7 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
 
   <!-- ═══════════ practice ═══════════ -->
   <section id="s-practice" hidden>
-    <div class="runner-top">
-      <button class="icon-btn" data-go="exams" data-i18n-aria-label="back" aria-label="رجوع" data-icon="back"></button>
-      <div class="eyebrow" id="pracTitle">—</div>
-      <div style="width:46px"></div>
-    </div>
+    <h1 class="page-title" id="pracTitle">تدريب</h1>
     <div id="pracBody"></div>
   </section>
 
@@ -800,6 +800,7 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
 
 <script type="application/json" id="vocab-data">__VOCAB_DATA__</script>
 <script type="application/json" id="exams-data">__EXAMS_DATA__</script>
+<script type="application/json" id="practice-data">__PRACTICE_DATA__</script>
 
 <script>
 "use strict";
@@ -828,7 +829,8 @@ const P = {
   stop:'M8 8h8v8H8z',
   flame:'M12 21c3.6 0 6-2.3 6-5.6 0-3.6-3-4.9-3-8.4-2 .8-2.6 2.6-2.6 4.2 0 1-.6 1.6-1.2 1.6-.8 0-1.2-.7-1.2-1.8V8C8.2 9.4 6 11.8 6 15.4 6 18.7 8.4 21 12 21Z',
   clock:'M12 7.2V12l3 1.8M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z',
-  out:'M15.4 16.4 19.8 12l-4.4-4.4M19.2 12H9M13 3.6H6.4A1.4 1.4 0 0 0 5 5v14a1.4 1.4 0 0 0 1.4 1.4H13'
+  out:'M15.4 16.4 19.8 12l-4.4-4.4M19.2 12H9M13 3.6H6.4A1.4 1.4 0 0 0 5 5v14a1.4 1.4 0 0 0 1.4 1.4H13',
+  target:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 16.6a4.6 4.6 0 1 0 0-9.2 4.6 4.6 0 0 0 0 9.2ZM12 12h.01'
 };
 function svg(name, size){
   const d = P[name]; if(!d) return '';
@@ -855,6 +857,7 @@ const STR = {
   navHome:{ar:'الرئيسية',en:'Home'}, navVocab:{ar:'القاموس',en:'Vocabulary'},
   navExams:{ar:'الامتحانات',en:'Exams'}, navTutor:{ar:'المدرّس',en:'Tutor'},
   navSchedule:{ar:'الجدول',en:'Planner'},
+  navPractice:{ar:'تدريب',en:'Practice'},
   greet:{ar:'أهلاً {0}!',en:'Hi {0}!'},
   greetAnon:{ar:'أهلاً بيك!',en:'Welcome!'},
   askName:{ar:'شو الاسم اللي بدك يظهر؟',en:'What name should we show?'},
@@ -1142,6 +1145,7 @@ function readJSON(id, fallback){
 }
 const VOCAB = readJSON('vocab-data', {levels:[]});
 const EXAMS = readJSON('exams-data', {exams:[]});
+const PRACTICE = readJSON('practice-data', {sets:[]});
 const LEVELS = VOCAB.levels || [];
 const SOURCE = VOCAB.source || EXAMS.source || '';
 const ALL_WORDS = LEVELS.flatMap(l => (l.words||[]).map(w => Object.assign({levelId:l.id}, w)));
@@ -1477,10 +1481,10 @@ function showLocalOnly(){
 /* ════════════════════════ nav ════════════════════════ */
 const TABS = [
   {id:'home', icon:'home'}, {id:'vocab', icon:'book'}, {id:'exams', icon:'doc'},
-  {id:'tutor', icon:'chat'}, {id:'schedule', icon:'cal'}
+  {id:'practice', icon:'target'}, {id:'tutor', icon:'chat'}, {id:'schedule', icon:'cal'}
 ];
 const TAB_OF = { study:'vocab', levelTest:'vocab', examRun:'exams', examReview:'exams',
-                 practice:'exams', drill:'exams', calc:'home' };
+                 drill:'practice', calc:'home' };
 const SCREENS = ['home','vocab','study','levelTest','exams','practice','drill','examRun','examReview','tutor','schedule','calc'];
 let current = 'home';
 
@@ -1932,25 +1936,6 @@ function renderExams(){
 
   $$('#examList [data-exam]').forEach(b => b.addEventListener('click', () => startExam(b.dataset.exam)));
 
-  /* التدريب يسبق الامتحانات: يتمرّن على كل مهارة وحدها قبل المؤقّت */
-  const dTotal = DRILL_TYPES.reduce((a, ty) =>
-    a + drillLevels(ty).reduce((n, x) => n + x.questions.length, 0), 0);
-  const dPct = Math.round(DRILL_TYPES.reduce((a, ty) => {
-    const lv = drillLevels(ty);
-    return a + (lv.length ? lv.reduce((n, _, i) => n + drillBest(drillKey(ty, i)), 0) / lv.length : 0);
-  }, 0) / DRILL_TYPES.length);
-  $('#practiceEntry').innerHTML =
-    '<button class="tile sage" data-go="practice" style="min-height:150px">' +
-      '<svg class="tile-art" viewBox="0 0 120 80" aria-hidden="true">' +
-        '<path d="M22 58h16V34H22zM52 58h16V18H52zM82 58h16V44H82z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>' +
-        '<path d="M16 66h88" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>' +
-      '</svg>' +
-      '<div class="tile-title">' + t('practiceTitle') + '</div>' +
-      '<div class="tile-meta">' + t('practiceSub', ar(dTotal)) + '</div>' +
-      '<span class="tile-go">' + svg('arrow',22) + '</span>' +
-    '</button>' +
-    (dPct ? '<div class="level-foot" style="padding:0 4px"><span>' + t('overallProgress') + '</span>' +
-            '<span>' + ar(dPct) + '٪</span></div>' : '');
 
   $('#attempts').innerHTML = S.attempts.length
     ? S.attempts.slice(0,10).map(a =>
@@ -2273,19 +2258,26 @@ const DRILL_SIZE = { 'sentence-completion': 15, 'restatement': 8 };
 
 /* يجمع أسئلة النوع من كل الامتحانات ويقسّمها مستويات.
    الاستيعاب المقروء يُقسّم بالنص لا بالعدد: كل نص مع أسئلته مستوى. */
+/* أسئلة data/practice.json: نصوصها أسطر نصية تُرقَّم هنا */
+const normPassage = p => (Array.isArray(p) && typeof p[0] === 'string')
+  ? p.map((line, i) => ({ n: i + 1, t: line })) : p;
+
 function drillLevels(type){
   const out = [];
+  const sets = (PRACTICE.sets || []).filter(x => x && x.type === type);
   if(type === 'reading'){
     (EXAMS.exams || []).forEach(ex => ex.sections.forEach(sec => {
       if(sec.type === 'reading')
         out.push({ passage: sec.passage, questions: sec.questions.slice() });
     }));
+    sets.forEach(x => out.push({ passage: normPassage(x.passage), questions: (x.questions || []).slice() }));
     return out;
   }
   const pool = [];
   (EXAMS.exams || []).forEach(ex => ex.sections.forEach(sec => {
     if(sec.type === type) sec.questions.forEach(q => pool.push(q));
   }));
+  sets.forEach(x => (x.questions || []).forEach(q => pool.push(q)));
   const per = DRILL_SIZE[type] || 10;
   for(let i = 0; i < pool.length; i += per) out.push({ questions: pool.slice(i, i + per) });
   return out;

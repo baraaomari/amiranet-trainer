@@ -1,0 +1,10 @@
+{
+  "_note": "أسئلة تدريب منفصلة عن الامتحانات — تُضاف لمسارات تاب «تدريب» حسب نوعها. كل مجموعة لها type: sentence-completion أو restatement أو reading. نص الاستيعاب المقروء مصفوفة أسطر نصية ليُرقَّم تلقائياً. correct فهرس يبدأ من صفر.",
+  "_shape": {
+    "type": "sentence-completion",
+    "questions": [
+      { "text": "The results were ______ enough to change policy.", "options": ["compelling", "trivial", "obscure", "tentative"], "correct": 0 }
+    ]
+  },
+  "sets": []
+}
