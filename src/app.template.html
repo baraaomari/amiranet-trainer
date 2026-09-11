@@ -255,6 +255,23 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
 .ring text{font-family:var(--font); font-variant-numeric:tabular-nums}
 .level.locked .ring{opacity:.45}
 
+/* ───────── التدريب ───────── */
+.skill-tile{min-height:150px}
+.skill-ring{position:absolute; top:14px; inset-inline-start:14px; color:var(--on-pastel)}
+.explain{
+  margin-top:14px; background:var(--surface); border-radius:var(--r-lg);
+  padding:18px 18px 8px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:14px;
+}
+.ex-row p{font-size:14.5px; line-height:1.8; margin-top:4px}
+.ex-opt{display:flex; gap:10px; align-items:flex-start; padding:8px 0; font-size:13.5px; line-height:1.7;
+  border-top:1px solid var(--line)}
+.ex-opt:first-of-type{border-top:0}
+.ex-opt .opt-k{flex:none; width:24px; height:24px; font-size:11.5px; margin-top:2px}
+.ex-opt.ok{color:var(--good)}
+.ex-opt.ok .opt-k{background:var(--good); color:#fff}
+.ex-vocab{display:flex; flex-wrap:wrap; gap:7px; margin-top:6px; padding-bottom:10px}
+.ex-vocab .chip b{color:var(--text); font-weight:600}
+
 /* ───────── flashcard ───────── */
 .fc-wrap{display:flex; flex-direction:column; gap:16px}
 .fc{
@@ -1073,16 +1090,25 @@ const STR = {
                   en:'The tutor is not deployed yet. To enable it, deploy an Edge Function named tutor on Supabase and add the ANTHROPIC_API_KEY secret — steps are in DEPLOY.md. Everything else works normally.'},
   practiceTitle:{ar:'تدريب بالأقسام',en:'Skill practice'},
   practiceSub:{ar:'{0} سؤال مقسّمة على المهارات',en:'{0} questions grouped by skill'},
-  practiceIntro:{ar:'كل نوع سؤال لحاله، بلا مؤقّت ومع تصحيح فوري. اتمرّن على المهارة أول، وبعدين ادخل الامتحان الكامل وأنت مرتاح.',
-                 en:'One skill at a time, untimed, with instant feedback. Train the skill first, then take a full exam without surprises.'},
+  practiceIntro:{ar:'كل مهارة لحالها بثلاث مستويات، بلا مؤقّت. بعد كل إجابة بيطلعلك الشرح: الترجمة، ليش الصح صح، وليش كل خيار غلط. أسئلة التدريب غير أسئلة الامتحانات، فالامتحان بيضل جديد عليك.',
+                 en:'One skill at a time across three levels, untimed. After each answer you get the explanation: translation, why the key is right, and why each option is wrong. Practice questions are separate from the exams, so the exams stay fresh.'},
   fullExams:{ar:'امتحانات كاملة',en:'Full exams'},
   allSkills:{ar:'كل المهارات',en:'All skills'},
   drillMeta:{ar:'{0} مستويات · {1} سؤال',en:'{0} levels · {1} questions'},
   questionsN:{ar:'{0} سؤال',en:'{0} questions'},
+  questionsFew:{ar:'{0} أسئلة',en:'{0} questions'},
   bestScore:{ar:'أفضل نتيجة {0}٪',en:'best {0}%'},
   drillDone:{ar:'خلّصت المستوى',en:'Level complete'},
   finish:{ar:'أنهِ',en:'Finish'},
   overallProgress:{ar:'تقدّمك بالتدريب',en:'Practice progress'},
+  skillMeta:{ar:'{0} مستويات · {1} سؤال',en:'{0} levels · {1} questions'},
+  practiceSoon:{ar:'الأسئلة قيد التحضير',en:'Questions coming soon'},
+  level_easy:{ar:'سهل',en:'Easy'}, level_medium:{ar:'متوسط',en:'Medium'}, level_hard:{ar:'صعب',en:'Hard'},
+  roundN:{ar:'جولة {0}',en:'Round {0}'},
+  exTranslation:{ar:'الترجمة',en:'Translation'},
+  exWhy:{ar:'الإجابة الصحيحة',en:'Correct answer'},
+  exOptions:{ar:'تحليل الخيارات',en:'Option analysis'},
+  exVocab:{ar:'مفردات مهمة',en:'Key vocabulary'},
   dbReadFail:{ar:'تعذّرت قراءة قاعدة البيانات',en:'Could not read the database'},
 
   /* بوابة الحساب */
@@ -2251,102 +2277,124 @@ function showReview(a){
   go('examReview');
 }
 
-/* ════════════════════════ التدريب حسب نوع السؤال ════════════════════════
-   كل نوع سؤال يصير مساراً مستقلاً مقسّماً لمستويات، بلا مؤقّت ومع تصحيح
-   فوري — ليتمرّن على المهارة وحدها قبل أن يواجهها داخل امتحان مؤقّت. */
-const DRILL_SIZE = { 'sentence-completion': 15, 'restatement': 8 };
+/* ════════════════════════ التدريب ════════════════════════
+   مسار مستقل لكل مهارة بثلاثة مستويات (سهل / متوسط / صعب)، من أسئلة
+   data/practice.json وحدها — حتى لا يرى الطالب أسئلة امتحانات المحاكاة قبل
+   أن يجلس لها. بلا مؤقّت، وبعد كل إجابة يظهر الشرح المكتوب مع السؤال. */
+const DRILL_TYPES = ['restatement', 'reading', 'sentence-completion'];
+const DRILL_LEVELS = ['easy', 'medium', 'hard'];
 
-/* يجمع أسئلة النوع من كل الامتحانات ويقسّمها مستويات.
-   الاستيعاب المقروء يُقسّم بالنص لا بالعدد: كل نص مع أسئلته مستوى. */
+/* لكل مهارة لون ورسم خاصان بها */
+const SKILL_LOOK = {
+  'restatement': { c: 'lilac', art:
+    '<path d="M22 28h62l-11-10M98 52H36l11 10" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>' },
+  'reading': { c: 'sage', art:
+    '<rect x="32" y="8" width="56" height="64" rx="5" fill="none" stroke="currentColor" stroke-width="3"/>' +
+    '<path d="M42 22h36M42 32h36M42 42h36M42 52h24" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>' },
+  'sentence-completion': { c: 'butter', art:
+    '<path d="M14 44h24M82 44h24" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>' +
+    '<rect x="44" y="30" width="32" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="5 4"/>' }
+};
+
 /* أسئلة data/practice.json: نصوصها أسطر نصية تُرقَّم هنا */
 const normPassage = p => (Array.isArray(p) && typeof p[0] === 'string')
   ? p.map((line, i) => ({ n: i + 1, t: line })) : p;
 
-function drillLevels(type){
-  const out = [];
-  const sets = (PRACTICE.sets || []).filter(x => x && x.type === type);
-  if(type === 'reading'){
-    (EXAMS.exams || []).forEach(ex => ex.sections.forEach(sec => {
-      if(sec.type === 'reading')
-        out.push({ passage: sec.passage, questions: sec.questions.slice() });
-    }));
-    sets.forEach(x => out.push({ passage: normPassage(x.passage), questions: (x.questions || []).slice() }));
-    return out;
-  }
-  const pool = [];
-  (EXAMS.exams || []).forEach(ex => ex.sections.forEach(sec => {
-    if(sec.type === type) sec.questions.forEach(q => pool.push(q));
-  }));
-  sets.forEach(x => (x.questions || []).forEach(q => pool.push(q)));
-  const per = DRILL_SIZE[type] || 10;
-  for(let i = 0; i < pool.length; i += per) out.push({ questions: pool.slice(i, i + per) });
-  return out;
-}
-
-const DRILL_TYPES = ['sentence-completion', 'restatement', 'reading'];
-const drillKey = (type, i) => 'd:' + type + ':' + i;
-const drillBest = key => (S.meta.drills && S.meta.drills[key]) || 0;
+const skillSets = type => (PRACTICE.sets || []).filter(x => x && x.type === type && (x.questions || []).length);
+const setBest = set => (S.meta.drills && S.meta.drills['p:' + set.id]) || 0;
+const avgBest = sets => sets.length ? Math.round(sets.reduce((a, x) => a + setBest(x), 0) / sets.length) : 0;
+const countQs = sets => sets.reduce((a, x) => a + x.questions.length, 0);
 
 function renderPractice(){
-  const rows = DRILL_TYPES.map(type => {
-    const lv = drillLevels(type);
-    const sum = lv.reduce((a, _, i) => a + drillBest(drillKey(type, i)), 0);
-    return { type, levels: lv, pct: lv.length ? Math.round(sum / lv.length) : 0 };
-  });
-
   $('#pracTitle').textContent = t('practiceTitle');
   $('#pracBody').innerHTML =
     '<p class="empty" style="padding:0 4px 18px; text-align:start">' + t('practiceIntro') + '</p>' +
-    '<div class="levels">' + rows.map((d, i) =>
-      '<button class="level open c' + (i % 4) + '" data-drill="' + d.type + '">' +
-        '<div class="level-top">' + ring(d.pct, ar(d.pct) + '٪', 46) +
-          '<span style="flex:1"><h3>' + esc(t('secTitle' + SEC_KEY[d.type])) + '</h3>' +
-          '<small>' + t('drillMeta', ar(d.levels.length),
-                        ar(d.levels.reduce(function(a, x){ return a + x.questions.length; }, 0))) + '</small></span>' +
-          svg('chev', 19) +
-        '</div>' +
-      '</button>').join('') + '</div>';
+    '<div class="stack">' + DRILL_TYPES.map(type => {
+      const sets = skillSets(type), look = SKILL_LOOK[type];
+      const levels = DRILL_LEVELS.filter(l => sets.some(x => x.level === l)).length;
+      return '<button class="tile ' + look.c + ' skill-tile" data-drill="' + type + '">' +
+        '<svg class="tile-art" viewBox="0 0 120 80" aria-hidden="true">' + look.art + '</svg>' +
+        '<div class="skill-ring">' + ring(avgBest(sets), ar(avgBest(sets)) + '٪', 50) + '</div>' +
+        '<div class="tile-title">' + esc(t('secTitle' + SEC_KEY[type])) + '</div>' +
+        '<div class="tile-meta">' + (sets.length
+            ? t('skillMeta', ar(levels), ar(countQs(sets)))
+            : t('practiceSoon')) + '</div>' +
+        '<span class="tile-go">' + svg('arrow', 22) + '</span>' +
+      '</button>';
+    }).join('') + '</div>';
 
   $$('#pracBody [data-drill]').forEach(b =>
     b.addEventListener('click', () => openDrillType(b.dataset.drill)));
 }
 
 function openDrillType(type){
-  const levels = drillLevels(type);
+  const sets = skillSets(type);
   $('#pracTitle').textContent = t('secTitle' + SEC_KEY[type]);
+
+  const groups = DRILL_LEVELS.map(level => {
+    const inLevel = sets.filter(x => x.level === level);
+    if(!inLevel.length) return '';
+    return '<div class="sec-head"><h2>' + t('level_' + level) + '</h2>' +
+        '<span class="link num">' + ar(avgBest(inLevel)) + '٪</span></div>' +
+      '<div class="levels">' + inLevel.map((set, i) => {
+        const pct = setBest(set);
+        return '<button class="level open c' + (DRILL_LEVELS.indexOf(level) % 4) + '" data-set="' + esc(set.id) + '">' +
+          '<div class="level-top">' + ring(pct, ar(pct) + '٪', 46) +
+            '<span style="flex:1"><h3>' + t('roundN', ar(i + 1)) + '</h3>' +
+            '<small>' + t(set.questions.length >= 3 && set.questions.length <= 10 ? 'questionsFew' : 'questionsN', ar(set.questions.length)) +
+              (pct ? ' · ' + t('bestScore', ar(pct)) : '') + '</small></span>' +
+            svg('chev', 19) +
+          '</div></button>';
+      }).join('') + '</div>';
+  }).join('');
+
   $('#pracBody').innerHTML =
-    '<button class="btn ghost sm" id="pracBack" style="margin-bottom:16px">' + svg('chev', 17) + ' ' + t('allSkills') + '</button>' +
-    '<div class="levels">' + levels.map((lv, i) => {
-      const pct = drillBest(drillKey(type, i));
-      return '<button class="level open c' + (i % 4) + '" data-i="' + i + '">' +
-        '<div class="level-top">' + ring(pct, ar(pct) + '٪', 46) +
-          '<span style="flex:1"><h3>' + t('levelName', ar(i + 1)) + '</h3>' +
-          '<small>' + t('questionsN', ar(lv.questions.length)) +
-            (pct ? ' · ' + t('bestScore', ar(pct)) : '') + '</small></span>' +
-          svg('chev', 19) +
-        '</div></button>';
-    }).join('') + '</div>';
+    '<button class="btn ghost sm" id="pracBack" style="margin-bottom:6px">' + svg('chev', 17) + ' ' + t('allSkills') + '</button>' +
+    (groups || '<div class="empty">' + t('practiceSoon') + '</div>');
 
   $('#pracBack').addEventListener('click', renderPractice);
-  $$('#pracBody [data-i]').forEach(b =>
-    b.addEventListener('click', () => startDrill(type, +b.dataset.i)));
+  $$('#pracBody [data-set]').forEach(b =>
+    b.addEventListener('click', () => startDrill(b.dataset.set)));
 }
 
-/* ── تشغيل التدريب: تصحيح فوري، بلا مؤقّت ── */
+/* ── تشغيل التدريب: تصحيح فوري وشرح مكتوب، بلا مؤقّت ── */
 let drill = null;
 
-function startDrill(type, idx){
-  const lv = drillLevels(type)[idx];
-  if(!lv) return;
-  drill = { type: type, idx: idx, lv: lv, i: 0, right: 0, answered: null };
-  $('#drillTitle').textContent = t('secTitle' + SEC_KEY[type]) + ' · ' + t('levelName', ar(idx + 1));
+function startDrill(setId){
+  const set = (PRACTICE.sets || []).find(x => x.id === setId);
+  if(!set) return;
+  const round = skillSets(set.type).filter(x => x.level === set.level).indexOf(set) + 1;
+  drill = { set: set, passage: normPassage(set.passage), i: 0, right: 0, answered: null };
+  $('#drillTitle').textContent = t('secTitle' + SEC_KEY[set.type]) + ' · ' +
+    t('level_' + set.level) + ' · ' + t('roundN', ar(round));
   go('drill');
   paintDrill();
 }
 
+function renderExplain(q){
+  const ex = q.explain;
+  if(!ex) return '';
+  return '<div class="explain">' +
+    (ex.translation ? '<div class="ex-row"><span class="eyebrow">' + t('exTranslation') + '</span><p>' + esc(ex.translation) + '</p></div>' : '') +
+    (ex.why ? '<div class="ex-row"><span class="eyebrow">' + t('exWhy') + ' · ' + 'ABCD'[q.correct] + '</span><p>' + esc(ex.why) + '</p></div>' : '') +
+    (ex.options && ex.options.length
+      ? '<div class="ex-row"><span class="eyebrow">' + t('exOptions') + '</span>' +
+          ex.options.map((line, i) =>
+            '<div class="ex-opt' + (i === q.correct ? ' ok' : '') + '"><span class="opt-k">' + 'ABCD'[i] + '</span>' +
+            '<span>' + esc(line) + '</span></div>').join('') +
+        '</div>'
+      : '') +
+    (ex.vocab && ex.vocab.length
+      ? '<div class="ex-row"><span class="eyebrow">' + t('exVocab') + '</span><div class="ex-vocab">' +
+          ex.vocab.map(v => '<span class="chip"><b class="en">' + esc(v[0]) + '</b> — ' + esc(v[1]) + '</span>').join('') +
+        '</div></div>'
+      : '') +
+  '</div>';
+}
+
 function paintDrill(){
   if(!drill) return;
-  const qs = drill.lv.questions;
+  const qs = drill.set.questions;
   if(drill.i >= qs.length) return finishDrill();
   const q = qs[drill.i];
   const picked = drill.answered;
@@ -2356,7 +2404,7 @@ function paintDrill(){
   $('#drillProg').style.width = (drill.i / qs.length * 100) + '%';
 
   $('#drillBody').innerHTML =
-    renderPassage(drill.lv.passage) +
+    renderPassage(drill.passage) +
     '<div class="q-card">' +
       '<div class="q-text en">' + esc(q.text) + '</div>' +
       '<div class="opts">' + q.options.map((o, i) => {
@@ -2367,7 +2415,8 @@ function paintDrill(){
       }).join('') + '</div>' +
     '</div>' +
     (picked != null
-      ? '<div class="row" style="gap:10px; margin-top:16px">' +
+      ? renderExplain(q) +
+        '<div class="row" style="gap:10px; margin-top:16px">' +
           '<button class="btn ghost ask-drill" style="flex:1">' + t('whyAnswer') + '</button>' +
           '<button class="btn" id="drillNext" style="flex:1">' + t(last ? 'finish' : 'next') + '</button>' +
         '</div>'
@@ -2382,20 +2431,20 @@ function paintDrill(){
     return;
   }
 
-  $('#drillNext').addEventListener('click', () => { drill.i++; drill.answered = null; paintDrill(); });
+  $('#drillNext').addEventListener('click', () => { drill.i++; drill.answered = null; paintDrill(); window.scrollTo(0, 0); });
   const ask = $('#drillBody .ask-drill');
   ask.hidden = sampleState !== 'ready';
   ask.addEventListener('click', () => askAboutQuestion({
-    section: t('secTitle' + SEC_KEY[drill.type]),
-    passage: passageText(drill.lv.passage),
+    section: t('secTitle' + SEC_KEY[drill.set.type]),
+    passage: passageText(drill.passage),
     text: q.text, options: q.options, correct: q.correct, mine: picked
   }));
 }
 
 function finishDrill(){
-  const qs = drill.lv.questions;
+  const qs = drill.set.questions;
   const pct = Math.round(drill.right / qs.length * 100);
-  const key = drillKey(drill.type, drill.idx);
+  const key = 'p:' + drill.set.id;
   S.meta.drills = S.meta.drills || {};
   if(pct > (S.meta.drills[key] || 0)){ S.meta.drills[key] = pct; save('meta'); }
 
@@ -2411,14 +2460,14 @@ function finishDrill(){
       '<button class="btn" id="drillDone" style="flex:1">' + t('back') + '</button>' +
     '</div>';
 
-  const type = drill.type, idx = drill.idx;
+  const set = drill.set;
   drill = null;
-  $('#drillAgain').addEventListener('click', () => startDrill(type, idx));
-  $('#drillDone').addEventListener('click', () => { go('practice'); openDrillType(type); });
+  $('#drillAgain').addEventListener('click', () => startDrill(set.id));
+  $('#drillDone').addEventListener('click', () => { go('practice'); openDrillType(set.type); });
 }
 
 $('#drillBack').addEventListener('click', () => {
-  const type = drill ? drill.type : null;
+  const type = drill ? drill.set.type : null;
   drill = null;
   go('practice');
   if(type) openDrillType(type);

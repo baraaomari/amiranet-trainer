@@ -1,10 +1,2738 @@
 {
-  "_note": "أسئلة تدريب منفصلة عن الامتحانات — تُضاف لمسارات تاب «تدريب» حسب نوعها. كل مجموعة لها type: sentence-completion أو restatement أو reading. نص الاستيعاب المقروء مصفوفة أسطر نصية ليُرقَّم تلقائياً. correct فهرس يبدأ من صفر.",
-  "_shape": {
-    "type": "sentence-completion",
-    "questions": [
-      { "text": "The results were ______ enough to change policy.", "options": ["compelling", "trivial", "obscure", "tentative"], "correct": 0 }
-    ]
-  },
-  "sets": []
+  "_note": "أسئلة تدريب مستقلة عن امتحانات المحاكاة — حتى لا يتعرّف الطالب على أسئلة الامتحان قبل أن يجلس له. كل مجموعة: type (restatement | reading | sentence-completion)، level (easy | medium | hard)، وأسئلة لكل منها explain: translation، why، options (سطر لكل خيار)، vocab. correct فهرس يبدأ من صفر.",
+  "sets": [
+    {
+      "id": "rs-easy-1",
+      "type": "restatement",
+      "level": "easy",
+      "questions": [
+        {
+          "text": "The museum is closed on Mondays.",
+          "options": [
+            "The museum opens only on Mondays.",
+            "Visitors cannot enter the museum on Mondays.",
+            "The museum closes early every Monday.",
+            "The museum was closed last Monday."
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "المتحف مغلق أيام الاثنين.",
+            "why": "«closed on Mondays» تعني أن المتحف مغلق كل يوم اثنين، أي لا يستطيع الزوّار دخوله في هذا اليوم. الجمع Mondays يدلّ على عادة متكررة لا على يوم واحد.",
+            "options": [
+              "تعكس المعنى: تقول إنه يفتح أيام الاثنين فقط، والأصل أنه مغلق فيها.",
+              "✓ الإجابة الصحيحة — «لا يمكن الدخول» هي النتيجة المباشرة لكونه مغلقاً.",
+              "تضيف معلومة غير موجودة: «يغلق مبكراً» يعني أنه يفتح جزءاً من اليوم، والأصل أنه مغلق طوال اليوم.",
+              "تحوّل العادة المتكررة إلى حدث واحد في الماضي (last Monday)."
+            ],
+            "vocab": [
+              ["closed", "مغلق"],
+              ["visitors", "زوّار"],
+              ["enter", "يدخل"],
+              ["early", "مبكراً"]
+            ]
+          }
+        },
+        {
+          "text": "Tom is taller than his brother.",
+          "options": [
+            "Tom's brother is shorter than Tom.",
+            "Tom and his brother are the same height.",
+            "Tom's brother is taller than Tom.",
+            "Tom is the tallest person in his family."
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "توم أطول من أخيه.",
+            "why": "المقارنة يمكن قلبها: إذا كان «أ أطول من ب» فإن «ب أقصر من أ». هذا من أشهر أنماط إعادة الصياغة.",
+            "options": [
+              "✓ الإجابة الصحيحة — نفس المقارنة من الجهة الأخرى: taller ← shorter.",
+              "تلغي الفرق تماماً، والأصل أن بينهما فرقاً في الطول.",
+              "تعكس المقارنة: تجعل الأخ هو الأطول.",
+              "مبالغة: الأصل يقارن توم بأخيه فقط، لا بكل العائلة. احذر من التعميم."
+            ],
+            "vocab": [
+              ["taller", "أطول"],
+              ["shorter", "أقصر"],
+              ["height", "الطول"],
+              ["the same", "نفس"]
+            ]
+          }
+        },
+        {
+          "text": "The train left before we arrived at the station.",
+          "options": [
+            "We arrived at the station before the train left.",
+            "The train left the station as soon as we got on it.",
+            "The train was waiting for us at the station.",
+            "When we reached the station, the train had already gone."
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "غادر القطار قبل أن نصل إلى المحطة.",
+            "why": "ترتيب الأحداث: القطار غادر أولاً، ثم وصلنا. «had already gone» (الماضي التام) تعبّر بدقة عن حدث وقع قبل حدث آخر في الماضي.",
+            "options": [
+              "تعكس الترتيب الزمني: تجعل وصولنا قبل مغادرة القطار.",
+              "تناقض الأصل: تجعلنا نركب القطار، والأصل أنه غادر قبل وصولنا.",
+              "تناقض الأصل: القطار لم ينتظر، بل غادر.",
+              "✓ الإجابة الصحيحة — reached = arrived، و had already gone = left before."
+            ],
+            "vocab": [
+              ["left", "غادر"],
+              ["arrived", "وصل"],
+              ["reached", "وصل إلى"],
+              ["already", "مسبقاً / بالفعل"]
+            ]
+          }
+        },
+        {
+          "text": "She rarely drinks coffee.",
+          "options": [
+            "She drinks coffee every morning.",
+            "She never drinks coffee.",
+            "She does not drink coffee very often.",
+            "She drinks coffee more than tea."
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "نادراً ما تشرب القهوة.",
+            "why": "rarely = نادراً، أي مرات قليلة جداً — لكنها ليست «أبداً». «not very often» هي المعادل الدقيق.",
+            "options": [
+              "تعكس المعنى: «كل صباح» عادة يومية، والأصل نادراً.",
+              "مبالغة: rarely ≠ never. «نادراً» تعني أنها تشربها أحياناً قليلة، لا مطلقاً. هذا الفخّ متكرر جداً.",
+              "✓ الإجابة الصحيحة — not very often تساوي rarely.",
+              "تدخل مقارنة مع الشاي غير موجودة في الأصل."
+            ],
+            "vocab": [
+              ["rarely", "نادراً"],
+              ["never", "أبداً"],
+              ["often", "غالباً / كثيراً"],
+              ["every", "كل"]
+            ]
+          }
+        },
+        {
+          "text": "Although it was raining, the children played outside.",
+          "options": [
+            "The children stayed inside because of the rain.",
+            "It stopped raining, so the children went outside.",
+            "The children played outside in spite of the rain.",
+            "The children played outside before it started to rain."
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "على الرغم من أنها كانت تمطر، لعب الأطفال في الخارج.",
+            "why": "although + جملة = in spite of + اسم. كلاهما يعبّر عن التناقض: حدث شيء رغم وجود ما يمنعه.",
+            "options": [
+              "تعكس النتيجة: الأطفال خرجوا ولم يبقوا في الداخل.",
+              "تغيّر الوقائع: المطر لم يتوقف، بل كان مستمراً أثناء اللعب.",
+              "✓ الإجابة الصحيحة — although it was raining = in spite of the rain.",
+              "تغيّر التوقيت: اللعب كان أثناء المطر لا قبله."
+            ],
+            "vocab": [
+              ["although", "على الرغم من أنّ"],
+              ["in spite of", "بالرغم من"],
+              ["outside", "في الخارج"],
+              ["stayed", "بقي"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rs-easy-2",
+      "type": "restatement",
+      "level": "easy",
+      "questions": [
+        {
+          "text": "The report must be finished by Friday.",
+          "options": [
+            "The report was finished on Friday.",
+            "The report can be finished after Friday.",
+            "The report has to be completed no later than Friday.",
+            "Someone started writing the report on Friday."
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "يجب إنهاء التقرير بحلول يوم الجمعة.",
+            "why": "must = has to (وجوب)، و by Friday = no later than Friday (في موعد أقصاه الجمعة). الانتباه لـ by: تعني «قبل أو في» لا «بعد».",
+            "options": [
+              "تحوّل الواجب المستقبلي إلى حدث وقع في الماضي.",
+              "تناقض الموعد: by Friday تمنع التأخير إلى ما بعد الجمعة.",
+              "✓ الإجابة الصحيحة — must = has to، by = no later than.",
+              "تتحدث عن بداية الكتابة، والأصل عن موعد الانتهاء."
+            ],
+            "vocab": [
+              ["must", "يجب"],
+              ["by (+ وقت)", "بحلول / في موعد أقصاه"],
+              ["completed", "مُنجَز / مكتمل"],
+              ["no later than", "في موعد لا يتجاوز"]
+            ]
+          }
+        },
+        {
+          "text": "Most of the students passed the test.",
+          "options": [
+            "The test was passed by the majority of the students.",
+            "All of the students in the class passed the test.",
+            "Only a few of the students managed to pass the test.",
+            "None of the students in the class failed the test."
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "نجح معظم الطلاب في الامتحان.",
+            "why": "most = the majority (الأغلبية)، والجملة حُوّلت من المبني للمعلوم إلى المبني للمجهول: students passed the test = the test was passed by students. كلمات الكمية (most, all, few, none) هي أهم ما تركّز عليه أسئلة إعادة الصياغة.",
+            "options": [
+              "✓ الإجابة الصحيحة — most = the majority، والتحويل إلى المجهول لا يغيّر المعنى.",
+              "مبالغة: most تعني الأغلبية لا الجميع.",
+              "تعكس الكمية: a few تعني قلة، والأصل أغلبية.",
+              "«لم يرسب أحد» تساوي «نجح الجميع» — مبالغة كالخيار B بصياغة مختلفة."
+            ],
+            "vocab": [
+              ["most", "معظم"],
+              ["the majority", "الأغلبية"],
+              ["passed", "نجح"],
+              ["failed", "رسب"]
+            ]
+          }
+        },
+        {
+          "text": "He forgot to lock the door.",
+          "options": [
+            "He locked the door twice before he left the house.",
+            "He did not lock the door because he did not remember to.",
+            "He did not want to lock the door, so he left it open.",
+            "He could not find the key, so he did not lock the door."
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "نسي أن يقفل الباب.",
+            "why": "forgot to do = did not do because he did not remember. انتبه: forget to (نسي أن يفعل — فلم يفعل) تختلف عن forget doing (نسي أنه فعل).",
+            "options": [
+              "تناقض الأصل: هو لم يقفل الباب أصلاً.",
+              "✓ الإجابة الصحيحة — النسيان هو سبب عدم الإقفال.",
+              "تغيّر السبب: من النسيان إلى عدم الرغبة (قرار متعمّد).",
+              "تخترع سبباً آخر (لم يجد المفتاح) غير مذكور."
+            ],
+            "vocab": [
+              ["forgot", "نسي"],
+              ["lock", "يقفل"],
+              ["remember", "يتذكّر"],
+              ["key", "مفتاح"]
+            ]
+          }
+        },
+        {
+          "text": "The shop sells both books and toys.",
+          "options": [
+            "The shop sells books but not toys.",
+            "The shop sells toys but not books.",
+            "The shop buys books and toys from customers.",
+            "You can buy books and toys at the shop."
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "المتجر يبيع الكتب والألعاب معاً.",
+            "why": "both A and B = الاثنين معاً. وإذا كان المتجر يبيع شيئاً فإن الزبون يستطيع شراءه منه — قلب الفاعل من البائع إلى المشتري.",
+            "options": [
+              "تحذف نصف المعلومة: الأصل يشمل الألعاب أيضاً.",
+              "تحذف النصف الآخر: الأصل يشمل الكتب أيضاً.",
+              "تعكس الفعل: sells (يبيع) ← buys (يشتري من الزبائن).",
+              "✓ الإجابة الصحيحة — المتجر يبيع = أنت تستطيع الشراء منه."
+            ],
+            "vocab": [
+              ["sells", "يبيع"],
+              ["buys", "يشتري"],
+              ["both ... and", "كلٌّ من ... و"],
+              ["customers", "زبائن"]
+            ]
+          }
+        },
+        {
+          "text": "It took Maria two hours to cook dinner.",
+          "options": [
+            "Maria cooked dinner two hours ago.",
+            "Maria spent two hours cooking dinner.",
+            "Maria cooked two dinners in one hour.",
+            "Dinner was ready two hours before Maria arrived."
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "استغرقت ماريا ساعتين في طبخ العشاء.",
+            "why": "It took (someone) + وقت + to do = (someone) spent + وقت + doing. التركيبان يعبّران عن المدة التي استغرقها العمل.",
+            "options": [
+              "تخلط بين المدة (استغرق ساعتين) والتوقيت (قبل ساعتين).",
+              "✓ الإجابة الصحيحة — it took two hours to cook = spent two hours cooking.",
+              "تغيّر الأرقام: عشاءان في ساعة بدل عشاء واحد في ساعتين.",
+              "تخترع حدثاً (وصول ماريا) غير مذكور وتغيّر معنى الساعتين."
+            ],
+            "vocab": [
+              ["it took", "استغرق"],
+              ["spent", "قضى (وقتاً)"],
+              ["ago", "قبل (زمنياً)"],
+              ["ready", "جاهز"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rs-medium-1",
+      "type": "restatement",
+      "level": "medium",
+      "questions": [
+        {
+          "text": "The bridge, which was designed by engineers from three countries, took ten years to complete.",
+          "options": [
+            "Engineers from three countries needed ten years to design the bridge.",
+            "The bridge, which connects three countries, was completed in ten years.",
+            "It took ten years to finish the bridge that engineers from three countries had designed.",
+            "Ten years after the bridge was completed, engineers from three countries redesigned it."
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "استغرق إنجاز الجسر، الذي صمّمه مهندسون من ثلاث دول، عشر سنوات.",
+            "why": "الجملة الموصولة (which was designed by ...) معلومة إضافية عن الجسر، والجملة الأساسية هي: the bridge took ten years to complete. حدّد دائماً بأي فعل ترتبط المدة: السنوات العشر للإنجاز، لا للتصميم.",
+            "options": [
+              "الفخّ: تنقل السنوات العشر من الإنجاز (complete) إلى التصميم (design).",
+              "تستغل three countries لكن تغيّر المعنى: الدول الثلاث للمهندسين لا لموقع الجسر.",
+              "✓ الإجابة الصحيحة — took ten years to complete = it took ten years to finish، والجملة الموصولة محفوظة.",
+              "تخترع حدثاً (إعادة التصميم) وتغيّر ترتيب الأحداث."
+            ],
+            "vocab": [
+              ["designed", "صمّم"],
+              ["complete / finish", "يُنجز / يُنهي"],
+              ["connects", "يربط"],
+              ["redesigned", "أعاد تصميمه"]
+            ]
+          }
+        },
+        {
+          "text": "If he had more free time, he would learn to play the piano.",
+          "options": [
+            "He is learning to play the piano now that he has more free time.",
+            "He is not learning to play the piano because he does not have enough free time.",
+            "He had more free time in the past, so he learned to play the piano.",
+            "He will learn to play the piano as soon as he has more free time next year."
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "لو كان لديه وقت فراغ أكثر، لتعلّم العزف على البيانو.",
+            "why": "الشرط من النوع الثاني (If + past, would + فعل) يصف حالة غير حقيقية في الحاضر. معناه الفعلي: ليس لديه وقت كافٍ، لذلك لا يتعلّم. قاعدة ذهبية: الشرط غير الحقيقي يعني عكس ما يقوله.",
+            "options": [
+              "تتعامل مع الشرط كأنه حقيقة: هو لا يتعلّم البيانو حالياً.",
+              "✓ الإجابة الصحيحة — تستخرج الواقع الحقيقي: لا وقت كافياً ← لا تعلّم.",
+              "رغم أن had بصيغة الماضي، الشرط الثاني يتحدث عن الحاضر لا الماضي.",
+              "تحوّله إلى خطة مستقبلية مؤكدة، والأصل افتراض غير واقعي."
+            ],
+            "vocab": [
+              ["free time", "وقت فراغ"],
+              ["enough", "كافٍ"],
+              ["now that", "بما أنّ / الآن وقد"],
+              ["as soon as", "بمجرد أن"]
+            ]
+          }
+        },
+        {
+          "text": "Unless you book in advance, you will not get a seat.",
+          "options": [
+            "You will get a seat only if you book in advance.",
+            "You will get a seat even if you do not book in advance.",
+            "If you book in advance, you will not get a seat.",
+            "Seats are available for people who arrive early."
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "ما لم تحجز مسبقاً، لن تحصل على مقعد.",
+            "why": "unless = if not. «ما لم تحجز لن تحصل» تعني أن الحجز شرط ضروري، وهذا بالضبط معنى only if.",
+            "options": [
+              "✓ الإجابة الصحيحة — unless ... not = only if.",
+              "تلغي الشرط: even if تعني أن الحجز غير مهم.",
+              "تعكس المنطق: تجعل الحجز سبباً لعدم الحصول على مقعد.",
+              "تستبدل الشرط (الحجز المسبق) بشرط آخر (الوصول مبكراً)."
+            ],
+            "vocab": [
+              ["unless", "ما لم / إلا إذا"],
+              ["book", "يحجز"],
+              ["in advance", "مسبقاً"],
+              ["only if", "فقط إذا"]
+            ]
+          }
+        },
+        {
+          "text": "The new model is not as expensive as the old one.",
+          "options": [
+            "The new model costs more than the old one.",
+            "The new model is more expensive to repair than the old one.",
+            "Both models cost exactly the same.",
+            "The old model is more expensive than the new one."
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "الطراز الجديد ليس بغلاء الطراز القديم.",
+            "why": "not as ... as = أقل من. «الجديد ليس بغلاء القديم» ← القديم أغلى. نبدّل ترتيب الطرفين ونحوّل not as ... as إلى more ... than (أو نُبقي الترتيب ونقول: الجديد أرخص).",
+            "options": [
+              "تعكس المعنى: تجعل الجديد أغلى.",
+              "تغيّر الموضوع: من سعر الشراء إلى تكلفة الإصلاح.",
+              "تلغي الفرق: not as ... as تعني وجود فرق.",
+              "✓ الإجابة الصحيحة — not as expensive as = القديم more expensive."
+            ],
+            "vocab": [
+              ["not as ... as", "ليس بقدر"],
+              ["expensive", "غالٍ"],
+              ["costs", "يكلّف"],
+              ["model", "طراز"]
+            ]
+          }
+        },
+        {
+          "text": "Despite having little experience, she was offered the job.",
+          "options": [
+            "She was given the job because she had a lot of experience.",
+            "She was offered the job even though she was not very experienced.",
+            "She was not offered the job because she had little experience.",
+            "She gained experience before she was offered the job."
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "رغم قلة خبرتها، عُرضت عليها الوظيفة.",
+            "why": "despite + اسم/فعل -ing = even though + جملة كاملة. والمهم: little experience (خبرة قليلة) ≠ a little experience (بعض الخبرة).",
+            "options": [
+              "تعكس السبب: خبرتها كانت قليلة لا كثيرة، وتحوّل التناقض إلى سببية.",
+              "✓ الإجابة الصحيحة — despite = even though، little experience = not very experienced.",
+              "تعكس النتيجة: الأصل أن الوظيفة عُرضت عليها فعلاً.",
+              "تغيّر الوقائع: لم تكتسب خبرة قبل العرض."
+            ],
+            "vocab": [
+              ["despite", "رغم"],
+              ["experience", "خبرة"],
+              ["offered", "عُرض عليه"],
+              ["even though", "رغم أنّ"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rs-medium-2",
+      "type": "restatement",
+      "level": "medium",
+      "questions": [
+        {
+          "text": "Not only is the hotel cheap, but it is also close to the beach.",
+          "options": [
+            "The hotel is cheap, but it is far from the beach.",
+            "The hotel is close to the beach, so it is expensive.",
+            "The hotel is both inexpensive and near the beach.",
+            "Only the cheap hotels are close to the beach."
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "الفندق ليس رخيصاً فحسب، بل قريب من الشاطئ أيضاً.",
+            "why": "Not only A but also B = both A and B. لاحظ الانقلاب بعد Not only: is the hotel بدل the hotel is — هذا لا يغيّر المعنى، فقط التأكيد.",
+            "options": [
+              "تعكس الصفة الثانية: قريب ← بعيد، وتضيف but بمعنى التناقض.",
+              "تخترع علاقة سببية وتعكس الصفة الأولى: رخيص ← غالٍ.",
+              "✓ الإجابة الصحيحة — cheap = inexpensive، close to = near.",
+              "تستغل كلمة only لتصنع تعميماً عن كل الفنادق."
+            ],
+            "vocab": [
+              ["not only ... but also", "ليس فقط ... بل أيضاً"],
+              ["inexpensive", "رخيص"],
+              ["close to", "قريب من"],
+              ["far from", "بعيد عن"]
+            ]
+          }
+        },
+        {
+          "text": "The meeting has been postponed until further notice.",
+          "options": [
+            "The meeting has been cancelled and will not take place at all.",
+            "The meeting will take place later, at a time not yet announced.",
+            "The meeting has been moved to an earlier date than planned.",
+            "The meeting will start as soon as everyone arrives."
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "أُجّل الاجتماع حتى إشعار آخر.",
+            "why": "postponed = أُجّل إلى وقت لاحق (لا أُلغي). until further notice = دون تحديد موعد بعد. الفرق بين postpone و cancel من أكثر الفخاخ شيوعاً.",
+            "options": [
+              "postponed ≠ cancelled: التأجيل يعني أنه سيُعقد لاحقاً.",
+              "✓ الإجابة الصحيحة — لاحقاً (postponed) + لم يُعلن الموعد (until further notice).",
+              "تعكس الاتجاه: التأجيل إلى وقت لاحق لا أبكر.",
+              "تخترع شرطاً للبدء غير موجود في الأصل."
+            ],
+            "vocab": [
+              ["postponed", "أُجّل"],
+              ["cancelled", "أُلغي"],
+              ["further notice", "إشعار آخر"],
+              ["announced", "أُعلن"]
+            ]
+          }
+        },
+        {
+          "text": "He had his car repaired at a local garage.",
+          "options": [
+            "He repaired his car himself at a local garage.",
+            "He bought a car from a local garage.",
+            "His car broke down near a local garage.",
+            "A local garage repaired his car for him."
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "جعل كراجاً محلياً يُصلح له سيارته.",
+            "why": "have + شيء + التصريف الثالث (had his car repaired) = جعل شخصاً آخر يقوم بالعمل له. هذا تركيب «السببية» وهو كثير في الامتحان.",
+            "options": [
+              "الفخّ الأشهر: had his car repaired لا تعني أنه أصلحها بنفسه، بل غيره أصلحها له.",
+              "تغيّر الفعل: repaired (أصلح) ≠ bought (اشترى).",
+              "تخترع حدثاً (تعطّلت السيارة قرب الكراج) وتغيّر المعنى.",
+              "✓ الإجابة الصحيحة — الكراج قام بالإصلاح نيابةً عنه."
+            ],
+            "vocab": [
+              ["have something done", "جعل غيره يفعل الشيء"],
+              ["repaired", "أُصلح"],
+              ["local", "محلي"],
+              ["broke down", "تعطّل"]
+            ]
+          }
+        },
+        {
+          "text": "The more you practise, the better you will become.",
+          "options": [
+            "Practising too much will make you worse.",
+            "You will improve only if you practise a little.",
+            "You are already better than those who practise.",
+            "Your skill will increase as you practise more."
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "كلما تدرّبت أكثر، أصبحت أفضل.",
+            "why": "The more ..., the better ... = كلما تدرّبت أكثر أصبحت أفضل (وكلما تُكتب مرة واحدة). علاقة طردية: زيادة الأول تعني زيادة الثاني.",
+            "options": [
+              "تعكس العلاقة: تجعل التدريب الكثير يضرّ.",
+              "تناقض الطرديّة: تربط التحسّن بالتدريب القليل.",
+              "تخترع مقارنة مع أشخاص آخرين غير موجودة.",
+              "✓ الإجابة الصحيحة — as you practise more = the more you practise."
+            ],
+            "vocab": [
+              ["the more ... the better", "كلما زاد ... تحسّن"],
+              ["practise", "يتدرّب"],
+              ["improve", "يتحسّن"],
+              ["skill", "مهارة"]
+            ]
+          }
+        },
+        {
+          "text": "It is hardly surprising that the plan failed.",
+          "options": [
+            "The failure of the plan was not at all unexpected.",
+            "Everyone was shocked when the plan failed.",
+            "The plan almost failed, but it succeeded in the end.",
+            "It is surprising that the plan did not fail."
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "ليس من المستغرب إطلاقاً أن الخطة فشلت.",
+            "why": "hardly = بالكاد / تقريباً لا. hardly surprising = غير مفاجئ = كان متوقَّعاً. تنبيه: hardly لا تعني hard (صعب).",
+            "options": [
+              "✓ الإجابة الصحيحة — hardly surprising = not unexpected.",
+              "تعكس المعنى: الصدمة تعني أنه كان مفاجئاً.",
+              "تغيّر الوقائع: الخطة فشلت فعلاً، ولم تنجح.",
+              "تعكس الحدث والمشاعر معاً: الخطة فشلت، والفشل غير مفاجئ."
+            ],
+            "vocab": [
+              ["hardly", "بالكاد / يكاد لا"],
+              ["surprising", "مفاجئ"],
+              ["unexpected", "غير متوقَّع"],
+              ["failed", "فشل"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rs-hard-1",
+      "type": "restatement",
+      "level": "hard",
+      "questions": [
+        {
+          "text": "Rarely have critics praised a first novel so highly.",
+          "options": [
+            "It is unusual for a first novel to receive such strong praise from critics.",
+            "Critics often give first novels such high praise that it is no longer unusual.",
+            "Critics rarely take the time to read an author's first novel at all.",
+            "The critics praised the novel, although it was not the author's first."
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "نادراً ما أشاد النقّاد برواية أولى بهذا القدر.",
+            "why": "القلب (Inversion): Rarely + have + فاعل = critics have rarely... الجملة تقول إن هذه الإشادة الكبيرة استثنائية وغير معتادة.",
+            "options": [
+              "✓ الإجابة الصحيحة — rarely ... so highly = unusual ... such strong praise.",
+              "تعكس المعنى: rarely ≠ often.",
+              "تغيّر ما هو نادر: النادر هو الإشادة الكبيرة، لا قراءة الروايات.",
+              "تناقض الأصل: الرواية هي الأولى للكاتب (a first novel)."
+            ],
+            "vocab": [
+              ["rarely", "نادراً"],
+              ["praised", "أشاد بـ / مدح"],
+              ["critics", "نقّاد"],
+              ["unusual", "غير معتاد"]
+            ]
+          }
+        },
+        {
+          "text": "But for her quick thinking, the accident would have been far worse.",
+          "options": [
+            "Her quick thinking was the reason the accident became far worse than expected.",
+            "The accident was very serious in spite of her quick thinking.",
+            "Her quick thinking prevented the accident from being much more serious.",
+            "If she had thought more quickly, there would have been no accident."
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "لولا سرعة تفكيرها، لكان الحادث أسوأ بكثير.",
+            "why": "But for + اسم = لولا = If it had not been for. سرعة تفكيرها حدثت فعلاً، ولذلك لم يكن الحادث أسوأ.",
+            "options": [
+              "تعكس الأثر: تفكيرها قلّل الضرر، لا زاده.",
+              "تقلب العلاقة إلى تناقض، وتجعل الحادث خطيراً رغم تدخّلها.",
+              "✓ الإجابة الصحيحة — but for = لولا ← تفكيرها منع الأسوأ.",
+              "تفترض أنها كانت بطيئة، والأصل أن تفكيرها كان سريعاً فعلاً."
+            ],
+            "vocab": [
+              ["but for", "لولا"],
+              ["quick thinking", "سرعة البديهة"],
+              ["far worse", "أسوأ بكثير"],
+              ["prevented", "منع"]
+            ]
+          }
+        },
+        {
+          "text": "Had the warning been taken seriously, the damage could have been avoided.",
+          "options": [
+            "The warning was taken seriously, and as a result the damage was avoided.",
+            "Because the warning was ignored, damage occurred that could have been avoided.",
+            "Even a serious response to the warning could not have prevented the damage.",
+            "The damage will be avoided as long as the warning is taken seriously this time."
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "لو أُخذ التحذير على محمل الجد، لأمكن تجنّب الضرر.",
+            "why": "Had + فاعل + التصريف الثالث = If + had ... (الشرط الثالث بصيغة القلب). يتحدث عن ماضٍ لم يحدث: التحذير لم يُؤخذ بجدية، والضرر وقع.",
+            "options": [
+              "تتعامل مع الشرط كأنه حقيقة وقعت.",
+              "✓ الإجابة الصحيحة — تستخرج الواقع: التحذير تُجوهل (ignored = not taken seriously) + وقع ضرر كان يمكن تجنّبه.",
+              "تناقض الأصل: could have been avoided تعني أن التجنّب كان ممكناً.",
+              "تحوّل الماضي غير المحقَّق إلى شرط مستقبلي."
+            ],
+            "vocab": [
+              ["warning", "تحذير"],
+              ["taken seriously", "أُخذ على محمل الجد"],
+              ["avoided", "تُجُنّب"],
+              ["ignored", "تُجوهل"]
+            ]
+          }
+        },
+        {
+          "text": "It was not until she moved abroad that she appreciated her home town.",
+          "options": [
+            "She moved abroad because she did not appreciate her home town.",
+            "She appreciated her home town so much that she refused to move abroad.",
+            "She stopped appreciating her home town soon after she moved to another country.",
+            "She only began to value her home town after she had left it for another country."
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "لم تقدّر مدينتها الأم إلا بعد أن انتقلت للعيش في الخارج.",
+            "why": "It was not until X that Y = لم يحدث Y إلا بعد X. أي أن التقدير بدأ فقط بعد الانتقال.",
+            "options": [
+              "تخترع علاقة سببية: الأصل يتحدث عن التوقيت لا عن سبب الانتقال.",
+              "تناقض الوقائع: هي انتقلت فعلاً ولم ترفض.",
+              "تعكس الاتجاه: التقدير بدأ بعد الانتقال، لم يتوقف.",
+              "✓ الإجابة الصحيحة — not until = only after، appreciated = began to value."
+            ],
+            "vocab": [
+              ["not until", "لم ... إلا بعد"],
+              ["abroad", "في الخارج"],
+              ["appreciated", "قدّر"],
+              ["value", "يقدّر / يُثمّن"]
+            ]
+          }
+        },
+        {
+          "text": "The proposal, however attractive it may seem, is simply too expensive to carry out.",
+          "options": [
+            "The proposal is attractive mainly because it would be inexpensive to carry out.",
+            "The proposal may seem unattractive, but it is affordable enough to carry out.",
+            "The proposal will be carried out once it becomes more attractive.",
+            "Although it may look appealing, the proposal costs too much to be carried out."
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "المقترح، مهما بدا جذاباً، مكلف جداً بحيث لا يمكن تنفيذه.",
+            "why": "however + صفة = مهما كان (تناقض)، و too ... to = أكثر من اللازم بحيث لا يمكن. الجاذبية لا تغيّر أنه غير قابل للتنفيذ بسبب تكلفته.",
+            "options": [
+              "تعكس الكلفة وتخترع سببية: الأصل أنه غالٍ جداً.",
+              "تعكس الصفتين معاً: جذاب ← غير جذاب، ومكلف ← في المتناول.",
+              "تتجاهل too ... to: المشكلة الكلفة، ولن يُنفّذ بمجرد أن يصبح أجمل.",
+              "✓ الإجابة الصحيحة — however attractive it may seem = although it may look appealing، و too expensive to carry out = costs too much to be carried out."
+            ],
+            "vocab": [
+              ["however (+ صفة)", "مهما"],
+              ["attractive / appealing", "جذاب"],
+              ["too ... to", "أكثر من أن / لدرجة لا يمكن"],
+              ["carry out", "ينفّذ"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rs-hard-2",
+      "type": "restatement",
+      "level": "hard",
+      "questions": [
+        {
+          "text": "Seldom does the committee reach a decision without a lengthy debate.",
+          "options": [
+            "The committee almost always discusses matters at length before deciding.",
+            "The committee usually decides quickly and without much discussion.",
+            "The committee seldom holds long debates before it reaches its decisions.",
+            "The committee never reaches a decision after a long debate."
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "نادراً ما تتوصّل اللجنة إلى قرار دون نقاش مطوّل.",
+            "why": "نفي مزدوج مع قلب: Seldom (نادراً) + without (بدون). «نادراً ما تقرر بدون نقاش طويل» = «تقريباً دائماً تناقش طويلاً قبل أن تقرر». نفيان يصنعان إثباتاً.",
+            "options": [
+              "✓ الإجابة الصحيحة — seldom + without = almost always + with.",
+              "تعكس المعنى تماماً: نقاش قليل بدل نقاش طويل.",
+              "تنقل seldom إلى النقاش نفسه، فتعكس المعنى.",
+              "تناقض الأصل: القرارات تأتي عادةً بعد نقاش طويل، لا أبداً."
+            ],
+            "vocab": [
+              ["seldom", "نادراً"],
+              ["lengthy", "مطوّل"],
+              ["debate", "نقاش / مناظرة"],
+              ["at length", "بإسهاب"]
+            ]
+          }
+        },
+        {
+          "text": "The documents are thought to have been destroyed in the fire.",
+          "options": [
+            "The documents were rescued from the fire, as people had thought.",
+            "Someone thought of destroying the documents before the fire.",
+            "It is believed that the fire destroyed the documents.",
+            "The fire was started in order to destroy the documents."
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "يُعتقد أن الوثائق أُتلفت في الحريق.",
+            "why": "are thought to have been done = It is believed that ... (was done). تركيب مبني للمجهول يعبّر عن اعتقاد عام، و to have been يشير إلى حدث في الماضي.",
+            "options": [
+              "تعكس المصير: أُنقذت بدل أُتلفت.",
+              "تخلط thought (يُعتقد) مع thought of (فكّر في)، وتخترع شخصاً.",
+              "✓ الإجابة الصحيحة — are thought to = it is believed that.",
+              "تخترع نيّة متعمّدة لإشعال الحريق غير موجودة."
+            ],
+            "vocab": [
+              ["are thought to", "يُعتقد أنها"],
+              ["destroyed", "أُتلف / دُمّر"],
+              ["rescued", "أُنقذ"],
+              ["it is believed", "يُعتقد"]
+            ]
+          }
+        },
+        {
+          "text": "Were the price to rise any further, many customers would stop buying the product.",
+          "options": [
+            "The price has risen, and many customers have stopped buying the product.",
+            "If the price went up again, many customers would no longer buy the product.",
+            "Many customers will buy even more of the product if the price rises any further.",
+            "Customers stopped buying the product, so the price rose further."
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "لو ارتفع السعر أكثر من ذلك، لتوقّف كثير من الزبائن عن شراء المنتج.",
+            "why": "Were + فاعل + to = If + فاعل + were to / فعل ماضٍ (شرط افتراضي بصيغة القلب). الحديث عن احتمال لم يحدث بعد.",
+            "options": [
+              "تحوّل الافتراض إلى حدث وقع فعلاً.",
+              "✓ الإجابة الصحيحة — were the price to rise = if the price went up.",
+              "تعكس النتيجة: ارتفاع السعر يُقلّل الشراء لا يزيده.",
+              "تعكس السبب والنتيجة: الأصل أن ارتفاع السعر يسبّب توقّف الشراء."
+            ],
+            "vocab": [
+              ["were ... to", "لو (افتراضاً)"],
+              ["any further", "أكثر من ذلك"],
+              ["no longer", "لم يعد"],
+              ["customers", "زبائن"]
+            ]
+          }
+        },
+        {
+          "text": "Much as I admire his work, I cannot agree with his latest conclusions.",
+          "options": [
+            "I disagree with his recent conclusions, although I admire his work a great deal.",
+            "I admire his work a great deal because I agree with his latest conclusions.",
+            "I do not admire his work very much, and I also reject his latest conclusions.",
+            "I agree with his conclusions more than I admire his work."
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "رغم إعجابي الشديد بأعماله، لا أستطيع الموافقة على استنتاجاته الأخيرة.",
+            "why": "Much as + جملة = Although ... very much (رغم أنني ... كثيراً). تعبير تناقض متقدّم يُخطئ فيه كثيرون فيظنونه مقارنة بالكمية.",
+            "options": [
+              "✓ الإجابة الصحيحة — much as = although ... a great deal.",
+              "تحوّل التناقض إلى سببية، وتعكس الموافقة.",
+              "الفخّ: تفهم much بمعنى الكمية وتنفي الإعجاب، والأصل إعجاب شديد.",
+              "تخترع مقارنة، وتعكس الموقف من الاستنتاجات."
+            ],
+            "vocab": [
+              ["much as", "رغم أنّ ... كثيراً"],
+              ["admire", "يُعجب بـ"],
+              ["conclusions", "استنتاجات"],
+              ["latest / recent", "الأخيرة / الحديثة"]
+            ]
+          }
+        },
+        {
+          "text": "There is no denying that the new policy has reduced traffic in the city centre.",
+          "options": [
+            "Some people deny that the new policy has had any effect on traffic.",
+            "The new policy has increased traffic, and nobody denies it.",
+            "It is uncertain whether the new policy has reduced traffic in the city centre.",
+            "It cannot be disputed that the new policy has cut traffic in the city centre."
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "لا يمكن إنكار أن السياسة الجديدة قلّلت حركة المرور في وسط المدينة.",
+            "why": "There is no denying that = It cannot be disputed that = من المؤكد/لا جدال. نفي الإنكار يعني تأكيداً قوياً.",
+            "options": [
+              "«لا يمكن إنكار» تأكيد قاطع من الكاتب أن السياسة قلّلت المرور؛ هذا الخيار يجعل الأمر خلافياً وينفي أي أثر للسياسة.",
+              "تعكس الأثر: reduced (قلّل) ← increased (زاد).",
+              "تعكس اليقين: الأصل تأكيد قاطع، لا شك.",
+              "✓ الإجابة الصحيحة — no denying = cannot be disputed، reduced = cut."
+            ],
+            "vocab": [
+              ["there is no denying", "لا يمكن إنكار"],
+              ["disputed", "موضع جدال"],
+              ["reduced / cut", "قلّل"],
+              ["policy", "سياسة"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rc-easy-1",
+      "type": "reading",
+      "level": "easy",
+      "passage": [
+        "In many cities, unused plots of land are being turned into community gardens.",
+        "These are small pieces of land where neighbours grow vegetables,",
+        "fruit and flowers together. Anyone who lives nearby can join, and",
+        "most gardens ask members to pay only a small yearly fee.",
+        "Community gardens do more than produce food. They give people who",
+        "live in flats a chance to spend time outdoors, and they bring",
+        "together neighbours who might otherwise never meet. Older members",
+        "often teach younger ones how to plant seeds and care for the soil.",
+        "Some cities have noticed another benefit: areas with gardens tend",
+        "to have less litter, because residents take pride in the space.",
+        "For these reasons, several local councils now offer free land to",
+        "groups that want to start a garden of their own."
+      ],
+      "questions": [
+        {
+          "text": "What is the passage mainly about?",
+          "options": [
+            "How to grow vegetables in a small flat",
+            "The value of gardens shared by neighbours",
+            "Why cities have too many unused plots",
+            "The cost of joining a local gardening club"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "السؤال: عمَّ يتحدث النص بشكل رئيسي؟ — النص يعرّف الحدائق المجتمعية ثم يعدّد فوائدها: الطعام، والخروج للهواء، وتعارف الجيران، ونظافة الحي.",
+            "why": "سؤال الفكرة الرئيسية: ابحث عن الإجابة التي تغطي النص كله لا تفصيلة واحدة. كل الفقرات تدور حول فوائد الحدائق التي يتشاركها الجيران.",
+            "options": [
+              "النص لا يشرح طريقة الزراعة في شقة — ذكر الشقق فقط ليقول إن سكانها يستفيدون من الخروج.",
+              "✓ الإجابة الصحيحة — تجمع كل ما في النص: تعريف الحدائق وفوائدها المتعددة.",
+              "الأراضي غير المستغلّة مذكورة في السطر الأول كنقطة بداية فقط، وليست موضوع النص.",
+              "الرسوم مذكورة في سطر واحد (السطر ٤) — تفصيلة، لا فكرة رئيسية."
+            ],
+            "vocab": [
+              ["community garden", "حديقة مجتمعية"],
+              ["neighbours", "جيران"],
+              ["unused plots", "أراضٍ غير مستغلّة"],
+              ["benefit", "فائدة"]
+            ]
+          }
+        },
+        {
+          "text": "According to the passage, members of most community gardens -",
+          "options": [
+            "must live in a flat",
+            "receive free vegetables every week",
+            "work for the local council",
+            "pay a small fee once a year"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "السؤال: حسب النص، أعضاء معظم الحدائق المجتمعية -. الجملة المفتاحية (السطر ٤): «most gardens ask members to pay only a small yearly fee» — معظم الحدائق تطلب من الأعضاء رسماً سنوياً صغيراً فقط.",
+            "why": "سؤال تفصيلي: ارجع إلى النص وطابق. yearly fee = a fee once a year.",
+            "options": [
+              "النص يقول «Anyone who lives nearby can join» — أي شخص يسكن قريباً، لا سكان الشقق فقط.",
+              "لا ذكر لخضار مجانية أسبوعية — الأعضاء يزرعون بأنفسهم.",
+              "البلديات تعطي الأرض (السطر ١١)، ولا يعمل الأعضاء لديها.",
+              "✓ الإجابة الصحيحة — yearly fee = fee once a year، و small موجودة في النص."
+            ],
+            "vocab": [
+              ["fee", "رسم / اشتراك"],
+              ["yearly", "سنوي"],
+              ["nearby", "قريب"],
+              ["members", "أعضاء"]
+            ]
+          }
+        },
+        {
+          "text": "The word \"otherwise\" (line 7) could best be replaced by -",
+          "options": [
+            "without the garden",
+            "at the same time",
+            "more often than not",
+            "as a result of this"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "السؤال: أي عبارة تحلّ محل كلمة «otherwise» في السطر ٧؟ الجملة: «neighbours who might otherwise never meet» — جيران ربما لم يكونوا ليلتقوا لولا ذلك.",
+            "why": "otherwise هنا تعني «لو لم يكن الأمر كذلك» أي لولا وجود الحديقة. الحديقة هي ما جمعهم.",
+            "options": [
+              "✓ الإجابة الصحيحة — otherwise هنا = لولا الحديقة، أي without the garden.",
+              "at the same time تعني «في الوقت نفسه» — لا علاقة لها بالمعنى.",
+              "more often than not تعني «في أغلب الأحيان» — تغيّر المعنى.",
+              "as a result of this تعني «نتيجة لذلك» — لا تناسب المعنى."
+            ],
+            "vocab": [
+              ["otherwise", "لولا ذلك / وإلا"],
+              ["bring together", "يجمع"],
+              ["meet", "يلتقي"],
+              ["replaced", "يُستبدل"]
+            ]
+          }
+        },
+        {
+          "text": "Why do areas with gardens have less litter, according to the passage?",
+          "options": [
+            "The council cleans them more often.",
+            "Gardeners are paid to collect rubbish.",
+            "Local people are proud of the area.",
+            "Fewer people live near the gardens."
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "السؤال: لماذا تقلّ القمامة في المناطق التي فيها حدائق، حسب النص؟ الجملة (السطر ١٠): «because residents take pride in the space» — لأن السكان يفخرون بالمكان.",
+            "why": "كلمة because في النص تعطيك السبب مباشرة. take pride in = يفخر بـ، و residents = local people، و the space = the area.",
+            "options": [
+              "النص لا يذكر أن البلدية تنظّف أكثر.",
+              "لا ذكر لأي أجر مقابل جمع القمامة.",
+              "✓ الإجابة الصحيحة — residents take pride in the space = local people are proud of the area.",
+              "النص لا يقول إن عدد السكان أقل — بل العكس، الحدائق تجمع الجيران."
+            ],
+            "vocab": [
+              ["litter", "قمامة مرمية"],
+              ["take pride in", "يفخر بـ"],
+              ["residents", "سكّان"],
+              ["local people", "السكان المحليون"]
+            ]
+          }
+        },
+        {
+          "text": "It can be inferred from lines 9-12 that some local councils -",
+          "options": [
+            "want to sell unused land to builders",
+            "pay residents to keep the streets clean",
+            "prefer gardens to be run by the council",
+            "believe gardens improve neighbourhoods"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "السؤال: يمكن الاستنتاج من الأسطر ٩–١٢ أن بعض البلديات -. في الأسطر: المدن لاحظت فائدة أخرى (قمامة أقل)، ثم «For these reasons, several local councils now offer free land» — لهذه الأسباب تقدّم عدة بلديات أرضاً مجانية.",
+            "why": "سؤال استنتاج: النص لا يقول صراحة إن البلديات «تؤمن» بشيء، لكن For these reasons تربط قرارها بفوائد الحدائق. من يعطي الأرض مجاناً بسبب هذه الفوائد يرى أن الحدائق تحسّن الأحياء.",
+            "options": [
+              "عكس النص: البلديات تعطي الأرض مجاناً للمجموعات، ولا تبيعها.",
+              "لا ذكر لدفع أموال للسكان؛ النظافة جاءت من فخر السكان بالمكان.",
+              "عكس النص: الأرض تُعطى لمجموعات تريد إنشاء حديقة خاصة بها (a garden of their own).",
+              "✓ الإجابة الصحيحة — For these reasons = بسبب فوائد الحدائق، إذن البلديات ترى أنها تحسّن الأحياء."
+            ],
+            "vocab": [
+              ["inferred", "يُستنتج"],
+              ["for these reasons", "لهذه الأسباب"],
+              ["of their own", "خاص بهم"],
+              ["neighbourhoods", "أحياء"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rc-easy-2",
+      "type": "reading",
+      "level": "easy",
+      "passage": [
+        "When a honeybee finds a good source of food, it does not keep",
+        "the discovery to itself. It flies back to the hive and performs",
+        "a special movement known as the waggle dance. The bee walks in a",
+        "straight line while shaking its body, then circles back and repeats",
+        "the pattern many times.",
+        "Other bees watch closely, because the dance contains information.",
+        "The direction of the straight line shows where the food is compared",
+        "with the position of the sun. The length of time the bee shakes",
+        "tells the others how far away the food is: the longer the dance,",
+        "the greater the distance.",
+        "Scientists first understood the meaning of the dance in the 1940s.",
+        "Today it is seen as one of the most complex forms of communication",
+        "in the animal world."
+      ],
+      "questions": [
+        {
+          "text": "The passage mainly describes -",
+          "options": [
+            "how honeybees make honey inside the hive",
+            "why bees are attracted to the sun",
+            "how bees share information about food",
+            "the scientists who studied bees in the 1940s"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "السؤال: النص يصف بشكل رئيسي -. النص كله عن «رقصة الاهتزاز» التي تخبر بها النحلة بقية النحل بمكان الطعام.",
+            "why": "الفكرة الرئيسية: الرقصة وسيلة تواصل تنقل مكان الطعام واتجاهه وبعده.",
+            "options": [
+              "صناعة العسل غير مذكورة إطلاقاً.",
+              "الشمس مذكورة كنقطة مرجعية للاتجاه فقط، لا كشيء يجذب النحل.",
+              "✓ الإجابة الصحيحة — تلخّص النص كله: النحل يتبادل المعلومات عن مكان الطعام.",
+              "العلماء مذكورون في سطر واحد (السطر ١١) — تفصيلة جانبية."
+            ],
+            "vocab": [
+              ["honeybee", "نحلة العسل"],
+              ["hive", "خلية"],
+              ["source", "مصدر"],
+              ["describes", "يصف"]
+            ]
+          }
+        },
+        {
+          "text": "According to the passage, the direction of the straight line shows -",
+          "options": [
+            "how long the bee has been flying",
+            "where the food is in relation to the sun",
+            "how much food the bee found at that source",
+            "which bees should leave the hive first"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "السؤال: حسب النص، اتجاه الخط المستقيم يُظهر -. الجملة (السطران ٧–٨): «shows where the food is compared with the position of the sun» — يُظهر مكان الطعام مقارنةً بموقع الشمس.",
+            "why": "compared with the position of the sun = in relation to the sun.",
+            "options": [
+              "مدة الطيران غير مذكورة؛ المدة المذكورة هي مدة الاهتزاز وتدل على المسافة.",
+              "✓ الإجابة الصحيحة — compared with = in relation to.",
+              "كمية الطعام غير مذكورة في النص.",
+              "لا ذكر لترتيب خروج النحل."
+            ],
+            "vocab": [
+              ["direction", "اتجاه"],
+              ["compared with", "مقارنةً بـ"],
+              ["position", "موقع"],
+              ["in relation to", "بالنسبة إلى"]
+            ]
+          }
+        },
+        {
+          "text": "If a bee dances for a longer time, the food is probably -",
+          "options": [
+            "closer to the hive",
+            "of better quality",
+            "in the same direction as the sun",
+            "further away from the hive"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "السؤال: إذا رقصت النحلة مدة أطول، فالطعام على الأرجح -. الجملة (السطران ٩–١٠): «the longer the dance, the greater the distance» — كلما طالت الرقصة زادت المسافة.",
+            "why": "تركيب the ... the ... (كلما طالت الرقصة زادت المسافة): رقصة أطول = مسافة أكبر = الطعام أبعد.",
+            "options": [
+              "عكس النص: الرقصة الأطول تعني أبعد لا أقرب.",
+              "جودة الطعام غير مذكورة.",
+              "الاتجاه يُحدَّد بالخط المستقيم لا بطول الرقصة.",
+              "✓ الإجابة الصحيحة — the greater the distance = further away."
+            ],
+            "vocab": [
+              ["the longer ... the greater", "كلما طال ... زاد"],
+              ["distance", "مسافة"],
+              ["further away", "أبعد"],
+              ["probably", "على الأرجح"]
+            ]
+          }
+        },
+        {
+          "text": "The word \"it\" (line 12) refers to -",
+          "options": [
+            "the waggle dance",
+            "the animal world",
+            "the information",
+            "the 1940s"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "السؤال: الضمير «it» في السطر ١٢ يعود على -. الجملة: «Scientists first understood the meaning of the dance ... Today it is seen as one of the most complex forms of communication».",
+            "why": "لمعرفة ما يعود عليه الضمير، ضع كل خيار مكانه: «the dance is seen as a complex form of communication» — المعنى صحيح تماماً.",
+            "options": [
+              "✓ الإجابة الصحيحة — الرقصة هي وسيلة التواصل المعقّدة التي يتحدث عنها النص.",
+              "«the animal world» تأتي بعد الضمير، وعالم الحيوان ليس «شكلاً من أشكال التواصل».",
+              "المعلومات موجودة داخل الرقصة، وليست هي وسيلة التواصل.",
+              "the 1940s تاريخ، لا وسيلة تواصل."
+            ],
+            "vocab": [
+              ["refers to", "يشير إلى"],
+              ["meaning", "معنى"],
+              ["communication", "تواصل"],
+              ["is seen as", "يُعتبر"]
+            ]
+          }
+        },
+        {
+          "text": "The word \"complex\" (line 12) is closest in meaning to -",
+          "options": [
+            "easy to understand",
+            "used for a long time",
+            "made up of many parts",
+            "done without sound"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "السؤال: كلمة «complex» في السطر ١٢ أقرب معنى إلى -. «one of the most complex forms of communication» — من أكثر أشكال التواصل تعقيداً.",
+            "why": "complex = معقّد، أي مكوَّن من أجزاء كثيرة مترابطة. والسياق يؤكد: الرقصة تنقل اتجاهاً ومسافة معاً.",
+            "options": [
+              "easy to understand = سهل الفهم — عكس complex.",
+              "used for a long time = مستعمل منذ زمن طويل — لا علاقة له بمعنى الكلمة.",
+              "✓ الإجابة الصحيحة — complex = مكوَّن من أجزاء كثيرة مترابطة (معقّد).",
+              "done without sound = يتم دون صوت — النص لا يذكر الصوت، وهذا ليس معنى complex."
+            ],
+            "vocab": [
+              ["complex", "معقّد"],
+              ["made up of", "مكوَّن من"],
+              ["simple", "بسيط"],
+              ["forms", "أشكال"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rc-medium-1",
+      "type": "reading",
+      "level": "medium",
+      "passage": [
+        "The first machine that could be called a bicycle appeared in Germany",
+        "in 1817. Known as the 'running machine', it had two wheels but no",
+        "pedals; riders pushed it along with their feet. It was heavy, and",
+        "since roads at the time were rough, it was more of a novelty than a",
+        "practical means of transport.",
+        "Pedals arrived in the 1860s, attached directly to the front wheel.",
+        "To go faster, manufacturers made that wheel larger and larger,",
+        "producing the famous penny-farthing. Its huge front wheel allowed",
+        "impressive speeds, but it also made the rider sit dangerously high,",
+        "and falls were common.",
+        "The breakthrough came in the 1880s with the so-called safety bicycle.",
+        "By using a chain to connect the pedals to the rear wheel, designers",
+        "could make both wheels the same modest size without losing speed.",
+        "Combined with air-filled tyres, which made riding far more comfortable,",
+        "the new design quickly replaced its predecessors. Within a decade,",
+        "cycling had become affordable for millions of ordinary people, and",
+        "the basic shape of the bicycle has changed surprisingly little since."
+      ],
+      "questions": [
+        {
+          "text": "The main purpose of the passage is to -",
+          "options": [
+            "argue that bicycles are safer than cars",
+            "explain how the design of the bicycle developed",
+            "describe the roads of nineteenth-century Germany",
+            "compare the speed of different bicycles"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "السؤال: الهدف الرئيسي من النص هو -. النص يتتبّع تطوّر الدراجة زمنياً: آلة الجري (١٨١٧) ← دواسات على العجلة الأمامية ثم البنس فارذينغ (ستينيات القرن التاسع عشر وما بعدها) ← دراجة الأمان (ثمانينيات القرن التاسع عشر).",
+            "why": "ترتيب النص زمني (1817 ← 1860s ← 1880s)، وكل فقرة مرحلة في تطوّر التصميم. هذا هو الهدف.",
+            "options": [
+              "السيارات غير مذكورة، والنص لا يجادل.",
+              "✓ الإجابة الصحيحة — التسلسل الزمني للتصميم هو هيكل النص كله.",
+              "الطرق مذكورة سبباً لعدم عملية الآلة الأولى فقط.",
+              "السرعة مذكورة، لكنها جزء من قصة التطوّر لا هدف النص."
+            ],
+            "vocab": [
+              ["purpose", "هدف"],
+              ["design", "تصميم"],
+              ["developed", "تطوّر"],
+              ["argue", "يجادل"]
+            ]
+          }
+        },
+        {
+          "text": "According to lines 3-5, the running machine was not very practical because -",
+          "options": [
+            "it was too fast for the roads of the time",
+            "it was light and easily damaged",
+            "of its weight and the poor condition of roads",
+            "riders could not steer it"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "السؤال: حسب الأسطر ٣–٥، آلة الجري لم تكن عملية لأن -. الجملة: «It was heavy, and since roads at the time were rough, it was more of a novelty than a practical means of transport».",
+            "why": "since = because. السببان المذكوران: ثقيلة + طرق وعرة، والنتيجة: شيء جديد طريف أكثر منه وسيلة نقل عملية.",
+            "options": [
+              "النص لا يذكر أنها سريعة؛ بل كانت ثقيلة.",
+              "عكس النص: كانت ثقيلة لا خفيفة.",
+              "✓ الإجابة الصحيحة — its weight = heavy، و the poor condition of roads = rough roads.",
+              "التوجيه غير مذكور في النص."
+            ],
+            "vocab": [
+              ["practical", "عملي"],
+              ["rough", "وعر"],
+              ["novelty", "شيء جديد طريف"],
+              ["means of transport", "وسيلة نقل"]
+            ]
+          }
+        },
+        {
+          "text": "Why did manufacturers make the front wheel of early pedal bicycles larger?",
+          "options": [
+            "To increase the speed of the bicycle",
+            "To make the rider feel safer",
+            "Because larger wheels were cheaper",
+            "So that the chain could be attached"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "السؤال: لماذا كبّر المصنّعون العجلة الأمامية؟ الجملة (السطر ٧): «To go faster, manufacturers made that wheel larger and larger».",
+            "why": "To go faster = من أجل السرعة. الغرض مكتوب صراحة في بداية الجملة.",
+            "options": [
+              "✓ الإجابة الصحيحة — to go faster = to increase the speed.",
+              "عكس النص: العجلة الكبيرة جعلت الجلوس خطيراً (السطر ٩).",
+              "السعر غير مذكور.",
+              "الفخّ الزمني: السلسلة جاءت لاحقاً في ثمانينيات القرن التاسع عشر، وربطت الدواسات بالعجلة الخلفية."
+            ],
+            "vocab": [
+              ["manufacturers", "المصنّعون"],
+              ["attached", "مُثبّت"],
+              ["impressive", "مُبهر"],
+              ["falls", "سقطات"]
+            ]
+          }
+        },
+        {
+          "text": "In line 15, \"its predecessors\" means -",
+          "options": [
+            "the companies that made the safety bicycle",
+            "people who rode bicycles before 1880",
+            "the new air-filled tyres",
+            "the earlier types of bicycle"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "السؤال: كلمة «predecessors» في السطر ١٥ تشير إلى -. الجملة: «the new design quickly replaced its predecessors» — التصميم الجديد حلّ سريعاً محلّ سابقيه.",
+            "why": "predecessor = ما سبق الشيء. «its predecessors» = ما سبق التصميم الجديد، أي الدراجات الأقدم (آلة الجري والبنس فارذينغ).",
+            "options": [
+              "الشركات لم تُذكر، ولا يحلّ تصميم محلّ شركة.",
+              "الفخّ: predecessors قد تعني أشخاصاً سابقين، لكن هنا ما حلّ محلّه التصميم هو تصاميم أقدم.",
+              "الإطارات جزء من التصميم الجديد نفسه، لا مما سبقه.",
+              "✓ الإجابة الصحيحة — الأنواع الأقدم من الدراجات."
+            ],
+            "vocab": [
+              ["predecessors", "السابقون / ما سبقه"],
+              ["replaced", "حلّ محلّ"],
+              ["breakthrough", "اختراق / إنجاز كبير"],
+              ["rear wheel", "العجلة الخلفية"]
+            ]
+          }
+        },
+        {
+          "text": "It can be inferred from the last paragraph that the safety bicycle -",
+          "options": [
+            "was slower than the penny-farthing",
+            "was never popular with ordinary people",
+            "set a shape still common today",
+            "was invented before the running machine"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "السؤال: يمكن الاستنتاج من الفقرة الأخيرة أن دراجة الأمان -. الجملة (السطر ١٧): «the basic shape of the bicycle has changed surprisingly little since» — الشكل الأساسي لم يتغيّر إلا قليلاً منذ ذلك الحين.",
+            "why": "سؤال استنتاج: إذا لم يتغيّر الشكل كثيراً منذ دراجة الأمان، فتصميمها ما زال مستخدماً إلى حد كبير اليوم.",
+            "options": [
+              "عكس النص: «without losing speed» (السطر ١٣).",
+              "عكس النص: «affordable for millions of ordinary people» (السطر ١٦).",
+              "✓ الإجابة الصحيحة — changed surprisingly little since = still common today.",
+              "خطأ زمني: آلة الجري عام ١٨١٧، ودراجة الأمان في ثمانينيات القرن التاسع عشر."
+            ],
+            "vocab": [
+              ["inferred", "يُستنتج"],
+              ["affordable", "في المتناول (سعراً)"],
+              ["largely", "إلى حد كبير"],
+              ["decade", "عقد (عشر سنوات)"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rc-medium-2",
+      "type": "reading",
+      "level": "medium",
+      "passage": [
+        "Everyone yawns, yet scientists still disagree about why. For many",
+        "years the most popular explanation was that yawning brings extra",
+        "oxygen into the body when levels are low. Experiments, however, have",
+        "not supported this idea: people who breathed air rich in oxygen",
+        "yawned just as often as those who did not.",
+        "A more recent theory suggests that yawning cools the brain. When we",
+        "open our mouths wide and take a deep breath, cooler air flows into",
+        "the head, and the stretching of the jaw increases blood flow. In one",
+        "study, people who held a cold pack against their foreheads yawned",
+        "far less than people who held a warm one.",
+        "Yawning is also famously contagious. Seeing, hearing or even reading",
+        "about a yawn can trigger one. Interestingly, this effect is stronger",
+        "between friends and family members than between strangers, which has",
+        "led some researchers to link it with empathy, the ability to share",
+        "the feelings of others."
+      ],
+      "questions": [
+        {
+          "text": "According to the first paragraph, the oxygen explanation -",
+          "options": [
+            "was proved correct by recent experiments",
+            "has not been confirmed by experiments",
+            "applies only to people who are tired",
+            "is still the most widely accepted theory today"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "السؤال: حسب الفقرة الأولى، تفسير الأكسجين -. الجملة (السطران ٣–٤): «Experiments, however, have not supported this idea» — التجارب لم تدعم هذه الفكرة.",
+            "why": "have not supported = has not been confirmed. والدليل: من تنفّسوا هواءً غنياً بالأكسجين تثاءبوا بنفس القدر.",
+            "options": [
+              "عكس النص: التجارب لم تدعمه.",
+              "✓ الإجابة الصحيحة — not supported = not confirmed.",
+              "التعب غير مذكور في النص.",
+              "الفخّ الزمني: «For many years the most popular» تتحدث عن الماضي، والفقرة التالية تقدّم نظرية أحدث."
+            ],
+            "vocab": [
+              ["explanation", "تفسير"],
+              ["supported", "دعم / أيّد"],
+              ["confirmed", "تأكّد"],
+              ["rich in", "غني بـ"]
+            ]
+          }
+        },
+        {
+          "text": "In the study described in lines 8-10, people holding a cold pack yawned less. This result supports the idea that -",
+          "options": [
+            "yawning helps to cool the brain",
+            "yawning brings extra oxygen into the body",
+            "cold air makes people feel tired",
+            "warm packs reduce blood flow"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "السؤال: في الدراسة (الأسطر ٨–١٠) من وضعوا كمادة باردة تثاءبوا أقل. هذه النتيجة تدعم فكرة أن -.",
+            "why": "منطق الدراسة: إذا كان التثاؤب يبرّد الدماغ، فمن تبرّد رأسه بالكمادة لا يحتاج للتثاؤب كثيراً. النتيجة جاءت في فقرة نظرية التبريد تحديداً.",
+            "options": [
+              "✓ الإجابة الصحيحة — الدراسة جاءت دليلاً على نظرية التبريد.",
+              "هذه نظرية الأكسجين التي رفضتها التجارب في الفقرة الأولى.",
+              "التعب غير مذكور، والنتيجة عن التثاؤب لا الشعور بالتعب.",
+              "النص لا يقول إن الكمادات الدافئة تقلّل تدفّق الدم."
+            ],
+            "vocab": [
+              ["cold pack", "كمادة باردة"],
+              ["forehead", "جبين"],
+              ["cools", "يبرّد"],
+              ["result", "نتيجة"]
+            ]
+          }
+        },
+        {
+          "text": "The word \"contagious\" (line 11) is closest in meaning to -",
+          "options": [
+            "dangerous to one's health",
+            "unusual among adults",
+            "caused by tiredness",
+            "easily spread to others"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "السؤال: كلمة «contagious» في السطر ١١ أقرب معنى إلى -. الجملة التالية تشرحها: «Seeing, hearing or even reading about a yawn can trigger one».",
+            "why": "contagious = معدٍ، أي ينتقل من شخص لآخر. والنص يشرحها مباشرة: رؤية تثاؤب غيرك تجعلك تتثاءب.",
+            "options": [
+              "الفخّ: contagious تُستعمل مع الأمراض فتوحي بالخطر على الصحة، لكن المعنى الانتقال لا الخطر.",
+              "unusual among adults = غير معتاد لدى البالغين — عكس النص: «Everyone yawns».",
+              "التعب غير مذكور في النص.",
+              "✓ الإجابة الصحيحة — easily spread to others = ينتقل بسهولة إلى الآخرين."
+            ],
+            "vocab": [
+              ["contagious", "مُعدٍ"],
+              ["trigger", "يُثير / يُطلق"],
+              ["famously", "كما هو معروف"],
+              ["spread", "ينتشر / ينتقل"]
+            ]
+          }
+        },
+        {
+          "text": "The word \"it\" (line 14) refers to -",
+          "options": [
+            "the ability to share feelings",
+            "the cooling theory",
+            "contagious yawning",
+            "the family"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "السؤال: الضمير «it» في السطر ١٤ يعود على -. الجملة: «this effect is stronger between friends ... which has led some researchers to link it with empathy» — ما دفع بعض الباحثين إلى ربطه بالتعاطف.",
+            "why": "ضع كل خيار مكان الضمير: «link contagious yawning with empathy» — يربطون التثاؤب المعدي بالتعاطف. هذا منطقي لأن الفقرة كلها عن العدوى، و this effect (السطر ١٢) تشير إليها.",
+            "options": [
+              "هذا تعريف empathy نفسها (السطر ١٤–١٥)؛ لا معنى لـ «ربط التعاطف بالتعاطف».",
+              "نظرية التبريد في الفقرة السابقة، ولا يتحدث عنها هذا الجزء.",
+              "✓ الإجابة الصحيحة — it = this effect = التثاؤب المعدي، وهو ما رُبط بالتعاطف.",
+              "العائلة مذكورة ضمن من يقوى بينهم الأثر، لكن الباحثين لم يربطوا «العائلة» بالتعاطف."
+            ],
+            "vocab": [
+              ["refers to", "يعود على"],
+              ["this effect", "هذا الأثر"],
+              ["link ... with", "يربط ... بـ"],
+              ["researchers", "باحثون"]
+            ]
+          }
+        },
+        {
+          "text": "Why does the writer mention empathy (line 14)?",
+          "options": [
+            "To define a word that appears earlier in the passage",
+            "To offer a possible explanation for a finding",
+            "To argue that strangers have no feelings",
+            "To show that the cooling theory is wrong"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "السؤال: لماذا يذكر الكاتب التعاطف (السطر ١٤)؟ الجملة: «which has led some researchers to link it with empathy» — ما دفع بعض الباحثين لربطه بالتعاطف.",
+            "why": "سؤال غرض: التعاطف مذكور بعد معلومة أن العدوى أقوى بين المقرّبين، كتفسير محتمل لها. «some researchers» و«link» تدلّ على احتمال لا يقين.",
+            "options": [
+              "empathy لم تُذكر قبل ذلك في النص؛ الكاتب يعرّفها لأنها كلمة جديدة، لا ليشرح كلمة سابقة.",
+              "✓ الإجابة الصحيحة — تفسير محتمل لنتيجة أن العدوى أقوى بين المقرّبين.",
+              "مبالغة وتشويه: النص لا يقول إن الغرباء بلا مشاعر.",
+              "النص لا يربط التعاطف بنظرية التبريد ولا يرفضها."
+            ],
+            "vocab": [
+              ["empathy", "التعاطف"],
+              ["link", "يربط"],
+              ["share", "يشارك"],
+              ["suggest", "يقترح / يلمّح"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rc-hard-1",
+      "type": "reading",
+      "level": "hard",
+      "passage": [
+        "A placebo is a treatment with no active ingredient — a sugar pill, a",
+        "saline injection — given to patients who believe it may help them.",
+        "That such treatments can produce genuine improvement has been known",
+        "for centuries, yet the placebo effect has long been regarded as a",
+        "nuisance: something to be subtracted in clinical trials so that the",
+        "real effect of a drug can be measured.",
+        "This view has become harder to sustain. Brain imaging has shown that",
+        "placebos can trigger the release of the body's own pain-relieving",
+        "chemicals, which suggests that the effect is not merely imagined. The",
+        "strength of the response, moreover, depends on details that have",
+        "nothing to do with chemistry: larger pills tend to work better than",
+        "small ones, injections better than tablets, and expensive treatments",
+        "better than cheap ones.",
+        "Perhaps the most surprising finding concerns so-called open-label",
+        "placebos. In several trials, patients were told plainly that their pills",
+        "contained no medicine, and many still reported feeling better. Such",
+        "results complicate the assumption that the effect depends entirely on",
+        "deception.",
+        "None of this means that placebos can cure serious disease; their",
+        "influence is largely confined to symptoms such as pain and nausea.",
+        "But it does suggest that the ritual of care — the consultation, the",
+        "prescription, the expectation of relief — is itself part of treatment,",
+        "and deserves to be studied rather than dismissed."
+      ],
+      "questions": [
+        {
+          "text": "The writer's main point is that the placebo effect -",
+          "options": [
+            "should be removed from all clinical trials",
+            "can cure most serious illnesses",
+            "is a real phenomenon worth serious study",
+            "works only when patients are deceived"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "السؤال: الفكرة الرئيسية للكاتب أن تأثير الدواء الوهمي -. الخلاصة في الجملة الأخيرة (السطر ٢٣): «deserves to be studied rather than dismissed» — يستحق الدراسة بدل التجاهل.",
+            "why": "النص ينتقل من النظرة القديمة (إزعاج يُطرح) إلى أدلة على أنه حقيقي (تصوير الدماغ) ثم يختم بأنه يستحق الدراسة. الجملة الأخيرة غالباً تحمل موقف الكاتب في النصوص الجدلية.",
+            "options": [
+              "هذه النظرة القديمة التي يرفضها الكاتب («This view has become harder to sustain»).",
+              "عكس النص صراحة: «None of this means that placebos can cure serious disease».",
+              "✓ الإجابة الصحيحة — «not merely imagined» + «deserves to be studied».",
+              "عكس نتيجة الأسطر ١٤–١٨: حتى من عرفوا أنه وهمي تحسّنوا."
+            ],
+            "vocab": [
+              ["placebo", "دواء وهمي"],
+              ["phenomenon", "ظاهرة"],
+              ["dismissed", "مُستبعَد / مُتجاهَل"],
+              ["deceived", "مخدوع"]
+            ]
+          }
+        },
+        {
+          "text": "The word \"nuisance\" (line 5) suggests that researchers traditionally saw the placebo effect as -",
+          "options": [
+            "an obstacle to measuring a drug's effect",
+            "a dangerous side effect of new drugs",
+            "the most important result of a trial",
+            "a cheap alternative to real medicine"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "السؤال: كلمة «nuisance» (السطر ٥) توحي بأن الباحثين رأوا التأثير تقليدياً على أنه -. الجملة: «a nuisance: something to be subtracted in clinical trials so that the real effect of a drug can be measured».",
+            "why": "nuisance = شيء مزعج. والنقطتان بعدها تشرحانها: شيء يُطرح من التجارب ليُقاس أثر الدواء الحقيقي، أي عائق أمام القياس.",
+            "options": [
+              "✓ الإجابة الصحيحة — مزعج (nuisance) + يعيق القياس (subtracted so that ... measured).",
+              "لا ذكر لخطر أو أعراض جانبية.",
+              "عكس المعنى: كان يُطرح ويُستبعد، لا يُعدّ الأهم.",
+              "الكلفة مذكورة لاحقاً في سياق آخر (الأسطر ١٢–١٣) ولا علاقة لها بكلمة nuisance."
+            ],
+            "vocab": [
+              ["nuisance", "مصدر إزعاج"],
+              ["subtracted", "مطروح"],
+              ["clinical trials", "تجارب سريرية"],
+              ["interfered", "تدخّل / أعاق"]
+            ]
+          }
+        },
+        {
+          "text": "According to lines 10-13, which of the following would probably produce the strongest placebo response?",
+          "options": [
+            "A small, cheap tablet",
+            "A large, cheap tablet",
+            "A cheap injection",
+            "An expensive injection"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "السؤال: حسب الأسطر ١٠–١٣، أيّها سيُنتج على الأرجح أقوى استجابة؟ القواعد في النص: الحبوب الكبيرة أفضل من الصغيرة، والحقن أفضل من الأقراص، والعلاج الغالي أفضل من الرخيص.",
+            "why": "سؤال تطبيق: اجمع العوامل. الحقنة الغالية تجمع ميزتين (حقنة + غالية)، بينما يخسر كل خيار آخر ميزة واحدة على الأقل من هاتين الميزتين.",
+            "options": [
+              "أضعف خيار: صغيرة + رخيصة + قرص.",
+              "قرص كبير لكنه رخيص: «injections better than tablets» و«expensive better than cheap».",
+              "حقنة، لكنها رخيصة و«expensive treatments better than cheap ones».",
+              "✓ الإجابة الصحيحة — حقنة (أفضل من قرص) + غالية (أفضل من رخيص)."
+            ],
+            "vocab": [
+              ["response", "استجابة"],
+              ["injection", "حقنة"],
+              ["tablet", "قرص"],
+              ["moreover", "علاوة على ذلك"]
+            ]
+          }
+        },
+        {
+          "text": "The results described in lines 14-18 challenge the belief that -",
+          "options": [
+            "placebos can reduce pain",
+            "the placebo effect requires patients to be misled",
+            "patients can tell whether a pill contains medicine",
+            "brain imaging can detect the placebo effect"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "السؤال: النتائج في الأسطر ١٤–١٨ تتحدّى الاعتقاد بأن -. الجملة: «Such results complicate the assumption that the effect depends entirely on deception» — تُربك افتراض أن التأثير يعتمد كلياً على الخداع.",
+            "why": "complicate the assumption = يتحدّى الاعتقاد. deception = الخداع، و misled = مخدوع. المرضى عرفوا أنه وهمي ومع ذلك تحسّنوا.",
+            "options": [
+              "النص لا يتحدّى هذا؛ بل يؤكّد أثر الوهمي على الألم (السطر ٢٠).",
+              "✓ الإجابة الصحيحة — deception = being misled.",
+              "النص لا يتناول قدرة المرضى على التمييز؛ فقد أُخبروا مسبقاً أن الحبوب بلا دواء.",
+              "تصوير الدماغ في الفقرة الثانية، والنص يستعمله دليلاً لا يتحدّاه."
+            ],
+            "vocab": [
+              ["open-label", "مُعلَن (دون إخفاء)"],
+              ["plainly", "بصراحة / بوضوح"],
+              ["assumption", "افتراض"],
+              ["deception", "خداع"]
+            ]
+          }
+        },
+        {
+          "text": "In the last paragraph, the writer's attitude towards placebos is best described as -",
+          "options": [
+            "enthusiastic and uncritical",
+            "completely dismissive",
+            "indifferent",
+            "cautiously positive"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "السؤال: موقف الكاتب من الأدوية الوهمية في الفقرة الأخيرة يُوصف بأنه -. الفقرة تبدأ بتحفّظ: «None of this means ... cure serious disease» ثم تنتقل: «But it does suggest ... deserves to be studied».",
+            "why": "سؤال الموقف (tone): ابحث عن كلمات التحفّظ والتأييد معاً. «None of this means» (حذر) + «But it does suggest ... deserves to be studied» (إيجابية) = إيجابي بحذر.",
+            "options": [
+              "غير صحيح: الكاتب يحدّ من ادعاءات الوهمي بوضوح، فهو ليس بلا نقد.",
+              "عكس رأيه: يطالب بدراسته بدل استبعاده.",
+              "الكاتب لديه موقف واضح، ليس غير مبالٍ.",
+              "✓ الإجابة الصحيحة — تحفّظ (لا يعالج الأمراض الخطيرة) + إيجابية (يستحق الدراسة)."
+            ],
+            "vocab": [
+              ["attitude", "موقف"],
+              ["cautiously", "بحذر"],
+              ["confined to", "مقتصر على"],
+              ["uncritical", "بلا نقد"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rc-hard-2",
+      "type": "reading",
+      "level": "hard",
+      "passage": [
+        "Does the language we speak shape the way we think? The idea, often",
+        "associated with the linguist Benjamin Lee Whorf, was fashionable in",
+        "the mid-twentieth century before falling out of favour. In its strong",
+        "form — that language determines thought, so that speakers cannot",
+        "grasp concepts their language lacks — it is now widely rejected.",
+        "People without a word for a colour can still see it, and speakers of",
+        "every language manage to learn new ideas.",
+        "A weaker version, however, has quietly returned. Its claim is not that",
+        "language imprisons thought but that it nudges attention. Speakers of",
+        "Guugu Yimithirr, an Aboriginal language of Australia, describe space",
+        "using compass directions rather than words like 'left' and 'right'.",
+        "They say, in effect, 'your cup is to the east of your plate'. Studies",
+        "suggest that, as a result, they keep track of orientation with a",
+        "precision that astonishes outsiders.",
+        "Critics caution that such findings are easy to over-interpret.",
+        "Differences in performance may reflect culture, environment or habit",
+        "as much as grammar, and disentangling these influences is notoriously",
+        "difficult. Still, the evidence is enough to suggest that the question",
+        "Whorf asked was a good one, even if his most ambitious answer was not."
+      ],
+      "questions": [
+        {
+          "text": "According to the first paragraph, the strong form of the theory claims that -",
+          "options": [
+            "language influences which things people notice",
+            "people can only understand ideas they have words for",
+            "every language contains the same concepts",
+            "learning a new language changes a person's culture"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "السؤال: حسب الفقرة الأولى، الصيغة القوية للنظرية تقول إن -. الجملة (الأسطر ٣–٥): «that language determines thought, so that speakers cannot grasp concepts their language lacks».",
+            "why": "cannot grasp concepts their language lacks = لا يستطيعون فهم مفاهيم تفتقر لغتهم إلى كلمات لها.",
+            "options": [
+              "الفخّ الأهم: هذه الصيغة الضعيفة (nudges attention) من الفقرة الثانية، لا القوية.",
+              "✓ الإجابة الصحيحة — cannot grasp concepts their language lacks = can only understand ideas they have words for.",
+              "النص لا يقول إن اللغات متماثلة المفاهيم؛ بل يفترض العكس.",
+              "الثقافة مذكورة في الفقرة الأخيرة عاملاً بديلاً، لا ادعاءً للنظرية."
+            ],
+            "vocab": [
+              ["determines", "يُحدّد"],
+              ["grasp", "يستوعب"],
+              ["concepts", "مفاهيم"],
+              ["lacks", "يفتقر إلى"]
+            ]
+          }
+        },
+        {
+          "text": "The example in lines 6-7 is used to -",
+          "options": [
+            "argue against the strong form of the theory",
+            "show that colour words are the same in all languages",
+            "support the strong form of the theory",
+            "introduce the weaker version of the theory"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "السؤال: المثال في الأسطر ٦–٧ يُستعمل من أجل -. «People without a word for a colour can still see it, and speakers of every language manage to learn new ideas».",
+            "why": "سؤال وظيفة: المثال يأتي مباشرة بعد «it is now widely rejected». أشخاص بلا كلمة للون يرونه = دليل أن اللغة لا تحدّد الإدراك، أي ضد الصيغة القوية.",
+            "options": [
+              "✓ الإجابة الصحيحة — المثال دليل على رفض الصيغة القوية.",
+              "النص يفترض أن بعض اللغات تفتقر لكلمات ألوان، فالكلمات ليست متماثلة.",
+              "عكس الوظيفة: المثال ينقض الصيغة القوية.",
+              "الصيغة الضعيفة تُقدَّم في الفقرة الثانية بـ «however»، لا بهذا المثال."
+            ],
+            "vocab": [
+              ["widely rejected", "مرفوض على نطاق واسع"],
+              ["manage to", "يتمكّن من"],
+              ["argue against", "يحتجّ ضد"],
+              ["introduce", "يقدّم"]
+            ]
+          }
+        },
+        {
+          "text": "The phrase \"nudges attention\" (line 9) means that language -",
+          "options": [
+            "prevents people from thinking clearly",
+            "replaces the need to pay attention at all",
+            "makes some things more likely to be noticed",
+            "forces speakers to use compass directions"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "السؤال: عبارة «nudges attention» في السطر ٩ تعني أن اللغة -. الجملة: «Its claim is not that language imprisons thought but that it nudges attention».",
+            "why": "nudge = يدفع دفعة خفيفة. المقابلة مع imprisons (يسجن) توضّح الفرق: اللغة لا تقيّد التفكير، بل توجّه الانتباه بلطف نحو أشياء معيّنة.",
+            "options": [
+              "هذا أقرب لـ imprisons thought — الصيغة التي يقول النص إن الصيغة الضعيفة لا تدّعيها.",
+              "لا معنى لأن تحلّ اللغة محلّ الانتباه.",
+              "✓ الإجابة الصحيحة — دفعة خفيفة للانتباه = تجعل أشياء معيّنة أكثر لفتاً للنظر.",
+              "مبالغة: forces (يُجبر) عكس nudge (يدفع بلطف)، والاتجاهات مثال خاص بلغة واحدة."
+            ],
+            "vocab": [
+              ["nudges", "يدفع بلطف"],
+              ["imprisons", "يسجن"],
+              ["attention", "انتباه"],
+              ["noticed", "يُلاحَظ"]
+            ]
+          }
+        },
+        {
+          "text": "What point do the critics make in lines 15-18?",
+          "options": [
+            "The Guugu Yimithirr studies were carried out incorrectly.",
+            "Grammar is the only cause of differences in performance.",
+            "Compass directions are harder to learn than 'left' and 'right'.",
+            "Factors other than language might explain the results."
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "السؤال: ما النقطة التي يطرحها النقّاد في الأسطر ١٥–١٨؟ «Differences in performance may reflect culture, environment or habit as much as grammar» — قد تعكس الفروق الثقافة أو البيئة أو العادة بقدر ما تعكس القواعد اللغوية.",
+            "why": "النقّاد لا ينكرون النتائج، بل يحذّرون من تفسيرها: عوامل أخرى (ثقافة، بيئة، عادة) قد تفسّرها. may = احتمال.",
+            "options": [
+              "النقّاد لا يقولون إن الدراسات أُجريت خطأً، بل إن تفسيرها سهل المبالغة.",
+              "عكس كلامهم: يقولون إن القواعد ليست السبب الوحيد.",
+              "صعوبة التعلّم غير مذكورة.",
+              "✓ الإجابة الصحيحة — culture, environment or habit = other factors."
+            ],
+            "vocab": [
+              ["caution", "يحذّر"],
+              ["over-interpret", "يبالغ في التفسير"],
+              ["disentangling", "فكّ التشابك"],
+              ["notoriously", "من المعروف (سلباً) أنه"]
+            ]
+          }
+        },
+        {
+          "text": "Which of the following best expresses the writer's conclusion?",
+          "options": [
+            "Whorf was right about both the question and the answer.",
+            "Whorf's question was valuable; his boldest claim was wrong.",
+            "Language has no effect whatsoever on thought.",
+            "The debate about language and thought has been settled."
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "السؤال: أيّها يعبّر أفضل عن استنتاج الكاتب؟ الجملة الأخيرة: «the question Whorf asked was a good one, even if his most ambitious answer was not» — السؤال كان جيداً وإن لم يكن جوابه الأكثر طموحاً كذلك.",
+            "why": "even if = حتى لو / وإن. الكاتب يمدح السؤال ويرفض الجواب القوي. most ambitious answer = الصيغة القوية المرفوضة في الفقرة الأولى.",
+            "options": [
+              "عكس النص: الجواب الطموح لم يكن جيداً.",
+              "✓ الإجابة الصحيحة — a good question = valuable، و his most ambitious answer was not = his boldest claim was wrong.",
+              "مبالغة: الصيغة الضعيفة «has quietly returned» والأدلة تدعمها جزئياً.",
+              "عكس النص: النقّاد يحذّرون وفكّ العوامل «notoriously difficult» — الجدل لم يُحسم."
+            ],
+            "vocab": [
+              ["conclusion", "استنتاج"],
+              ["ambitious", "طموح"],
+              ["even if", "حتى لو / وإن"],
+              ["settled", "محسوم"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc-easy-1",
+      "type": "sentence-completion",
+      "level": "easy",
+      "questions": [
+        {
+          "text": "The library is a very ____ place, so students go there to study.",
+          "options": [
+            "noisy",
+            "quiet",
+            "crowded",
+            "dangerous"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "المكتبة مكان هادئ جداً، لذلك يذهب الطلاب إليها للدراسة.",
+            "why": "كلمة الدليل so (لذلك): ما بعدها نتيجة لما قبلها. الطلاب يذهبون للدراسة ← المكان يجب أن يكون مناسباً للدراسة، أي هادئاً.",
+            "options": [
+              "noisy = صاخب — عكس المطلوب؛ الضجيج لا يكون سبباً للذهاب للدراسة.",
+              "✓ الإجابة الصحيحة — quiet = هادئ، والهدوء سبب منطقي للدراسة هناك.",
+              "crowded = مزدحم — الازدحام لا يجذب الطلاب للدراسة.",
+              "dangerous = خطير — لا يمكن أن يكون سبباً للذهاب إليه."
+            ],
+            "vocab": [
+              ["quiet", "هادئ"],
+              ["noisy", "صاخب"],
+              ["crowded", "مزدحم"],
+              ["so", "لذلك"]
+            ]
+          }
+        },
+        {
+          "text": "Sara was ____ because she had not eaten anything all day.",
+          "options": [
+            "full",
+            "rich",
+            "hungry",
+            "late"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "كانت سارة جائعة لأنها لم تأكل شيئاً طوال اليوم.",
+            "why": "كلمة الدليل because (لأن): ما بعدها سبب. السبب هو عدم الأكل، والنتيجة المنطقية الوحيدة هي الجوع.",
+            "options": [
+              "full = شبعان — عكس النتيجة المتوقعة لمن لم يأكل.",
+              "rich = غني — لا علاقة للمال بعدم الأكل.",
+              "✓ الإجابة الصحيحة — hungry = جائع، نتيجة مباشرة لعدم الأكل.",
+              "late = متأخر — عدم الأكل لا يسبّب التأخّر."
+            ],
+            "vocab": [
+              ["hungry", "جائع"],
+              ["full", "شبعان"],
+              ["because", "لأن"],
+              ["all day", "طوال اليوم"]
+            ]
+          }
+        },
+        {
+          "text": "It started to rain, ____ we went back inside.",
+          "options": [
+            "but",
+            "because",
+            "although",
+            "so"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "بدأ المطر يهطل، لذلك عدنا إلى الداخل.",
+            "why": "سؤال أدوات ربط: قبل الفراغ سبب (المطر) وبعده نتيجة (عدنا للداخل). أداة «سبب ← نتيجة» هي so.",
+            "options": [
+              "but = لكن — تعبّر عن تناقض، ولا تناقض بين المطر والدخول.",
+              "because = لأن — تجعل الدخول سبباً للمطر، أي تعكس العلاقة.",
+              "although = رغم أن — تعبّر عن تناقض، والعلاقة هنا سببية.",
+              "✓ الإجابة الصحيحة — so = لذلك: المطر (سبب) ← الدخول (نتيجة)."
+            ],
+            "vocab": [
+              ["so", "لذلك"],
+              ["but", "لكن"],
+              ["although", "رغم أن"],
+              ["went back", "عاد"]
+            ]
+          }
+        },
+        {
+          "text": "Please ____ the lights when you leave the room.",
+          "options": [
+            "turn off",
+            "look for",
+            "put on",
+            "give up"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "من فضلك أطفئ الأضواء عندما تغادر الغرفة.",
+            "why": "أفعال مركّبة (phrasal verbs) كثيرة في الامتحان. عند مغادرة الغرفة، المنطقي أن نطفئ الضوء.",
+            "options": [
+              "✓ الإجابة الصحيحة — turn off = يُطفئ.",
+              "look for = يبحث عن — لا معنى للبحث عن الأضواء عند الخروج.",
+              "put on = يُشغّل / يرتدي — تشغيل الضوء عند المغادرة غير منطقي.",
+              "give up = يستسلم / يترك عادة — لا يُستعمل مع الأضواء."
+            ],
+            "vocab": [
+              ["turn off", "يُطفئ"],
+              ["look for", "يبحث عن"],
+              ["put on", "يرتدي / يُشغّل"],
+              ["give up", "يستسلم / يُقلع عن"]
+            ]
+          }
+        },
+        {
+          "text": "My grandfather is ninety years old, but he is still very ____.",
+          "options": [
+            "old",
+            "active",
+            "weak",
+            "slow"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "جدّي عمره تسعون عاماً، لكنه ما زال نشيطاً جداً.",
+            "why": "كلمتا الدليل but (لكن) و still (ما زال) تدلّان على تناقض مع ما قبلهما. رجل في التسعين، والمتوقَّع الضعف، لكنه عكس ذلك: نشيط.",
+            "options": [
+              "old = عجوز — تكرار لما قبل but، ولا تناقض فيه.",
+              "✓ الإجابة الصحيحة — active = نشيط، وهو عكس المتوقَّع في التسعين.",
+              "weak = ضعيف — متوقَّع في هذا العمر، فلا يناسب but.",
+              "slow = بطيء — متوقَّع أيضاً، ولا يصنع تناقضاً."
+            ],
+            "vocab": [
+              ["active", "نشيط"],
+              ["still", "ما زال"],
+              ["weak", "ضعيف"],
+              ["but", "لكن"]
+            ]
+          }
+        },
+        {
+          "text": "The film was so ____ that I fell asleep in the middle of it.",
+          "options": [
+            "exciting",
+            "funny",
+            "short",
+            "boring"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "كان الفيلم مملاً جداً لدرجة أنني نمت في منتصفه.",
+            "why": "التركيب so + صفة + that = لدرجة أن. النتيجة (نمت) تكشف الصفة: الفيلم الذي ينام فيه المشاهد فيلم ممل.",
+            "options": [
+              "exciting = مثير — الفيلم المثير يُبقيك مستيقظاً.",
+              "funny = مضحك — لا يسبّب النوم.",
+              "short = قصير — القِصَر لا يسبّب النوم في المنتصف.",
+              "✓ الإجابة الصحيحة — boring = ممل، والملل سبب النوم."
+            ],
+            "vocab": [
+              ["boring", "ممل"],
+              ["so ... that", "لدرجة أن"],
+              ["fell asleep", "غلبه النوم"],
+              ["exciting", "مثير"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc-easy-2",
+      "type": "sentence-completion",
+      "level": "easy",
+      "questions": [
+        {
+          "text": "The shop was ____, so we could not buy any bread.",
+          "options": [
+            "open",
+            "closed",
+            "new",
+            "cheap"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "كان المتجر مغلقاً، لذلك لم نستطع شراء أي خبز.",
+            "why": "so (لذلك) تربط السبب بالنتيجة. النتيجة: لم نستطع الشراء ← السبب: المتجر مغلق.",
+            "options": [
+              "open = مفتوح — لو كان مفتوحاً لاستطعنا الشراء.",
+              "✓ الإجابة الصحيحة — closed = مغلق، وهو سبب عدم الشراء.",
+              "new = جديد — كون المتجر جديداً لا يمنع الشراء.",
+              "cheap = رخيص — الرخص يشجّع على الشراء لا يمنعه."
+            ],
+            "vocab": [
+              ["closed", "مغلق"],
+              ["open", "مفتوح"],
+              ["cheap", "رخيص"],
+              ["bread", "خبز"]
+            ]
+          }
+        },
+        {
+          "text": "He ____ the bus because he woke up late.",
+          "options": [
+            "caught",
+            "sold",
+            "missed",
+            "drove"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "فاتته الحافلة لأنه استيقظ متأخراً.",
+            "why": "because (لأن) تقدّم السبب: الاستيقاظ متأخراً. النتيجة المنطقية: لم يلحق بالحافلة، أي فاتته.",
+            "options": [
+              "caught = لحق بـ — عكس النتيجة؛ من يستيقظ متأخراً لا يلحق بها عادةً.",
+              "sold = باع — لا علاقة لبيع الحافلة بالاستيقاظ متأخراً.",
+              "✓ الإجابة الصحيحة — missed = فاته / لم يلحق بـ.",
+              "drove = قاد — التأخّر في الاستيقاظ ليس سبباً لقيادة الحافلة."
+            ],
+            "vocab": [
+              ["missed", "فاته"],
+              ["caught", "لحق بـ"],
+              ["woke up", "استيقظ"],
+              ["late", "متأخراً"]
+            ]
+          }
+        },
+        {
+          "text": "____ the weather was cold, she did not wear a coat.",
+          "options": [
+            "Although",
+            "Because",
+            "However",
+            "So"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "رغم أن الطقس كان بارداً، لم ترتدِ معطفاً.",
+            "why": "الطقس البارد يستدعي ارتداء معطف، لكنها لم ترتدِه ← علاقة تناقض. والفراغ في بداية جملة تابعة (يليها فاصلة ثم الجملة الرئيسية)، فنحتاج أداة تُدخل جملة: Although.",
+            "options": [
+              "✓ الإجابة الصحيحة — Although = رغم أن، للتناقض.",
+              "Because = لأن — تجعل البرد سبباً لعدم ارتداء المعطف، وهذا غير منطقي.",
+              "However = ومع ذلك — للتناقض، لكنها ظرف ربط بين جملتين مستقلتين (… . However, …) ولا تُدخل جملة تابعة.",
+              "So = لذلك — للنتيجة، ولا تدخل على جملة السبب."
+            ],
+            "vocab": [
+              ["although", "رغم أن"],
+              ["however", "ومع ذلك"],
+              ["coat", "معطف"],
+              ["wear", "يرتدي"]
+            ]
+          }
+        },
+        {
+          "text": "This bag is too ____ for me to carry. Can you help me?",
+          "options": [
+            "light",
+            "small",
+            "cheap",
+            "heavy"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "هذه الحقيبة أثقل من أن أحملها. هل يمكنك مساعدتي؟",
+            "why": "too + صفة + to = أكثر من اللازم بحيث لا يمكن. وطلب المساعدة يؤكد أن حملها صعب ← ثقيلة.",
+            "options": [
+              "light = خفيف — الحقيبة الخفيفة لا تحتاج مساعدة.",
+              "small = صغير — الصِّغر لا يمنع الحمل.",
+              "cheap = رخيص — السعر لا علاقة له بصعوبة الحمل.",
+              "✓ الإجابة الصحيحة — heavy = ثقيل، وهو سبب طلب المساعدة."
+            ],
+            "vocab": [
+              ["heavy", "ثقيل"],
+              ["light", "خفيف"],
+              ["too ... to", "أكثر من أن / لا يمكن"],
+              ["carry", "يحمل"]
+            ]
+          }
+        },
+        {
+          "text": "I am going to the ____ to buy some medicine.",
+          "options": [
+            "bakery",
+            "library",
+            "pharmacy",
+            "airport"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "أنا ذاهب إلى الصيدلية لشراء بعض الدواء.",
+            "why": "الدليل medicine (دواء): المكان الذي يُشترى منه الدواء هو الصيدلية.",
+            "options": [
+              "bakery = مخبز — يُباع فيه الخبز لا الدواء.",
+              "library = مكتبة — تُستعار منها الكتب ولا يُشترى منها الدواء.",
+              "✓ الإجابة الصحيحة — pharmacy = صيدلية.",
+              "airport = مطار — ليس مكاناً لشراء الدواء."
+            ],
+            "vocab": [
+              ["pharmacy", "صيدلية"],
+              ["medicine", "دواء"],
+              ["bakery", "مخبز"],
+              ["library", "مكتبة"]
+            ]
+          }
+        },
+        {
+          "text": "I need to ____ my little brother while my parents are at work.",
+          "options": [
+            "look after",
+            "look into",
+            "look up to",
+            "look like"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "عليّ أن أعتني بأخي الصغير بينما والداي في العمل.",
+            "why": "الدليل while my parents are at work: الأخ الصغير يحتاج من يرعاه في غياب الوالدين ← look after. أفعال look مع حروف الجر تتغيّر معانيها كلياً، فاحفظها كمجموعة.",
+            "options": [
+              "✓ الإجابة الصحيحة — look after = يعتني بـ / يرعى.",
+              "look into = يحقّق في / يدرس — تُستعمل مع مسائل ومشكلات لا مع أشخاص.",
+              "look up to = يحترم / يقتدي بـ — لا علاقة لها بغياب الوالدين.",
+              "look like = يشبه — «أحتاج أن أشبه أخي» لا معنى لها."
+            ],
+            "vocab": [
+              ["look after", "يعتني بـ"],
+              ["look into", "يحقّق في"],
+              ["look up to", "يقتدي بـ / يحترم"],
+              ["look like", "يشبه"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc-medium-1",
+      "type": "sentence-completion",
+      "level": "medium",
+      "questions": [
+        {
+          "text": "The company had to ____ fifty workers because it was losing money.",
+          "options": [
+            "hire",
+            "dismiss",
+            "promote",
+            "train"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "اضطرت الشركة إلى فصل خمسين عاملاً لأنها كانت تخسر المال.",
+            "why": "had to (اضطرت) + because it was losing money (لأنها تخسر): الشركة الخاسرة تخفّض التكاليف ← تفصل عمّالاً.",
+            "options": [
+              "hire = يوظّف — التوظيف يزيد التكاليف، عكس ما تفعله شركة خاسرة.",
+              "✓ الإجابة الصحيحة — dismiss = يفصل من العمل.",
+              "promote = يُرقّي — الترقية تكلّف مالاً ولا تناسب الخسارة.",
+              "train = يدرّب — لا تُضطر شركة للتدريب بسبب الخسارة."
+            ],
+            "vocab": [
+              ["dismiss", "يفصل (من العمل)"],
+              ["hire", "يوظّف"],
+              ["promote", "يُرقّي"],
+              ["losing money", "تخسر المال"]
+            ]
+          }
+        },
+        {
+          "text": "The instructions were so ____ that nobody understood what to do.",
+          "options": [
+            "explicit",
+            "repetitive",
+            "straightforward",
+            "ambiguous"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "كانت التعليمات غامضة جداً لدرجة أن أحداً لم يفهم ماذا يفعل.",
+            "why": "so ... that (لدرجة أن): النتيجة «لم يفهم أحد» تتطلّب صفة سلبية تمنع الفهم.",
+            "options": [
+              "explicit = صريح / واضح — التعليمات الصريحة تُفهم.",
+              "repetitive = مكرَّر — التكرار قد يكون مملاً لكنه لا يمنع الفهم.",
+              "straightforward = واضح ومباشر — يسهّل الفهم.",
+              "✓ الإجابة الصحيحة — ambiguous = غامض / ملتبس، وهو سبب عدم الفهم."
+            ],
+            "vocab": [
+              ["ambiguous", "غامض / ملتبس"],
+              ["straightforward", "واضح ومباشر"],
+              ["explicit", "صريح"],
+              ["so ... that", "لدرجة أن"]
+            ]
+          }
+        },
+        {
+          "text": "Doctors recommend regular exercise because it can ____ the risk of heart disease.",
+          "options": [
+            "reduce",
+            "raise",
+            "ignore",
+            "hide"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "يوصي الأطباء بالتمارين المنتظمة لأنها تقلّل خطر الإصابة بأمراض القلب.",
+            "why": "الدليل recommend + because: الأطباء يوصون بما يفيد، والسبب يجب أن يكون إيجابياً ← يقلّل الخطر. والتلازم reduce the risk شائع جداً.",
+            "options": [
+              "✓ الإجابة الصحيحة — reduce = يقلّل.",
+              "raise = يرفع — الأطباء لا يوصون بشيء لأنه يرفع الخطر.",
+              "ignore = يتجاهل — التمرين لا «يتجاهل» الخطر؛ لا معنى لها.",
+              "hide = يخفي — إخفاء الخطر لا يقلّله ولا يكون سبباً للتوصية."
+            ],
+            "vocab": [
+              ["reduce", "يقلّل"],
+              ["raise", "يرفع"],
+              ["recommend", "يوصي بـ"],
+              ["risk", "خطر"]
+            ]
+          }
+        },
+        {
+          "text": "Although the museum usually charges an entrance fee, it is ____ to the public free of charge on the first Sunday of every month.",
+          "options": [
+            "closed",
+            "unknown",
+            "open",
+            "opposed"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "رغم أن المتحف يتقاضى عادةً رسم دخول، فهو مفتوح للجمهور مجاناً في أول يوم أحد من كل شهر.",
+            "why": "Although تتطلب تناقضاً: عادةً برسم دخول ← لكن في يوم معيّن مجاناً. والتعبير الثابت open to the public = مفتوح للجمهور.",
+            "options": [
+              "closed = مغلق — «مغلق مجاناً» لا معنى له، ولا يصنع التناقض مع رسم الدخول.",
+              "unknown = غير معروف — لا علاقة له بالدخول المجاني.",
+              "✓ الإجابة الصحيحة — open to the public = مفتوح للجمهور.",
+              "opposed to = معارض لـ — المتحف لا «يعارض» الجمهور."
+            ],
+            "vocab": [
+              ["open to the public", "مفتوح للجمهور"],
+              ["free of charge", "مجاناً"],
+              ["entrance fee", "رسم دخول"],
+              ["charges", "يتقاضى"]
+            ]
+          }
+        },
+        {
+          "text": "She speaks French ____ that many people think she was born in Paris.",
+          "options": [
+            "such fluent",
+            "so fluently",
+            "too fluently",
+            "very fluently"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "تتحدّث الفرنسية بطلاقة كبيرة لدرجة أن كثيرين يظنّون أنها وُلدت في باريس.",
+            "why": "سؤال قواعد: كلمة that بعد الفراغ تحتاج so (so + ظرف/صفة + that). والفعل speaks يحتاج ظرفاً (fluently) لا صفة (fluent).",
+            "options": [
+              "such تأتي قبل اسم (such a fluent speaker)، وهنا لا اسم.",
+              "✓ الإجابة الصحيحة — so + fluently + that = لدرجة أن.",
+              "too تعني «أكثر من اللازم» ولا تُستعمل مع that بهذا المعنى.",
+              "very لا تُكمَل بـ that؛ «very fluently that» خطأ نحوي."
+            ],
+            "vocab": [
+              ["fluently", "بطلاقة"],
+              ["so ... that", "لدرجة أن"],
+              ["such (+ اسم)", "مثل هذا / كهذا"],
+              ["born", "وُلد"]
+            ]
+          }
+        },
+        {
+          "text": "____ he was tired after the long journey, he agreed to help us move the furniture.",
+          "options": [
+            "Because",
+            "Despite",
+            "Unless",
+            "Even though"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "رغم أنه كان متعباً بعد الرحلة الطويلة، وافق على مساعدتنا في نقل الأثاث.",
+            "why": "التعب يمنع المساعدة عادةً، لكنه ساعد ← تناقض. أداتا التناقض هنا Despite و Even though، لكن بعد الفراغ جملة كاملة (he was tired)، و Despite لا تُتبع بجملة.",
+            "options": [
+              "Because = لأن — التعب ليس سبباً منطقياً للموافقة على المساعدة.",
+              "Despite = رغم — معناها صحيح، لكنها تُتبع باسم أو -ing (despite being tired)، لا بجملة كاملة.",
+              "Unless = ما لم — تجعل الجملة شرطية بلا معنى.",
+              "✓ الإجابة الصحيحة — Even though + جملة كاملة = رغم أن."
+            ],
+            "vocab": [
+              ["even though", "رغم أن"],
+              ["despite (+ اسم)", "رغم"],
+              ["journey", "رحلة"],
+              ["furniture", "أثاث"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc-medium-2",
+      "type": "sentence-completion",
+      "level": "medium",
+      "questions": [
+        {
+          "text": "The two reports ____ each other: one says prices rose, while the other says they fell.",
+          "options": [
+            "support",
+            "complement",
+            "contradict",
+            "repeat"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "التقريران يناقض أحدهما الآخر: أحدهما يقول إن الأسعار ارتفعت، والآخر يقول إنها انخفضت.",
+            "why": "النقطتان (:) تعنيان أن ما بعدهما شرح لما قبلهما. ارتفعت ≠ انخفضت ← التقريران متناقضان.",
+            "options": [
+              "support = يدعم — التقريران مختلفان ولا يدعم أحدهما الآخر.",
+              "complement = يُكمّل — الارتفاع والانخفاض لا يُكمّل أحدهما الآخر.",
+              "✓ الإجابة الصحيحة — contradict = يناقض.",
+              "repeat = يكرّر — لو كرّر أحدهما الآخر لقالا الشيء نفسه."
+            ],
+            "vocab": [
+              ["contradict", "يناقض"],
+              ["complement", "يُكمّل"],
+              ["support", "يدعم"],
+              ["while", "بينما"]
+            ]
+          }
+        },
+        {
+          "text": "Because of the heavy snow, all flights were ____ until the next morning.",
+          "options": [
+            "delayed",
+            "overbooked",
+            "shortened",
+            "accelerated"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "بسبب الثلج الكثيف، تأخّرت كل الرحلات حتى صباح اليوم التالي.",
+            "why": "Because of the heavy snow (سبب) + until the next morning (مدة). الثلج يؤخّر الطيران حتى وقت لاحق ← delayed.",
+            "options": [
+              "✓ الإجابة الصحيحة — delayed = تأخّر.",
+              "overbooked = محجوز فوق طاقته — لا علاقة للثلج به، ولا يناسب until.",
+              "shortened = قُصِّر — الثلج لا يقصّر الرحلات.",
+              "accelerated = سُرِّع — عكس أثر الثلج."
+            ],
+            "vocab": [
+              ["delayed", "متأخّر"],
+              ["heavy snow", "ثلج كثيف"],
+              ["overbooked", "محجوز فوق طاقته"],
+              ["accelerated", "سُرِّع"]
+            ]
+          }
+        },
+        {
+          "text": "The new law is ____ to protect children from dangerous products.",
+          "options": [
+            "reluctant",
+            "forbidden",
+            "ashamed",
+            "intended"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "القانون الجديد يهدف إلى حماية الأطفال من المنتجات الخطرة.",
+            "why": "التركيب be intended to = يُقصد به / يهدف إلى. الجملة تتحدث عن غرض القانون.",
+            "options": [
+              "reluctant = متردّد — صفة بشرية، ولا يُتردَّد في حماية الأطفال.",
+              "forbidden = ممنوع — القانون لا «يُمنع» من الحماية.",
+              "ashamed = خجلان — صفة إنسانية لا تناسب القانون.",
+              "✓ الإجابة الصحيحة — is intended to = يهدف إلى."
+            ],
+            "vocab": [
+              ["intended to", "يهدف إلى / مقصود به"],
+              ["law", "قانون"],
+              ["protect", "يحمي"],
+              ["reluctant", "متردّد"]
+            ]
+          }
+        },
+        {
+          "text": "He apologised for his rude ____ at the meeting.",
+          "options": [
+            "agreement",
+            "behaviour",
+            "ability",
+            "appearance"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "اعتذر عن تصرّفه الوقح في الاجتماع.",
+            "why": "الدليل apologised (اعتذر) و rude (وقح): يعتذر الإنسان عن تصرّف سيئ قام به.",
+            "options": [
+              "agreement = اتفاق / موافقة — لا يوصف الاتفاق بالوقاحة.",
+              "✓ الإجابة الصحيحة — behaviour = سلوك / تصرّف.",
+              "ability = قدرة — لا يعتذر أحد عن قدرته، ولا توصف بالوقاحة.",
+              "appearance = مظهر — المظهر لا يُوصف بـ rude عادةً، ولا يُعتذر عنه في اجتماع."
+            ],
+            "vocab": [
+              ["behaviour", "سلوك"],
+              ["apologised", "اعتذر"],
+              ["rude", "وقح / فظ"],
+              ["appearance", "مظهر"]
+            ]
+          }
+        },
+        {
+          "text": "The results of the experiment were ____, so the scientists decided to repeat it.",
+          "options": [
+            "undisputed",
+            "unpublished",
+            "inconclusive",
+            "conclusive"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "كانت نتائج التجربة غير حاسمة، لذلك قرّر العلماء إعادتها.",
+            "why": "so (لذلك): قرار إعادة التجربة نتيجة لمشكلة في النتائج. الصفة المطلوبة سلبية: النتائج لم تحسم شيئاً.",
+            "options": [
+              "undisputed = لا خلاف عليه — النتائج التي لا خلاف عليها لا تستدعي الإعادة.",
+              "unpublished = غير منشور — عدم النشر ليس سبباً لإعادة التجربة.",
+              "✓ الإجابة الصحيحة — inconclusive = غير حاسم، وهو سبب الإعادة.",
+              "conclusive = حاسم — النتائج الحاسمة لا تُعاد."
+            ],
+            "vocab": [
+              ["inconclusive", "غير حاسم"],
+              ["conclusive", "حاسم"],
+              ["undisputed", "لا خلاف عليه"],
+              ["experiment", "تجربة"]
+            ]
+          }
+        },
+        {
+          "text": "You can borrow my car ____ you promise to drive carefully.",
+          "options": [
+            "as long as",
+            "unless",
+            "even if",
+            "so that"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "يمكنك استعارة سيارتي بشرط أن تعِد بالقيادة بحذر.",
+            "why": "الوعد بالقيادة بحذر شرط للاستعارة. أداة الشرط الإيجابي: as long as = بشرط أن / ما دام.",
+            "options": [
+              "✓ الإجابة الصحيحة — as long as = بشرط أن.",
+              "unless = إلا إذا — تعني «تستعيرها إن لم تعِد بالحذر»، وهذا عكس المنطق.",
+              "even if = حتى لو — تلغي أهمية الوعد، والجملة تجعله شرطاً.",
+              "so that = لكي — تجعل الوعد هدف الاستعارة، وهذا غير منطقي."
+            ],
+            "vocab": [
+              ["as long as", "بشرط أن / ما دام"],
+              ["unless", "إلا إذا"],
+              ["borrow", "يستعير"],
+              ["carefully", "بحذر"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc-hard-1",
+      "type": "sentence-completion",
+      "level": "hard",
+      "questions": [
+        {
+          "text": "Although the theory was initially met with scepticism, subsequent research has largely ____ it.",
+          "options": [
+            "undermined",
+            "vindicated",
+            "abandoned",
+            "obscured"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "رغم أن النظرية قوبلت بالتشكيك في البداية، فإن الأبحاث اللاحقة أثبتت صحتها إلى حد كبير.",
+            "why": "Although (رغم أن) تتطلب تناقضاً بين الجزأين: البداية تشكيك (initially met with scepticism)، إذن اللاحق عكسه: إثبات الصحة.",
+            "options": [
+              "undermined = أضعف / قوّض — يتوافق مع التشكيك ولا يناقضه، فلا يناسب Although.",
+              "✓ الإجابة الصحيحة — vindicated = أثبت صحّتها.",
+              "abandoned = تخلّى عن — استمرار للتشكيك لا تناقض معه.",
+              "obscured = حجب / جعله غامضاً — لا يصنع التناقض المطلوب ولا يناسب research بهذا المعنى."
+            ],
+            "vocab": [
+              ["vindicated", "أثبت صحّته"],
+              ["scepticism", "تشكيك"],
+              ["subsequent", "لاحق"],
+              ["undermined", "قوّض"]
+            ]
+          }
+        },
+        {
+          "text": "The drug's side effects, while rarely serious, are ____ enough to discourage many patients from continuing treatment.",
+          "options": [
+            "negligible",
+            "life-threatening",
+            "tolerable",
+            "burdensome"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "الأعراض الجانبية للدواء، رغم أنها نادراً ما تكون خطيرة، مُرهِقة بما يكفي لتثني كثيراً من المرضى عن مواصلة العلاج.",
+            "why": "الدليلان: while rarely serious (تنازل: ليست خطيرة) ثم enough to discourage (كافية لتنفير المرضى). الصفة يجب أن تكون سلبية لكن أقل من «خطيرة».",
+            "options": [
+              "negligible = ضئيل لا يُذكر — لا يمكن أن يثني المرضى عن العلاج.",
+              "life-threatening = مهدِّد للحياة — يتناقض مع while rarely serious.",
+              "tolerable = يمكن تحمّله — ما يمكن تحمّله لا يثني المرضى عن العلاج.",
+              "✓ الإجابة الصحيحة — burdensome = مُرهِق / مُثقِل."
+            ],
+            "vocab": [
+              ["burdensome", "مُرهِق / مُثقِل"],
+              ["tolerable", "يمكن تحمّله"],
+              ["negligible", "ضئيل"],
+              ["discourage from", "يثني عن"]
+            ]
+          }
+        },
+        {
+          "text": "Far from being a ____ problem, air pollution affects almost every major city in the world.",
+          "options": [
+            "localised",
+            "widespread",
+            "recent",
+            "serious"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "بعيداً عن كونها مشكلة محلية محدودة، يؤثّر تلوّث الهواء في كل مدينة كبرى تقريباً في العالم.",
+            "why": "Far from being = بعيداً عن كونه / على العكس من. ما بعد الفاصلة (يؤثّر في كل مدينة) هو عكس الكلمة المطلوبة ← محدود / محلي.",
+            "options": [
+              "✓ الإجابة الصحيحة — localised = محصور في مكان واحد، عكس «كل مدينة في العالم».",
+              "widespread = واسع الانتشار — يتفق مع ما بعد الفاصلة، فلا تناقض.",
+              "recent = حديث العهد — «يؤثّر في كل مدينة» لا يناقض كونها حديثة.",
+              "serious = خطير — «بعيداً عن كونها خطيرة» ثم وصف انتشارها الواسع؛ لا تناقض منطقي."
+            ],
+            "vocab": [
+              ["far from", "بعيداً عن / على العكس"],
+              ["localised", "محصور / موضعي"],
+              ["widespread", "واسع الانتشار"],
+              ["recent", "حديث"]
+            ]
+          }
+        },
+        {
+          "text": "The new treatment proved highly effective in laboratory trials; ____, its high cost means that few hospitals are likely to adopt it.",
+          "options": [
+            "consequently",
+            "moreover",
+            "nevertheless",
+            "similarly"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "أثبت العلاج الجديد فعالية عالية في التجارب المخبرية؛ ومع ذلك، فإن تكلفته المرتفعة تعني أن قلة من المستشفيات ستعتمده على الأرجح.",
+            "why": "سؤال أدوات ربط: الجزء الأول إيجابي (فعّال جداً) والثاني سلبي (التكلفة تمنع اعتماده) ← تناقض. أداة التناقض التي تربط جملتين مستقلتين بعد الفاصلة المنقوطة: nevertheless.",
+            "options": [
+              "consequently = نتيجةً لذلك — الفعالية العالية ليست سبباً لعدم اعتماده.",
+              "moreover = علاوة على ذلك — تضيف فكرة في الاتجاه نفسه، والجزء الثاني عكس الأول.",
+              "✓ الإجابة الصحيحة — nevertheless = ومع ذلك.",
+              "similarly = بالمثل — لا تشابه بين الفعالية والتكلفة التي تمنع اعتماده."
+            ],
+            "vocab": [
+              ["nevertheless", "ومع ذلك"],
+              ["consequently", "نتيجةً لذلك"],
+              ["moreover", "علاوة على ذلك"],
+              ["adopt", "يعتمد / يتبنّى"]
+            ]
+          }
+        },
+        {
+          "text": "Measures to ____ the effects of climate change, such as building sea walls, are now considered as urgent as efforts to prevent it.",
+          "options": [
+            "exacerbate",
+            "predict",
+            "deny",
+            "mitigate"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "تُعدّ الآن إجراءات التخفيف من آثار تغيّر المناخ، مثل بناء الجدران البحرية، عاجلة بقدر جهود منعه.",
+            "why": "المثال such as building sea walls يكشف المعنى: الجدران البحرية تحمي من الآثار، أي تخفّفها. والمقارنة مع prevent (المنع) تؤكد أن المطلوب التعامل مع الآثار الواقعة.",
+            "options": [
+              "exacerbate = يُفاقم — لا يُعدّ تفاقم الآثار إجراءً عاجلاً مطلوباً.",
+              "predict = يتنبّأ — بناء الجدران لا يتنبّأ بشيء.",
+              "deny = ينكر — الإنكار لا يكون ببناء الجدران.",
+              "✓ الإجابة الصحيحة — mitigate = يخفّف من حدّة."
+            ],
+            "vocab": [
+              ["mitigate", "يخفّف من"],
+              ["exacerbate", "يُفاقم"],
+              ["measures", "إجراءات"],
+              ["urgent", "عاجل"]
+            ]
+          }
+        },
+        {
+          "text": "The author's latest book marks a clear ____ with her earlier work: it abandons the themes that made her famous.",
+          "options": [
+            "continuity",
+            "break",
+            "affinity",
+            "parallel"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "يمثّل أحدث كتب المؤلفة قطيعة واضحة مع أعمالها السابقة: فهو يتخلّى عن الموضوعات التي صنعت شهرتها.",
+            "why": "ما بعد النقطتين يشرح الكلمة المطلوبة: abandons the themes (يتخلّى عن الموضوعات) ← الكتاب انفصل عن أعمالها السابقة، أي a break with = قطيعة مع.",
+            "options": [
+              "continuity = استمرارية — عكس «يتخلّى عن».",
+              "✓ الإجابة الصحيحة — a break with = قطيعة مع / انفصال عن.",
+              "affinity = تقارب / صلة — يتناقض مع التخلّي عن موضوعاتها.",
+              "parallel = تشابه / تواز — يتناقض مع التخلّي عن موضوعاتها."
+            ],
+            "vocab": [
+              ["a break with", "قطيعة مع"],
+              ["abandons", "يتخلّى عن"],
+              ["continuity", "استمرارية"],
+              ["affinity", "تقارب / صلة"]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc-hard-2",
+      "type": "sentence-completion",
+      "level": "hard",
+      "questions": [
+        {
+          "text": "Critics argue that the report's conclusions are ____, since they rely on data collected from only a handful of participants.",
+          "options": [
+            "irrefutable",
+            "comprehensive",
+            "unfounded",
+            "outdated"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "يرى النقّاد أن استنتاجات التقرير لا أساس لها، إذ تعتمد على بيانات جُمعت من عدد قليل جداً من المشاركين.",
+            "why": "Critics (نقّاد) + since (إذ / لأن) + only a handful (قلة قليلة): السبب ضعف البيانات، فالصفة سلبية ← بلا أساس متين.",
+            "options": [
+              "irrefutable = لا يمكن دحضه — مديح، عكس انتقاد النقّاد.",
+              "comprehensive = شامل — بيانات من عدد قليل ليست شاملة.",
+              "✓ الإجابة الصحيحة — unfounded = لا أساس له.",
+              "outdated = قديم / متقادم — كان سيناسب لو كانت المشكلة قِدم البيانات، لكن السبب المذكور قلة المشاركين."
+            ],
+            "vocab": [
+              ["unfounded", "لا أساس له"],
+              ["irrefutable", "لا يُدحض"],
+              ["a handful of", "حفنة من / عدد قليل"],
+              ["outdated", "متقادم"]
+            ]
+          }
+        },
+        {
+          "text": "Talks between the two sides have reached ____: neither is willing to make any concessions, and no further meetings are planned.",
+          "options": [
+            "a deadlock",
+            "an agreement",
+            "a breakthrough",
+            "a compromise"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "وصلت المحادثات بين الطرفين إلى طريق مسدود: لا أحد منهما مستعد لتقديم أي تنازلات، ولا اجتماعات أخرى مخطط لها.",
+            "why": "ما بعد النقطتين: لا تنازلات + لا اجتماعات قادمة = توقّف تام ← طريق مسدود.",
+            "options": [
+              "✓ الإجابة الصحيحة — a deadlock = طريق مسدود / جمود.",
+              "an agreement = اتفاق — لا اتفاق دون تنازلات.",
+              "a breakthrough = انفراجة — عكس توقّف المحادثات.",
+              "a compromise = تسوية — التسوية تتطلب تنازلات، والطرفان يرفضانها."
+            ],
+            "vocab": [
+              ["deadlock", "طريق مسدود"],
+              ["concessions", "تنازلات"],
+              ["breakthrough", "انفراجة"],
+              ["compromise", "تسوية"]
+            ]
+          }
+        },
+        {
+          "text": "His ____ remarks, which were meant as jokes, deeply offended several members of the audience.",
+          "options": [
+            "tactful",
+            "malicious",
+            "sincere",
+            "insensitive"
+          ],
+          "correct": 3,
+          "explain": {
+            "translation": "ملاحظاته غير المراعية للمشاعر، التي قصد بها المزاح، أساءت بشدة إلى عدد من الحضور.",
+            "why": "الدليل deeply offended (أساءت بشدة): الملاحظات لم تراعِ مشاعر الناس. و meant as jokes (قُصد بها المزاح) تستبعد sincere (الجدية) و malicious (نية الأذى).",
+            "options": [
+              "tactful = لبق — اللباقة لا تسيء إلى الناس.",
+              "malicious = خبيث / يقصد الأذى — يتناقض مع «قُصد بها المزاح».",
+              "sincere = صادق / جاد — تتناقض مع «قُصد بها المزاح».",
+              "✓ الإجابة الصحيحة — insensitive = لا يراعي المشاعر."
+            ],
+            "vocab": [
+              ["insensitive", "غير مراعٍ للمشاعر"],
+              ["tactful", "لبق"],
+              ["offended", "أساء إلى / جرح"],
+              ["remarks", "ملاحظات / تعليقات"]
+            ]
+          }
+        },
+        {
+          "text": "Despite its ____ size, the device is powerful enough to run complex software.",
+          "options": [
+            "enormous",
+            "compact",
+            "adjustable",
+            "impressive"
+          ],
+          "correct": 1,
+          "explain": {
+            "translation": "رغم حجمه الصغير، فالجهاز قوي بما يكفي لتشغيل برامج معقّدة.",
+            "why": "Despite (رغم) تتطلب تناقضاً: الجهاز قوي، إذن الحجم يوحي بعكس القوة ← صغير.",
+            "options": [
+              "enormous = ضخم — الحجم الضخم يتفق مع القوة، فلا تناقض.",
+              "✓ الإجابة الصحيحة — compact = صغير الحجم / مدمج.",
+              "adjustable = قابل للتعديل — لا علاقة له بالقوة، فلا تناقض.",
+              "impressive = مُبهر (كبير) — الحجم الكبير يتفق مع القوة، فلا تناقض."
+            ],
+            "vocab": [
+              ["compact", "صغير / مدمج"],
+              ["enormous", "ضخم"],
+              ["adjustable", "قابل للتعديل"],
+              ["despite", "رغم"]
+            ]
+          }
+        },
+        {
+          "text": "____ the first study found no link between diet and memory, the second reported a strong connection.",
+          "options": [
+            "Whereas",
+            "Because",
+            "Provided that",
+            "In case"
+          ],
+          "correct": 0,
+          "explain": {
+            "translation": "بينما لم تجد الدراسة الأولى أي صلة بين النظام الغذائي والذاكرة، أفادت الثانية بوجود علاقة قوية.",
+            "why": "سؤال أدوات ربط: الدراستان وصلتا إلى نتيجتين متعاكستين (لا صلة ↔ صلة قوية) ← مقارنة بتضاد. Whereas = بينما، تربط بين حقيقتين متعارضتين.",
+            "options": [
+              "✓ الإجابة الصحيحة — Whereas = بينما (مقارنة بتضاد).",
+              "Because = لأن — نتيجة الدراسة الأولى ليست سبباً لنتيجة الثانية.",
+              "Provided that = بشرط أن — لا علاقة شرطية بين الدراستين.",
+              "In case = تحسّباً لـ — لا معنى للتحسّب هنا."
+            ],
+            "vocab": [
+              ["whereas", "بينما"],
+              ["provided that", "بشرط أن"],
+              ["in case", "تحسّباً لـ"],
+              ["link / connection", "صلة / علاقة"]
+            ]
+          }
+        },
+        {
+          "text": "Rather than ____ the controversy, the minister's statement only served to intensify it.",
+          "options": [
+            "fuelling",
+            "prolonging",
+            "defusing",
+            "publicising"
+          ],
+          "correct": 2,
+          "explain": {
+            "translation": "بدلاً من تهدئة الجدل، لم يؤدِّ تصريح الوزير إلا إلى تأجيجه.",
+            "why": "Rather than (بدلاً من) تتطلب عكس ما حدث فعلاً. ما حدث: intensify (زاد حدّته) ← المطلوب عكسه: التهدئة.",
+            "options": [
+              "fuelling = يؤجّج — مرادف لما حدث (intensify)، فلا يناسب Rather than.",
+              "prolonging = إطالة — ليس عكس التأجيج، فلا يناسب Rather than.",
+              "✓ الإجابة الصحيحة — defusing = نزع فتيل / تهدئة.",
+              "publicising = إشهار / نشر — ليس عكس التأجيج."
+            ],
+            "vocab": [
+              ["defusing", "تهدئة / نزع فتيل"],
+              ["rather than", "بدلاً من"],
+              ["prolonging", "إطالة"],
+              ["controversy", "جدل"]
+            ]
+          }
+        }
+      ]
+    }
+  ]
 }
