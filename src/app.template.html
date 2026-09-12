@@ -459,14 +459,17 @@ body.feed-open{overflow:hidden}
   overflow-y:auto; scroll-snap-type:y mandatory; overscroll-behavior:contain; scrollbar-width:none;
 }
 .feed::-webkit-scrollbar{display:none}
+/* لو الإطار أطول من الشاشة وحُصرت الريلز بارتفاعها، ما تحتها يُغطّى بدل ما تبين الصفحة */
+#s-feed::before{content:""; position:fixed; inset:0; z-index:14; background:var(--bg)}
 .reel{
   height:100vh; height:var(--reel-h, 100dvh); scroll-snap-align:start; scroll-snap-stop:always;
   display:flex; justify-content:center; color:var(--on-pastel); background:var(--c-butter);
 }
 .reel.c-sage{background:var(--c-sage)} .reel.c-lilac{background:var(--c-lilac)} .reel.c-blush{background:var(--c-blush)}
+/* المحتوى مثبّت من فوق لا بالمنتصف: لو صارت الشاشة أطول من المرئي تضل الكلمة ظاهرة */
 .reel-inner{
-  position:relative; width:100%; max-width:560px; height:100%; display:flex; align-items:center;
-  padding:calc(118px + env(safe-area-inset-top)) 20px calc(128px + env(safe-area-inset-bottom));
+  position:relative; width:100%; max-width:560px; height:100%; display:flex; align-items:flex-start;
+  padding:calc(112px + env(safe-area-inset-top)) 20px 40px;
 }
 .reel-body{width:100%; text-align:center; padding-inline-start:60px}
 .reel .en{text-align:center}
@@ -490,7 +493,7 @@ body.feed-open{overflow:hidden}
 .reel-syn{display:flex; flex-wrap:wrap; gap:7px; justify-content:center; margin-top:20px}
 .reel-syn span{background:var(--surface); color:var(--text); border-radius:var(--r-pill); padding:5px 12px; font-size:12.5px}
 .reel-rail{
-  position:absolute; inset-inline-start:12px; bottom:calc(136px + env(safe-area-inset-bottom));
+  position:absolute; inset-inline-start:12px; top:calc(112px + env(safe-area-inset-top));
   display:flex; flex-direction:column; align-items:center; gap:14px;
 }
 .rail-btn{display:flex; flex-direction:column; align-items:center; gap:5px; font-size:11px; font-weight:600}
@@ -504,8 +507,7 @@ body.feed-open{overflow:hidden}
 .rail-lock{opacity:.7}
 .rail-box{font-size:10.5px; font-weight:600; opacity:.75}
 .reel-swipe{
-  position:absolute; inset-inline:0; bottom:calc(98px + env(safe-area-inset-bottom));
-  display:flex; flex-direction:column; align-items:center; font-size:12px; font-weight:600; opacity:.6;
+  display:flex; flex-direction:column; align-items:center; margin-top:34px; font-size:12px; font-weight:600; opacity:.6;
   animation:swipeHint 1.6s ease-in-out infinite; pointer-events:none;
 }
 @keyframes swipeHint{50%{transform:translateY(-8px)}}
@@ -1940,6 +1942,8 @@ function startFeed(words){
   $('#feedResults').hidden = true;
   go('feed');
   paintFeed();
+  /* داخل إطار ممدود: نطلب من الصفحة الحاضنة ترجع لأعلى الإطار حيث تبدأ الريلز */
+  try { document.documentElement.scrollIntoView({ block:'start' }); } catch(e){}
 }
 
 /* الكلمة داخل جملة المثال تُبرز حتى لو جاءت بتصريف آخر (abandon ← abandoned) */
@@ -1975,6 +1979,7 @@ function reelInner(w, i){
         (w.exampleAr ? '<p class="reel-ex-ar">' + esc(w.exampleAr) + '</p>' : '') +
         (w.synonyms && w.synonyms.length
           ? '<div class="reel-syn">' + w.synonyms.map(s => '<span class="en">' + esc(s) + '</span>').join('') + '</div>' : '') +
+        (i === 0 ? '<div class="reel-swipe">' + svg('chevUp', 20) + t('feedSwipe') + '</div>' : '') +
       '</div>' +
       '<div class="reel-rail">' +
         (canSpeak ? railBtn('listen', 'sound', t('feedListen')) : '') +
@@ -1983,7 +1988,6 @@ function reelInner(w, i){
           : '<span class="rail-ic rail-lock">' + svg('lock', 21) + '</span>') +
         '<span class="rail-box num">' + (open ? t('boxN', ar(c.box || 0)) : t('feedLocked')) + '</span>' +
       '</div>' +
-      (i === 0 ? '<div class="reel-swipe">' + svg('chevUp', 20) + t('feedSwipe') + '</div>' : '') +
     '</div>';
 }
 
@@ -2002,9 +2006,16 @@ function paintFeed(){
   el.scrollTop = 0;
   fillReels();
 }
+/* بعض عارضات الصفحات (منها عارض Claude) تمدّ إطار الأبب على طول محتواه، فيصير
+   ارتفاع الحاوية أضعاف الشاشة. نحصر كل شاشة كلمة بارتفاع الشاشة الفعلية. */
 function sizeReels(){
   const el = $('#feed');
-  feed.h = Math.max(1, el.clientHeight);
+  el.style.height = '';
+  el.style.bottom = '';
+  const natural = el.clientHeight;
+  const screenH = (window.screen && screen.availHeight) || natural;
+  feed.h = Math.max(320, Math.round(Math.min(natural, screenH)));
+  if(feed.h < natural){ el.style.bottom = 'auto'; el.style.height = feed.h + 'px'; }
   el.style.setProperty('--reel-h', feed.h + 'px');
 }
 const reelAt = () => Math.round($('#feed').scrollTop / ((feed && feed.h) || 1));
