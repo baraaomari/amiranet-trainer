@@ -506,6 +506,7 @@ body.feed-open{overflow:hidden}
 .rail-btn[data-act="hard"].on .rail-ic{background:var(--bad); color:#fff}
 .rail-lock{opacity:.7}
 .rail-box{font-size:10.5px; font-weight:600; opacity:.75}
+.reel-err{margin-top:26px; font-size:11px; opacity:.6; word-break:break-word}
 .reel-swipe{
   display:flex; flex-direction:column; align-items:center; margin-top:34px; font-size:12px; font-weight:600; opacity:.6;
   animation:swipeHint 1.6s ease-in-out infinite; pointer-events:none;
@@ -1366,15 +1367,21 @@ const defaults = () => ({
 });
 let S = defaults();
 
+/* البيانات الراجعة من مخزن الصفحة قد تكون مقفولة للتعديل، فالكتابة عليها بتفشل
+   بصمت وبترجع undefined. نشتغل على نسخة قابلة للتعديل بدلها. */
 function srsFor(levelId){
-  if(!S.srs[levelId]) S.srs[levelId] = {};
-  return S.srs[levelId];
+  let box = S.srs[levelId];
+  if(!box || !Object.isExtensible(box)) box = S.srs[levelId] = Object.assign({}, box);
+  return box;
 }
 function cardOf(w){
   const box = srsFor(w.levelId);
-  if(!box[w.id]) box[w.id] = { box:0, due:0, seen:0, ok:0, bad:0 };
+  if(!box[w.id] || !Object.isExtensible(box[w.id]))
+    box[w.id] = Object.assign({ box:0, due:0, seen:0, ok:0, bad:0 }, box[w.id]);
   return box[w.id];
 }
+/* قراءة فقط، بدون إنشاء بطاقة — للعرض */
+const peekCard = w => ((S.srs[w.levelId] || {})[w.id]) || { box:0 };
 const isMastered = w => cardOf(w).box >= MAX_BOX;
 const isDue = w => { const c = cardOf(w); return c.box === 0 || c.due <= Date.now(); };
 const dueWords = () => ALL_WORDS.filter(w => isUnlocked(w.levelId) && isDue(w));
@@ -1964,7 +1971,7 @@ const reelColor = w => REEL_C[Math.max(0, LEVELS.findIndex(l => l.id === w.level
 
 function reelInner(w, i){
   const open = isUnlocked(w.levelId);
-  const c = cardOf(w);
+  const c = peekCard(w);
   const lv = LEVELS.find(l => l.id === w.levelId);
   return '<div class="reel-inner">' +
       '<div class="reel-body">' +
@@ -2008,6 +2015,17 @@ function paintFeed(){
 }
 /* بعض عارضات الصفحات (منها عارض Claude) تمدّ إطار الأبب على طول محتواه، فيصير
    ارتفاع الحاوية أضعاف الشاشة. نحصر كل شاشة كلمة بارتفاع الشاشة الفعلية. */
+/* لو تعطّل رسم شاشة لأي سبب، تظهر الكلمة ومعناها على الأقل مع سبب العطل بدل شاشة فاضية */
+function reelFallback(w, err){
+  console.error('reel render failed', err);
+  return '<div class="reel-inner"><div class="reel-body">' +
+    '<div class="reel-word en">' + esc(w && w.en) + '</div>' +
+    '<div class="reel-ar"><span class="reel-ar-t">' + esc(w && w.ar) + '</span></div>' +
+    (w && w.example ? '<p class="reel-ex en">' + esc(w.example) + '</p>' : '') +
+    '<p class="reel-err en">' + esc(err && (err.message || err)) + '</p>' +
+  '</div></div>';
+}
+
 function sizeReels(){
   const el = $('#feed');
   el.style.height = '';
@@ -2024,7 +2042,13 @@ function fillReels(){
   if(!feed) return;
   const at = reelAt(), reels = $('#feed').children;
   for(let i = Math.max(0, at - REEL_NEAR); i <= Math.min(feed.words.length - 1, at + REEL_NEAR); i++){
-    if(!feed.filled.has(i)){ reels[i].innerHTML = reelInner(feed.words[i], i); feed.filled.add(i); }
+    if(!feed.filled.has(i)){
+      let html;
+      try { html = reelInner(feed.words[i], i); }
+      catch(err){ html = reelFallback(feed.words[i], err); }
+      reels[i].innerHTML = html;
+      feed.filled.add(i);
+    }
   }
   feed.filled.forEach(i => {
     if(Math.abs(i - at) > REEL_KEEP){ reels[i].innerHTML = ''; feed.filled.delete(i); }
