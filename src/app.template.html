@@ -436,6 +436,106 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
 .suggests{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
 .suggest{background:var(--surface); box-shadow:var(--shadow); border-radius:var(--r-pill); padding:9px 15px; font-size:13px; text-align:start}
 
+/* ───────── حلول الأغلاط عند المدرّس ───────── */
+.mistake .rowcard{width:100%; text-align:start}
+.mistake-body{display:flex; flex-direction:column; gap:12px; margin-top:12px}
+.mistake-body .explain{margin-top:0}
+.m-passage{background:var(--surface); border-radius:var(--r-lg); padding:13px 17px; box-shadow:var(--shadow)}
+.m-passage summary{cursor:pointer; font-weight:600; font-size:13.5px}
+.m-passage .passage{margin-top:10px}
+
+/* ───────── تصفّح الكلمات (زي الريلز) ───────── */
+.feed-entry{
+  display:flex; align-items:center; gap:14px; width:100%; margin-bottom:18px; padding:15px 17px;
+  border-radius:var(--r-lg); background:var(--ink); color:var(--on-ink); text-align:start; box-shadow:var(--shadow-lift);
+}
+.feed-entry b{display:block; font-size:16px}
+.feed-entry small{display:block; font-size:12.5px; opacity:.72; margin-top:2px}
+.fe-ic{width:44px; height:44px; border-radius:50%; flex:none; display:grid; place-items:center;
+  background:var(--c-butter); color:var(--on-pastel)}
+body.feed-open{overflow:hidden}
+.feed{
+  position:fixed; inset:0; z-index:15; background:var(--bg);
+  overflow-y:auto; scroll-snap-type:y mandatory; overscroll-behavior:contain; scrollbar-width:none;
+}
+.feed::-webkit-scrollbar{display:none}
+.reel{
+  height:100vh; height:100dvh; scroll-snap-align:start; scroll-snap-stop:always;
+  display:flex; justify-content:center; color:var(--on-pastel); background:var(--c-butter);
+}
+.reel.c-sage{background:var(--c-sage)} .reel.c-lilac{background:var(--c-lilac)} .reel.c-blush{background:var(--c-blush)}
+.reel-inner{
+  position:relative; width:100%; max-width:560px; height:100%; display:flex; align-items:center;
+  padding:calc(118px + env(safe-area-inset-top)) 20px calc(128px + env(safe-area-inset-bottom));
+}
+.reel-body{width:100%; text-align:center; padding-inline-start:60px}
+.reel .en{text-align:center}
+.reel-meta{display:flex; flex-wrap:wrap; gap:7px; justify-content:center; margin-bottom:18px}
+.reel-tag{
+  font-size:11px; font-weight:600; letter-spacing:.05em; padding:5px 12px; border-radius:var(--r-pill);
+  background:var(--surface); color:var(--text);
+}
+.reel-word{font-size:clamp(32px, 11vw, 58px); font-weight:700; letter-spacing:-.035em; line-height:1.05; word-break:break-word}
+.reel-ar{display:grid; margin:14px auto 0; min-height:40px}
+.reel-ar > span{grid-area:1/1; align-self:center; justify-self:center}
+.reel-ar-t{font-size:26px; font-weight:700; letter-spacing:-.02em}
+.reel-ar-h{display:none; font-size:13px; font-weight:600; padding:9px 16px; border-radius:var(--r-pill);
+  background:var(--surface); color:var(--text)}
+.hide-ar .reel:not(.revealed) .reel-ar-t{visibility:hidden}
+.hide-ar .reel:not(.revealed) .reel-ar-h{display:block}
+.hide-ar .reel:not(.revealed) .reel-ex-ar{filter:blur(6px)}
+.reel-ex{margin:22px auto 0; font-size:17px; line-height:1.6; max-width:34ch}
+.reel-ex b{font-weight:700; text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:4px}
+.reel-ex-ar{margin:8px auto 0; font-size:14.5px; line-height:1.7; opacity:.78; max-width:36ch; transition:filter .2s}
+.reel-syn{display:flex; flex-wrap:wrap; gap:7px; justify-content:center; margin-top:20px}
+.reel-syn span{background:var(--surface); color:var(--text); border-radius:var(--r-pill); padding:5px 12px; font-size:12.5px}
+.reel-rail{
+  position:absolute; inset-inline-start:12px; bottom:calc(136px + env(safe-area-inset-bottom));
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+}
+.rail-btn{display:flex; flex-direction:column; align-items:center; gap:5px; font-size:11px; font-weight:600}
+.rail-ic{
+  width:50px; height:50px; border-radius:50%; display:grid; place-items:center;
+  background:var(--surface); color:var(--text); box-shadow:var(--shadow-lift); transition:transform .18s, background .18s;
+}
+.rail-btn:active .rail-ic{transform:scale(.88)}
+.rail-btn[data-act="know"].on .rail-ic{background:var(--good); color:#fff}
+.rail-btn[data-act="hard"].on .rail-ic{background:var(--bad); color:#fff}
+.rail-lock{opacity:.7}
+.rail-box{font-size:10.5px; font-weight:600; opacity:.75}
+.reel-swipe{
+  position:absolute; inset-inline:0; bottom:calc(98px + env(safe-area-inset-bottom));
+  display:flex; flex-direction:column; align-items:center; font-size:12px; font-weight:600; opacity:.6;
+  animation:swipeHint 1.6s ease-in-out infinite; pointer-events:none;
+}
+@keyframes swipeHint{50%{transform:translateY(-8px)}}
+.feed-top{
+  position:fixed; z-index:17; top:0; inset-inline:0; margin-inline:auto; max-width:560px;
+  display:flex; align-items:center; gap:10px; padding:calc(14px + env(safe-area-inset-top)) 16px 8px;
+}
+.feed-search{
+  flex:1; min-width:0; height:46px; display:flex; align-items:center; gap:8px; padding:0 15px;
+  background:var(--surface); color:var(--muted); border-radius:var(--r-pill); box-shadow:var(--shadow);
+}
+.feed-search input{flex:1; min-width:0; height:100%; border:0; outline:0; background:none; color:var(--text); font-size:14px}
+#feedHide[aria-pressed="true"]{background:var(--ink); color:var(--on-ink)}
+.feed-count{
+  position:fixed; z-index:16; top:calc(72px + env(safe-area-inset-top)); inset-inline:0; margin-inline:auto;
+  width:max-content; padding:4px 11px; border-radius:var(--r-pill); background:var(--surface);
+  font-size:11.5px; font-weight:600; color:var(--muted); box-shadow:var(--shadow);
+}
+.feed-results{
+  position:fixed; z-index:18; top:calc(66px + env(safe-area-inset-top)); inset-inline:16px; margin-inline:auto;
+  max-width:528px; max-height:52vh; overflow-y:auto; padding:6px;
+  background:var(--surface); border-radius:var(--r-md); box-shadow:var(--shadow-lift);
+}
+.feed-results button{display:flex; align-items:baseline; justify-content:space-between; gap:12px; width:100%;
+  padding:11px 12px; border-radius:var(--r-sm); text-align:start}
+.feed-results button:hover{background:var(--surface-2)}
+.feed-results small{color:var(--muted); font-size:12.5px}
+.feed-none{padding:14px; color:var(--muted); font-size:13px; text-align:center}
+@media (min-width:620px){ .reel-body{padding-inline:64px} }
+
 /* ───────── tabbar ───────── */
 .tabbar{
   position:fixed; z-index:20; direction:rtl;   /* خارج حاوية الأبب، فيحتاج اتجاهه صراحةً */
@@ -589,6 +689,11 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
   <!-- ═══════════ vocab ═══════════ -->
   <section id="s-vocab" hidden>
     <h1 class="page-title">القاموس</h1>
+    <button class="feed-entry" id="feedEntry">
+      <span class="fe-ic" data-icon="reels"></span>
+      <span style="flex:1"><b data-i18n="feedBtn">تصفّح الكلمات</b><small data-i18n="feedSub">كلمة بكل شاشة — اسحب لفوق زي الريلز</small></span>
+      <span data-icon="chev"></span>
+    </button>
     <div class="pills" id="vocabFilter" role="tablist">
       <button class="pill" role="tab" aria-selected="true" data-f="all"><span data-i18n="fAll">المستويات</span></button>
       <button class="pill" role="tab" aria-selected="false" data-f="due"><span data-i18n="fDue">للمراجعة</span></button>
@@ -613,6 +718,21 @@ label.lbl{display:block; font-size:13px; font-weight:600; color:var(--muted); ma
       </div>
       <button class="btn wide ghost" id="fcFlip"><span data-i18n="flipCard">اقلب البطاقة</span></button>
     </div>
+  </section>
+
+  <!-- ═══════════ word feed ═══════════ -->
+  <section id="s-feed" hidden>
+    <div class="feed-top">
+      <button class="icon-btn" id="feedBack" aria-label="رجوع" data-i18n-aria-label="back" data-icon="back"></button>
+      <label class="feed-search">
+        <span data-icon="search"></span>
+        <input id="feedQ" type="search" autocomplete="off" spellcheck="false" placeholder="دوّر على كلمة…" data-i18n-placeholder="feedSearch">
+      </label>
+      <button class="icon-btn" id="feedHide" aria-pressed="false" aria-label="خبّي المعنى" data-i18n-aria-label="feedHide" data-i18n-title="feedHide" title="خبّي المعنى" data-icon="eye"></button>
+    </div>
+    <div class="feed-results" id="feedResults" hidden></div>
+    <div class="feed-count num" id="feedCount"></div>
+    <div class="feed" id="feed"></div>
   </section>
 
   <!-- ═══════════ level test ═══════════ -->
@@ -847,7 +967,13 @@ const P = {
   flame:'M12 21c3.6 0 6-2.3 6-5.6 0-3.6-3-4.9-3-8.4-2 .8-2.6 2.6-2.6 4.2 0 1-.6 1.6-1.2 1.6-.8 0-1.2-.7-1.2-1.8V8C8.2 9.4 6 11.8 6 15.4 6 18.7 8.4 21 12 21Z',
   clock:'M12 7.2V12l3 1.8M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z',
   out:'M15.4 16.4 19.8 12l-4.4-4.4M19.2 12H9M13 3.6H6.4A1.4 1.4 0 0 0 5 5v14a1.4 1.4 0 0 0 1.4 1.4H13',
-  target:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 16.6a4.6 4.6 0 1 0 0-9.2 4.6 4.6 0 0 0 0 9.2ZM12 12h.01'
+  target:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 16.6a4.6 4.6 0 1 0 0-9.2 4.6 4.6 0 0 0 0 9.2ZM12 12h.01',
+  reels:'M8 3.4h8A1.6 1.6 0 0 1 17.6 5v14a1.6 1.6 0 0 1-1.6 1.6H8A1.6 1.6 0 0 1 6.4 19V5A1.6 1.6 0 0 1 8 3.4ZM10.6 9.4v5.2l4.2-2.6Z',
+  search:'M10.8 17.6a6.8 6.8 0 1 0 0-13.6 6.8 6.8 0 0 0 0 13.6ZM15.8 15.8 20 20',
+  sound:'M4.6 9.6h3L12 6v12l-4.4-3.6h-3a.6.6 0 0 1-.6-.6v-3.6a.6.6 0 0 1 .6-.6ZM15.6 9.2a4 4 0 0 1 0 5.6M18.2 6.8a7.4 7.4 0 0 1 0 10.4',
+  eye:'M2.8 12S6.2 5.8 12 5.8 21.2 12 21.2 12 17.8 18.2 12 18.2 2.8 12 2.8 12ZM12 14.8a2.8 2.8 0 1 0 0-5.6 2.8 2.8 0 0 0 0 5.6Z',
+  chevUp:'M5.5 14.5 12 8l6.5 6.5',
+  chevDown:'M5.5 9.5 12 16l6.5-6.5'
 };
 function svg(name, size){
   const d = P[name]; if(!d) return '';
@@ -1062,8 +1188,24 @@ const STR = {
             en:'The tutor is unavailable in this view. Everything else in the app works normally.'},
   chatPlaceholder:{ar:'اسأل عن كلمة، قاعدة، أو سؤال…',en:'Ask about a word, a rule, or a question…'},
   send:{ar:'إرسال',en:'Send'}, stop:{ar:'إيقاف',en:'Stop'},
-  chatEmptyMistakes:{ar:'تحت أغلاطك من آخر امتحان — اضغط على أي وحدة عشان يشرحلك.',
-                     en:'Your mistakes from the last exam are below — tap any one for an explanation.'},
+  chatEmptyMistakes:{ar:'حلول أغلاطك فوق. وإذا ضل إشي مش واضح، اسأل المدرّس هون.',
+                     en:'Solutions to your mistakes are above. If anything is still unclear, ask the tutor here.'},
+  mistakesHint:{ar:'اضغط على أي سؤال لتشوف الحل: ليش الجواب الصح صح، وليش كل خيار ثاني غلط.',
+                en:'Tap any question to see the solution: why the right answer is right and why each other option is wrong.'},
+  showPassage:{ar:'اعرض النص',en:'Show the passage'},
+  askTutorMore:{ar:'لسا مش فاهم؟ اسأل المدرّس',en:'Still unclear? Ask the tutor'},
+  noWrittenExplain:{ar:'ما في شرح مكتوب لهاد السؤال بعد.',en:'No written explanation for this question yet.'},
+  feedBtn:{ar:'تصفّح الكلمات',en:'Browse words'},
+  feedSub:{ar:'كلمة بكل شاشة — اسحب لفوق زي الريلز',en:'One word per screen — swipe up like reels'},
+  feedLevelBtn:{ar:'تصفّح كلمات هالمستوى',en:'Browse this level'},
+  feedSearch:{ar:'دوّر على كلمة…',en:'Search for a word…'},
+  feedListen:{ar:'اسمع',en:'Listen'},
+  feedHard:{ar:'صعبة',en:'Hard'},
+  feedHide:{ar:'خبّي المعنى',en:'Hide meanings'},
+  feedTapReveal:{ar:'اضغط لتشوف المعنى',en:'Tap to see the meaning'},
+  feedSwipe:{ar:'اسحب لفوق',en:'Swipe up'},
+  feedNoResults:{ar:'ما لقينا هالكلمة',en:'No matching word'},
+  feedLocked:{ar:'مقفول',en:'Locked'},
   chatEmpty:{ar:'اسأل المدرّس عن أي كلمة أو قاعدة. بعد ما تعمل امتحان، أغلاطك بتظهر هون جاهزة للشرح.',
              en:'Ask the tutor about any word or rule. After an exam, your mistakes appear here ready to be explained.'},
   mistakesTitle:{ar:'أغلاطك بآخر امتحان',en:'Your mistakes in the last exam'},
@@ -1509,9 +1651,9 @@ const TABS = [
   {id:'home', icon:'home'}, {id:'vocab', icon:'book'}, {id:'exams', icon:'doc'},
   {id:'practice', icon:'target'}, {id:'tutor', icon:'chat'}, {id:'schedule', icon:'cal'}
 ];
-const TAB_OF = { study:'vocab', levelTest:'vocab', examRun:'exams', examReview:'exams',
+const TAB_OF = { study:'vocab', levelTest:'vocab', feed:'vocab', examRun:'exams', examReview:'exams',
                  drill:'practice', calc:'home' };
-const SCREENS = ['home','vocab','study','levelTest','exams','practice','drill','examRun','examReview','tutor','schedule','calc'];
+const SCREENS = ['home','vocab','study','levelTest','feed','exams','practice','drill','examRun','examReview','tutor','schedule','calc'];
 let current = 'home';
 
 /* التسميات تُضبط في applyLang حسب اللغة */
@@ -1529,6 +1671,8 @@ function go(name){
     else b.removeAttribute('aria-current');
   });
   window.scrollTo({top:0, behavior:'instant'});
+  document.body.classList.toggle('feed-open', name === 'feed');   /* الريلز تمرّر بحاويتها، لا بالصفحة */
+  if(name !== 'feed' && window.speechSynthesis) speechSynthesis.cancel();
   if(name === 'vocab')    renderVocab();
   if(name === 'exams')    renderExams();
   if(name === 'practice') renderPractice();
@@ -1732,6 +1876,7 @@ function openLevel(id){
       '<button class="btn" id="lStudy" style="flex:1">' + t('startStudy') + '</button>' +
       '<button class="btn ghost" id="lTest" style="flex:1">' + t('levelTestBtn') + '</button>' +
     '</div>' +
+    '<button class="btn wide ghost" id="lFeed" style="margin:-6px 0 18px">' + svg('reels', 19) + ' ' + t('feedLevelBtn') + '</button>' +
     '<div class="stack">' + (l.words || []).map(w => {
       const c = cardOf(w);
       return '<div class="rowcard flat"><span class="rowcard-ic ' + (c.box >= MAX_BOX ? 'sage' : 'butter') + '">' +
@@ -1746,7 +1891,155 @@ function openLevel(id){
     startStudy(due.length ? due : (l.words||[]), levelName(l));
   });
   $('#lTest').addEventListener('click', () => startLevelTest(l));
+  $('#lFeed').addEventListener('click', () => startFeed(shuffle(ALL_WORDS.filter(w => w.levelId === l.id))));
 }
+
+/* ════════════════════════ تصفّح الكلمات ════════════════════════
+   كلمة بكل شاشة والتمرير عمودي بالتثبيت (scroll-snap) زي الريلز. «بعرفها» و«صعبة»
+   تمشي على نفس صناديق الحفظ، وللمستويات المفتوحة بس — المقفولة للتصفّح والبحث. */
+const REEL_C = ['butter', 'sage', 'lilac', 'blush'];
+const canSpeak = 'speechSynthesis' in window && typeof SpeechSynthesisUtterance !== 'undefined';
+let feed = null;
+
+function startFeed(words){
+  feed = { words: (words && words.length) ? words : ALL_WORDS, hide: !!S.meta.feedHide };
+  $('#feedQ').value = '';
+  $('#feedResults').hidden = true;
+  go('feed');
+  paintFeed();
+}
+
+/* الكلمة داخل جملة المثال تُبرز حتى لو جاءت بتصريف آخر (abandon ← abandoned) */
+function markWord(example, word){
+  const safe = esc(example);
+  const stem = String(word || '').trim().replace(/e$/i, '');
+  if(stem.length < 3) return safe;
+  const re = new RegExp('(^|[^A-Za-z])(' + esc(stem).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[a-z]*)', 'i');
+  return safe.replace(re, (m, pre, hit) => pre + '<b>' + hit + '</b>');
+}
+
+function railBtn(act, icon, label, on){
+  return '<button class="rail-btn' + (on ? ' on' : '') + '" data-act="' + act + '">' +
+    '<span class="rail-ic">' + svg(icon, 23) + '</span><span class="rail-l">' + esc(label) + '</span></button>';
+}
+
+function reelHTML(w, i){
+  const open = isUnlocked(w.levelId);
+  const c = cardOf(w);
+  const lv = LEVELS.find(l => l.id === w.levelId);
+  return '<section class="reel c-' + REEL_C[Math.max(0, LEVELS.indexOf(lv)) % 4] + '" data-i="' + i + '">' +
+    '<div class="reel-inner">' +
+      '<div class="reel-body">' +
+        '<div class="reel-meta">' +
+          (lv ? '<span class="reel-tag">' + esc(levelName(lv)) + '</span>' : '') +
+          (w.pos ? '<span class="reel-tag en">' + esc(w.pos) + '</span>' : '') +
+        '</div>' +
+        '<div class="reel-word en">' + esc(w.en) + '</div>' +
+        '<button class="reel-ar" data-reveal><span class="reel-ar-t">' + esc(w.ar) + '</span>' +
+          '<span class="reel-ar-h">' + t('feedTapReveal') + '</span></button>' +
+        (w.example ? '<p class="reel-ex en">' + markWord(w.example, w.en) + '</p>' : '') +
+        (w.exampleAr ? '<p class="reel-ex-ar">' + esc(w.exampleAr) + '</p>' : '') +
+        (w.synonyms && w.synonyms.length
+          ? '<div class="reel-syn">' + w.synonyms.map(s => '<span class="en">' + esc(s) + '</span>').join('') + '</div>' : '') +
+      '</div>' +
+      '<div class="reel-rail">' +
+        (canSpeak ? railBtn('listen', 'sound', t('feedListen')) : '') +
+        (open
+          ? railBtn('know', 'check', t('know'), c.box >= MAX_BOX) + railBtn('hard', 'x', t('feedHard'))
+          : '<span class="rail-ic rail-lock">' + svg('lock', 21) + '</span>') +
+        '<span class="rail-box num">' + (open ? t('boxN', ar(c.box || 0)) : t('feedLocked')) + '</span>' +
+      '</div>' +
+      (i === 0 ? '<div class="reel-swipe">' + svg('chevUp', 20) + t('feedSwipe') + '</div>' : '') +
+    '</div>' +
+  '</section>';
+}
+
+function paintFeed(){
+  const el = $('#feed');
+  $('#s-feed').classList.toggle('hide-ar', feed.hide);
+  $('#feedHide').setAttribute('aria-pressed', String(feed.hide));
+  el.innerHTML = feed.words.map(reelHTML).join('');
+  el.scrollTop = 0;
+  feedCount();
+}
+const reelAt = () => { const el = $('#feed'); return Math.round(el.scrollTop / Math.max(1, el.clientHeight)); };
+function feedCount(){
+  if(!feed) return;
+  $('#feedCount').textContent = ar(Math.min(feed.words.length, reelAt() + 1)) + ' / ' + ar(feed.words.length);
+}
+function feedGoTo(i, smooth){
+  const el = $('#feed');
+  el.scrollTo({ top: Math.max(0, Math.min(feed.words.length - 1, i)) * el.clientHeight, behavior: smooth ? 'smooth' : 'instant' });
+}
+
+$('#feed').addEventListener('scroll', feedCount, { passive: true });
+
+$('#feed').addEventListener('click', e => {
+  if(!feed) return;
+  const reel = e.target.closest('.reel'); if(!reel) return;
+  const i = +reel.dataset.i, w = feed.words[i];
+  if(e.target.closest('[data-reveal]')){ reel.classList.toggle('revealed'); return; }
+  const b = e.target.closest('[data-act]'); if(!b) return;
+  if(b.dataset.act === 'listen'){
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(w.en);
+    u.lang = 'en-US'; u.rate = .9;
+    speechSynthesis.speak(u);
+    return;
+  }
+  if(!isUnlocked(w.levelId)) return;
+  grade(w, b.dataset.act === 'know');
+  reel.querySelectorAll('[data-act="know"],[data-act="hard"]').forEach(x => x.classList.toggle('on', x === b));
+  reel.querySelector('.rail-box').textContent = t('boxN', ar(cardOf(w).box || 0));
+  /* بعد التقييم ننتقل للكلمة التالية، إلا إذا مرّر الطالب بنفسه قبلها */
+  setTimeout(() => { if(current === 'feed' && reelAt() === i) feedGoTo(i + 1, true); }, 380);
+});
+
+$('#feedEntry').addEventListener('click', () =>
+  startFeed(LEVELS.flatMap(l => shuffle(ALL_WORDS.filter(w => w.levelId === l.id)))));
+$('#feedBack').addEventListener('click', () => go('vocab'));
+$('#feedHide').addEventListener('click', () => {
+  if(!feed) return;
+  feed.hide = !feed.hide;
+  S.meta.feedHide = feed.hide;
+  save('meta');
+  $('#s-feed').classList.toggle('hide-ar', feed.hide);
+  $('#feedHide').setAttribute('aria-pressed', String(feed.hide));
+  $$('#feed .reel.revealed').forEach(r => r.classList.remove('revealed'));
+});
+
+$('#feedQ').addEventListener('input', () => {
+  const box = $('#feedResults');
+  const q = $('#feedQ').value.trim().toLowerCase();
+  if(!feed || !q){ box.hidden = true; return; }
+  const hits = [];
+  feed.words.forEach((w, i) => {
+    const en = (w.en || '').toLowerCase();
+    if(en.includes(q) || (w.ar || '').includes(q)) hits.push({ i, rank: en.startsWith(q) ? 0 : 1 });
+  });
+  hits.sort((a, b) => a.rank - b.rank || a.i - b.i);
+  box.innerHTML = hits.length
+    ? hits.slice(0, 8).map(h => '<button data-jump="' + h.i + '"><b class="en">' + esc(feed.words[h.i].en) + '</b>' +
+        '<small>' + esc(feed.words[h.i].ar) + '</small></button>').join('')
+    : '<div class="feed-none">' + t('feedNoResults') + '</div>';
+  box.hidden = false;
+});
+$('#feedQ').addEventListener('keydown', e => {
+  if(e.key === 'Enter'){ const first = $('#feedResults [data-jump]'); if(first) first.click(); }
+  if(e.key === 'Escape'){ $('#feedQ').value = ''; $('#feedResults').hidden = true; }
+});
+$('#feedResults').addEventListener('click', e => {
+  const b = e.target.closest('[data-jump]'); if(!b) return;
+  feedGoTo(+b.dataset.jump, false);
+  $('#feedQ').value = '';
+  $('#feedQ').blur();
+  $('#feedResults').hidden = true;
+});
+document.addEventListener('keydown', e => {
+  if(current !== 'feed' || e.target.matches('input, textarea')) return;
+  if(e.key === 'ArrowDown' || e.key === 'PageDown'){ e.preventDefault(); feedGoTo(reelAt() + 1, true); }
+  if(e.key === 'ArrowUp' || e.key === 'PageUp'){ e.preventDefault(); feedGoTo(reelAt() - 1, true); }
+});
 
 /* ════════════════════════ study session ════════════════════════ */
 let sess = null;
@@ -2695,8 +2988,7 @@ function paintTutorAvail(){
     off.textContent = t(tutorReason === 'notDeployed' ? 'errNotDeployed' : 'tutorOff');
   $('#chatSend').disabled = !on || busy;
   $('#chatIn').disabled = !on;
-  $$('.ask').forEach(b => { b.hidden = !on; });
-  $$('.to-tutor').forEach(b => { b.hidden = !on; });
+  $$('.ask').forEach(b => { b.hidden = !on; });   /* زر «راجع أغلاطك» يبقى: الحلول المكتوبة لا تحتاج المدرّس */
   /* الإتاحة تُحسم بعد التحميل، فقائمة الأغلاط تُعاد إن كنّا على شاشة المدرّس */
   if(current === 'tutor') renderMistakes();
 }
@@ -2721,33 +3013,50 @@ function markExplained(a, qid){
     sb.from('attempts').update({ data:a }).eq('id', a.id).then(()=>{});
 }
 
+/* الحل المكتوب لكل غلطة جاهز بدون اتصال: الترجمة، ليش الصح صح، وليش كل خيار غلط.
+   المدرّس الذكي يبقى للأسئلة الإضافية، فالقائمة تظهر حتى لو كان متوقّفاً. */
+let openMistakeId = null;
+
 function renderMistakes(){
   const box = $('#mistakes');
   const m = lastMistakes();
-  if(!m || sampleState !== 'ready'){ box.innerHTML = ''; return; }
+  if(!m){ box.innerHTML = ''; return; }
 
+  const aiOn = sampleState === 'ready';
   const done = new Set(m.attempt.explained || []);
   const left = m.items.filter(x => !done.has(x.q.id)).length;
 
   box.innerHTML =
     '<div class="sec-head"><h2>' + t('mistakesTitle') + '</h2>' +
       '<span class="link">' + (left ? t('remainingN', ar(left)) : t('allExplained')) + '</span></div>' +
-    '<div class="stack">' + m.items.map((x,i) => {
+    '<p class="empty" style="padding:0 4px 12px; text-align:start">' + t('mistakesHint') + '</p>' +
+    '<div class="stack">' + m.items.map((x, i) => {
       const mine = (m.attempt.answers || {})[x.q.id];
-      const ok = done.has(x.q.id);
-      return '<button class="rowcard flat" data-m="' + i + '">' +
-        '<span class="rowcard-ic ' + (ok ? 'sage' : 'blush') + '">' + svg(ok ? 'check' : 'x', 18) + '</span>' +
-        '<span style="flex:1;min-width:0">' +
-          '<b class="en" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(x.q.text) + '</b>' +
-          '<small>' + esc(t('yourAnswerVs', secLabel(x.si, x.sec),
-            (mine == null ? t('noAnswerGiven') : 'ABCD'[mine]), 'ABCD'[x.q.correct])) + '</small>' +
-        '</span>' + svg('chev',18) + '</button>';
+      const seen = done.has(x.q.id);
+      const open = x.q.id === openMistakeId;
+      return '<div class="mistake">' +
+        '<button class="rowcard flat" data-m="' + i + '" aria-expanded="' + open + '">' +
+          '<span class="rowcard-ic ' + (seen ? 'sage' : 'blush') + '">' + svg(seen ? 'check' : 'x', 18) + '</span>' +
+          '<span style="flex:1;min-width:0">' +
+            '<b class="en" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(x.q.text) + '</b>' +
+            '<small>' + esc(t('yourAnswerVs', secLabel(x.si, x.sec),
+              (mine == null ? t('noAnswerGiven') : 'ABCD'[mine]), 'ABCD'[x.q.correct])) + '</small>' +
+          '</span>' + svg(open ? 'chevUp' : 'chevDown', 18) + '</button>' +
+        (open ? mistakeBody(x, mine, i, aiOn) : '') +
+      '</div>';
     }).join('') + '</div>' +
-    (left > 1 ? '<button class="btn wide ghost" id="explainAll" style="margin-top:12px">' + t('explainAll') + '</button>' : '');
+    (aiOn && left > 1 ? '<button class="btn wide ghost" id="explainAll" style="margin-top:12px">' + t('explainAll') + '</button>' : '');
 
   box.querySelectorAll('[data-m]').forEach(b => b.addEventListener('click', () => {
     const x = m.items[+b.dataset.m];
-    markExplained(m.attempt, x.q.id);
+    openMistakeId = openMistakeId === x.q.id ? null : x.q.id;
+    if(openMistakeId) markExplained(m.attempt, x.q.id);
+    renderMistakes();
+    const again = openMistakeId && box.querySelector('[data-m="' + b.dataset.m + '"]');
+    if(again) again.scrollIntoView({ block:'start', behavior:'smooth' });
+  }));
+  box.querySelectorAll('.ask-more').forEach(b => b.addEventListener('click', () => {
+    const x = m.items[+b.dataset.i];
     askAboutQuestion({
       section: secLabel(x.si, x.sec),
       passage: passageText(x.sec.passage),
@@ -2757,6 +3066,23 @@ function renderMistakes(){
   }));
   const all = $('#explainAll');
   if(all) all.addEventListener('click', () => explainAll(m));
+}
+
+function mistakeBody(x, mine, i, aiOn){
+  const q = x.q;
+  return '<div class="mistake-body">' +
+    (x.sec.passage && x.sec.passage.length
+      ? '<details class="m-passage"><summary>' + t('showPassage') + '</summary>' + renderPassage(x.sec.passage) + '</details>' : '') +
+    '<div class="q-card">' +
+      '<div class="q-text en" style="font-size:15px">' + esc(q.text) + '</div>' +
+      '<div class="opts">' + q.options.map((o, k) =>
+        '<div class="opt ' + (k === q.correct ? 'correct' : (k === mine ? 'wrong' : '')) + '">' +
+        '<span class="opt-k">' + 'ABCD'[k] + '</span><span class="en" style="flex:1">' + esc(o) + '</span></div>').join('') +
+      '</div>' +
+    '</div>' +
+    (q.explain ? renderExplain(q) : '<div class="note">' + t('noWrittenExplain') + '</div>') +
+    (aiOn ? '<button class="btn wide ghost ask-more" data-i="' + i + '">' + t('askTutorMore') + '</button>' : '') +
+  '</div>';
 }
 
 function explainAll(m){
@@ -2806,7 +3132,7 @@ function renderChat(){
   $('#suggests').innerHTML = (turns.length || m) ? '' :
     SUGGESTS().map(x => '<button class="suggest">' + esc(x) + '</button>').join('');
   $$('#suggests .suggest').forEach(b => b.addEventListener('click', () => { $('#chatIn').value = b.textContent; sendChat(); }));
-  c.scrollIntoView({block:'end'});
+  if(!m) c.scrollIntoView({block:'end'});   /* مع وجود أغلاط تبقى حلولها أول ما يظهر */
 }
 
 function trimTurns(turns){
