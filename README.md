@@ -13,18 +13,38 @@ repetition, timed mock exams, and an optional AI tutor.
 | Feature | Detail |
 |---|---|
 | **Vocabulary** | 359 exam-level words across 4 difficulty-ordered levels, each with an Arabic gloss, a worked example sentence, and synonyms |
+| **Word reels** | A full-screen, vertically snapping feed — one word per screen — with search, text-to-speech, and "I know it / hard" buttons wired to the spaced-repetition boxes |
 | **Spaced repetition** | Leitner system, 5 boxes: 1 → 3 → 7 → 14 → 30 days. Wrong answers return to box 1 and reappear in the same session |
 | **Level gating** | A level test of 15–20 mixed-format questions; 80% unlocks the next level |
-| **Skill practice** | Every question in the bank regrouped by type — sentence completion, restatement, reading — into 13 untimed levels with instant feedback, so each skill is trained before it is tested |
+| **Skill practice** | 96 original practice questions — restatement, reading comprehension (full passage + 5 questions), sentence completion — each at easy / medium / hard, separate from the exams so those stay unseen |
 | **Mock exams** | 5 full exams in the real Amiranet structure — 6 sections, 23 questions, 39 minutes |
 | **Per-section timers** | Each section runs its own clock and **locks when it expires**, matching the real exam |
 | **Scoring** | Mistakes → score on the published 50–150 conversion curve, with the exemption threshold marked |
-| **AI tutor** | After an exam, wrong answers are listed and explained one tap at a time |
+| **Written solutions** | Every practice and exam question carries an Arabic explanation: translation, why the key is right, why each other option is wrong, key vocabulary. Exam mistakes open their solution in the tutor tab, even offline |
+| **AI tutor** | Optional follow-up chat for anything the written solution leaves unclear |
 | **Planner** | Exam-date countdown, month calendar, per-day tasks |
 | **Bilingual** | Arabic (RTL) ⇄ English (LTR) — layout direction, numerals, month names, and the tutor's own language all switch |
 
 All vocabulary and exam content was written specifically for this project. No third-party
 material is redistributed.
+
+---
+
+## Content pipeline: AI agents with an independent checker
+
+Questions and explanations are produced by **three version-controlled Claude Code subagents**
+in [`.claude/agents/`](.claude/agents), with separate roles and tool permissions:
+
+| Agent | Role |
+|---|---|
+| `amiram-question-generator` | Writes original items at easy / medium / hard into a drafts file |
+| `amiram-quality-checker` | Independent, **read-only** audit: single defensible answer, key, line references, giveaways, Arabic accuracy, originality |
+| `amiram-arabic-tutor` | Writes the per-question Arabic explanation, without changing any key |
+
+A standard-library validator, [`tools/validate_content.py`](tools/validate_content.py), gates every
+file. The independent audits caught problems the writers missed. For example, **A was the
+correct answer in 53 of 58 exam sentence completions**, and the correct reading option was the
+longest one in 16 of 30 items. Full process and findings: [`docs/content-pipeline.md`](docs/content-pipeline.md).
 
 ---
 
@@ -132,10 +152,16 @@ against the original before trusting several hundred extracted rows.
 line numbering is content, not decoration. Passages are stored as numbered line arrays and
 rendered with a gutter every fifth line, matching the printed original.
 
-**Practice before pressure.** The same 115 questions serve two modes. In a mock exam they run
-under a per-section clock that locks on expiry; in practice they are regrouped by skill, untimed,
-and marked the instant you answer. Reading is split by passage rather than by count, since a
-passage and its questions are one unit.
+**Practice before pressure.** Practice and exams use separate question banks. Practice
+is untimed, grouped by skill and level, and shows the explanation the moment you answer. The
+mock exams run under a per-section clock that locks on expiry, and a student has never seen
+their questions. Reading is practised by passage rather than by count, since a passage and its
+questions are one unit.
+
+**Answer positions leak answers.** Written one at a time, questions drift toward a favourite
+answer slot: 53 of 58 exam sentence completions were keyed A. Options and their explanations
+were swapped to spread keys across A–D, and exam ids were versioned, because saved attempts store
+answers as option indexes and would otherwise be reviewed against the new order.
 
 **Measuring question difficulty instead of guessing.** The first generated exams felt right
 but measured wrong: restatement options averaged 8.8 words against 14.7 in the reference
@@ -153,9 +179,13 @@ physical alignment throughout.
 
 ```
 ├─ src/app.template.html     the whole application
+├─ .claude/agents/           the three content agents (generator, checker, Arabic tutor)
+├─ tools/validate_content.py content validator used by the agents and before publishing
+├─ docs/content-pipeline.md  how the agents work together, and what they caught
 ├─ data/
 │  ├─ vocab_extra*.json      vocabulary source
-│  ├─ exams_generated.json   exam source
+│  ├─ practice.json          practice questions with Arabic explanations
+│  ├─ exams_generated.json   exam source, with explanations
 │  └─ difficulty.json        manual difficulty tiers, 1–6
 ├─ supabase/
 │  ├─ schema.sql             tables, RLS policies, quota function

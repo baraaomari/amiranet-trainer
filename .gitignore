@@ -16,6 +16,13 @@ web/index.html
 data/vocab.json
 data/exams.json
 
+# ── Claude Code ──
+# الـagents الرسمية تُنشر مع المشروع؛ باقي إعدادات .claude محلية.
+.claude/*
+!.claude/agents/
+# مسودات الأسئلة قبل التدقيق والدمج في data/
+drafts/
+
 # ── نظام التشغيل والمحررات ──
 Thumbs.db
 desktop.ini
