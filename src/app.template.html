@@ -460,7 +460,7 @@ body.feed-open{overflow:hidden}
 }
 .feed::-webkit-scrollbar{display:none}
 .reel{
-  height:100vh; height:100dvh; scroll-snap-align:start; scroll-snap-stop:always;
+  height:100vh; height:var(--reel-h, 100dvh); scroll-snap-align:start; scroll-snap-stop:always;
   display:flex; justify-content:center; color:var(--on-pastel); background:var(--c-butter);
 }
 .reel.c-sage{background:var(--c-sage)} .reel.c-lilac{background:var(--c-lilac)} .reel.c-blush{background:var(--c-blush)}
@@ -653,7 +653,20 @@ body.feed-open{overflow:hidden}
         <span class="tile-go" data-icon="arrow"></span>
       </button>
 
-      <button class="tile lilac" data-go="tutor">
+      <button class="tile lilac" data-go="practice">
+        <svg class="tile-art" viewBox="0 0 120 80" aria-hidden="true">
+          <circle cx="56" cy="42" r="28" fill="none" stroke="currentColor" stroke-width="3"/>
+          <circle cx="56" cy="42" r="16" fill="none" stroke="currentColor" stroke-width="2.6"/>
+          <circle cx="56" cy="42" r="5" fill="currentColor"/>
+          <path d="M56 42 94 12M84 10l10 2-2 10" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="tile-badge" data-icon="target"></div>
+        <div class="tile-title"><span data-i18n="navPractice">تدريب</span></div>
+        <div class="tile-meta" id="tilePractice">—</div>
+        <span class="tile-go" data-icon="arrow"></span>
+      </button>
+
+      <button class="tile blush" data-go="tutor">
         <svg class="tile-art" viewBox="0 0 120 80" aria-hidden="true">
           <path d="M26 20h44a5 5 0 0 1 5 5v20a5 5 0 0 1-5 5H44l-12 10V50h-6a5 5 0 0 1-5-5V25a5 5 0 0 1 5-5Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
           <path d="M86 34h8a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4h-3v8l-9-8h-4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
@@ -665,7 +678,7 @@ body.feed-open{overflow:hidden}
         <span class="tile-go" data-icon="arrow"></span>
       </button>
 
-      <button class="tile blush" data-go="calc">
+      <button class="tile sage" data-go="calc">
         <svg class="tile-art" viewBox="0 0 120 80" aria-hidden="true">
           <rect x="36" y="8" width="48" height="64" rx="6" fill="none" stroke="currentColor" stroke-width="3"/>
           <rect x="45" y="17" width="30" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="2.6"/>
@@ -676,6 +689,19 @@ body.feed-open{overflow:hidden}
         <div class="tile-badge" data-icon="calc"></div>
         <div class="tile-title"><span data-i18n="calcRow">حاسبة العلامة</span></div>
         <div class="tile-meta"><span data-i18n="tileCalcSub">من ١٥٠</span></div>
+        <span class="tile-go" data-icon="arrow"></span>
+      </button>
+
+      <button class="tile butter" data-go="schedule">
+        <svg class="tile-art" viewBox="0 0 120 80" aria-hidden="true">
+          <rect x="30" y="14" width="60" height="56" rx="6" fill="none" stroke="currentColor" stroke-width="3"/>
+          <path d="M30 30h60M46 8v12M74 8v12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <path d="M42 42h8M56 42h8M70 42h8M42 54h8M56 54h8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          <circle cx="74" cy="54" r="5" fill="currentColor"/>
+        </svg>
+        <div class="tile-badge" data-icon="cal"></div>
+        <div class="tile-title"><span data-i18n="navSchedule">الجدول</span></div>
+        <div class="tile-meta" id="tileSchedule">—</div>
         <span class="tile-go" data-icon="arrow"></span>
       </button>
     </div>
@@ -1022,6 +1048,9 @@ const STR = {
   tileExamsSub:{ar:'{0} امتحان جاهز',en:'{0} exams ready'},
   tileTutorSub:{ar:'اسأل عن أي سؤال',en:'Ask about any question'},
   tileCalcSub:{ar:'من ١٥٠',en:'out of 150'},
+  tilePracticeSub:{ar:'{0} سؤال بثلاث مستويات',en:'{0} questions, 3 levels'},
+  tileScheduleSub:{ar:'{0} يوم للامتحان',en:'{0} days to your exam'},
+  tileScheduleNone:{ar:'حدّد تاريخ امتحانك',en:'Set your exam date'},
   recent:{ar:'آخر نشاط',en:'Recent activity'},
   noActivity:{ar:'لسا ما في نشاط — ابدأ جلسة حفظ.',en:'Nothing yet — start a study session.'},
   streakN:{ar:'سلسلة {0} يوم',en:'{0}-day streak'},
@@ -1777,6 +1806,10 @@ function renderHome(){
   $('#startTodayLabel').textContent = due > 0 ? t('startTodayN', ar(due)) : t('freeReview');
   $('#tileVocab').textContent = t('tileVocabSub', ar(mastered), ar(ALL_WORDS.length));
   $('#tileExams').textContent = t('tileExamsSub', ar((EXAMS.exams||[]).length));
+  $('#tilePractice').textContent = t('tilePracticeSub',
+    ar((PRACTICE.sets || []).reduce((a, s) => a + (s.questions || []).length, 0)));
+  $('#tileSchedule').textContent = d == null ? t('tileScheduleNone')
+    : (d < 0 ? t('daysPassed') : t('tileScheduleSub', ar(d)));
 
   const items = [];
   if(S.meta.streak > 0) items.push(['flame','butter', t('streakN', ar(S.meta.streak)), t('streakSub')]);
@@ -1923,12 +1956,13 @@ function railBtn(act, icon, label, on){
     '<span class="rail-ic">' + svg(icon, 23) + '</span><span class="rail-l">' + esc(label) + '</span></button>';
 }
 
-function reelHTML(w, i){
+const reelColor = w => REEL_C[Math.max(0, LEVELS.findIndex(l => l.id === w.levelId)) % 4];
+
+function reelInner(w, i){
   const open = isUnlocked(w.levelId);
   const c = cardOf(w);
   const lv = LEVELS.find(l => l.id === w.levelId);
-  return '<section class="reel c-' + REEL_C[Math.max(0, LEVELS.indexOf(lv)) % 4] + '" data-i="' + i + '">' +
-    '<div class="reel-inner">' +
+  return '<div class="reel-inner">' +
       '<div class="reel-body">' +
         '<div class="reel-meta">' +
           (lv ? '<span class="reel-tag">' + esc(levelName(lv)) + '</span>' : '') +
@@ -1950,29 +1984,56 @@ function reelHTML(w, i){
         '<span class="rail-box num">' + (open ? t('boxN', ar(c.box || 0)) : t('feedLocked')) + '</span>' +
       '</div>' +
       (i === 0 ? '<div class="reel-swipe">' + svg('chevUp', 20) + t('feedSwipe') + '</div>' : '') +
-    '</div>' +
-  '</section>';
+    '</div>';
 }
+
+/* كل الشاشات موجودة كصناديق ملوّنة فاضية بارتفاع الحاوية بالضبط، والمحتوى يُرسم
+   للكلمة الحالية وجاراتها فقط. مئات الشاشات المرسومة مرة وحدة بتخلّي الموبايل
+   يتأخّر برسم النص أثناء السحب، فتظهر خلفيات بلا كلمات. */
+const REEL_NEAR = 2, REEL_KEEP = 6;
 
 function paintFeed(){
   const el = $('#feed');
   $('#s-feed').classList.toggle('hide-ar', feed.hide);
   $('#feedHide').setAttribute('aria-pressed', String(feed.hide));
-  el.innerHTML = feed.words.map(reelHTML).join('');
+  feed.filled = new Set();
+  el.innerHTML = feed.words.map((w, i) => '<section class="reel c-' + reelColor(w) + '" data-i="' + i + '"></section>').join('');
+  sizeReels();
   el.scrollTop = 0;
-  feedCount();
+  fillReels();
 }
-const reelAt = () => { const el = $('#feed'); return Math.round(el.scrollTop / Math.max(1, el.clientHeight)); };
-function feedCount(){
+function sizeReels(){
+  const el = $('#feed');
+  feed.h = Math.max(1, el.clientHeight);
+  el.style.setProperty('--reel-h', feed.h + 'px');
+}
+const reelAt = () => Math.round($('#feed').scrollTop / ((feed && feed.h) || 1));
+
+function fillReels(){
   if(!feed) return;
-  $('#feedCount').textContent = ar(Math.min(feed.words.length, reelAt() + 1)) + ' / ' + ar(feed.words.length);
+  const at = reelAt(), reels = $('#feed').children;
+  for(let i = Math.max(0, at - REEL_NEAR); i <= Math.min(feed.words.length - 1, at + REEL_NEAR); i++){
+    if(!feed.filled.has(i)){ reels[i].innerHTML = reelInner(feed.words[i], i); feed.filled.add(i); }
+  }
+  feed.filled.forEach(i => {
+    if(Math.abs(i - at) > REEL_KEEP){ reels[i].innerHTML = ''; feed.filled.delete(i); }
+  });
+  $('#feedCount').textContent = ar(Math.min(feed.words.length, at + 1)) + ' / ' + ar(feed.words.length);
 }
 function feedGoTo(i, smooth){
   const el = $('#feed');
-  el.scrollTo({ top: Math.max(0, Math.min(feed.words.length - 1, i)) * el.clientHeight, behavior: smooth ? 'smooth' : 'instant' });
+  el.scrollTo({ top: Math.max(0, Math.min(feed.words.length - 1, i)) * feed.h, behavior: smooth ? 'smooth' : 'instant' });
+  if(!smooth) fillReels();
 }
 
-$('#feed').addEventListener('scroll', feedCount, { passive: true });
+$('#feed').addEventListener('scroll', fillReels, { passive: true });
+/* تدوير الشاشة أو ظهور شريط العنوان يغيّر الارتفاع: نحافظ على نفس الكلمة */
+window.addEventListener('resize', () => {
+  if(current !== 'feed' || !feed) return;
+  const i = reelAt();
+  sizeReels();
+  feedGoTo(i, false);
+});
 
 $('#feed').addEventListener('click', e => {
   if(!feed) return;
