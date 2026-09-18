@@ -539,6 +539,16 @@ body.feed-open{overflow:hidden}
 .feed-none{padding:14px; color:var(--muted); font-size:13px; text-align:center}
 @media (min-width:620px){ .reel-body{padding-inline:64px} }
 
+/* ───────── تذكيرات الإيميل ───────── */
+.email-ask{display:flex; gap:14px; align-items:flex-start; padding:17px 18px; margin:-8px 0 22px}
+.email-ask b{display:block; font-size:15.5px}
+.email-ask p{color:var(--muted); font-size:13px; line-height:1.7; margin-top:3px}
+.email-toggle{display:flex; gap:12px; align-items:flex-start; margin-top:16px; padding-top:14px;
+  border-top:1px solid var(--line); cursor:pointer}
+.email-toggle input{width:20px; height:20px; margin-top:2px; accent-color:var(--ink); flex:none}
+.email-toggle b{display:block; font-size:14px}
+.email-toggle small{display:block; color:var(--muted); font-size:12.5px; line-height:1.6}
+
 /* ───────── tabbar ───────── */
 .tabbar{
   position:fixed; z-index:20; direction:rtl;   /* خارج حاوية الأبب، فيحتاج اتجاهه صراحةً */
@@ -628,6 +638,18 @@ body.feed-open{overflow:hidden}
     <button class="btn wide" id="startToday" style="margin-bottom:24px">
       <span id="startTodayLabel"></span>
     </button>
+
+    <div class="card email-ask" id="emailAsk" hidden>
+      <span class="rowcard-ic lilac" data-icon="mail"></span>
+      <div style="flex:1; min-width:0">
+        <b data-i18n="emailAskTitle">بدك نذكّرك بالإيميل؟</b>
+        <p data-i18n="emailAskText">إذا غبت ٣ أيام منبعتلك تذكير، وقبل امتحانك بيوم رسالة بالتوفيق. بتقدر توقفها بأي وقت.</p>
+        <div class="row" style="gap:8px; margin-top:12px">
+          <button class="btn sm" id="emailYes"><span data-i18n="emailYes">آه، ذكّرني</span></button>
+          <button class="btn ghost sm" id="emailNo"><span data-i18n="emailNo">لا شكراً</span></button>
+        </div>
+      </div>
+    </div>
 
     <div class="tiles">
       <button class="tile butter" data-go="vocab">
@@ -858,6 +880,10 @@ body.feed-open{overflow:hidden}
         <input type="date" class="field" id="examDate" style="flex:1">
       </div>
       <div id="countdown" class="row" style="margin-top:13px; gap:8px; color:var(--muted); font-size:13.5px"></div>
+      <label class="email-toggle" id="emailToggleRow" hidden>
+        <input type="checkbox" id="emailToggle">
+        <span><b data-i18n="emailToggle">ذكّرني بالإيميل</b><small data-i18n="emailToggleSub">تذكير إذا غبت ٣ أيام، ورسالة بالتوفيق قبل امتحانك بيوم</small></span>
+      </label>
     </div>
 
     <div class="cal">
@@ -1002,7 +1028,8 @@ const P = {
   sound:'M4.6 9.6h3L12 6v12l-4.4-3.6h-3a.6.6 0 0 1-.6-.6v-3.6a.6.6 0 0 1 .6-.6ZM15.6 9.2a4 4 0 0 1 0 5.6M18.2 6.8a7.4 7.4 0 0 1 0 10.4',
   eye:'M2.8 12S6.2 5.8 12 5.8 21.2 12 21.2 12 17.8 18.2 12 18.2 2.8 12 2.8 12ZM12 14.8a2.8 2.8 0 1 0 0-5.6 2.8 2.8 0 0 0 0 5.6Z',
   chevUp:'M5.5 14.5 12 8l6.5 6.5',
-  chevDown:'M5.5 9.5 12 16l6.5-6.5'
+  chevDown:'M5.5 9.5 12 16l6.5-6.5',
+  mail:'M4.4 6h15.2A1.4 1.4 0 0 1 21 7.4v9.2a1.4 1.4 0 0 1-1.4 1.4H4.4A1.4 1.4 0 0 1 3 16.6V7.4A1.4 1.4 0 0 1 4.4 6ZM3.4 7.2 12 13.2l8.6-6'
 };
 function svg(name, size){
   const d = P[name]; if(!d) return '';
@@ -1238,6 +1265,15 @@ const STR = {
   feedSwipe:{ar:'اسحب لفوق',en:'Swipe up'},
   feedNoResults:{ar:'ما لقينا هالكلمة',en:'No matching word'},
   feedLocked:{ar:'مقفول',en:'Locked'},
+  emailAskTitle:{ar:'بدك نذكّرك بالإيميل؟',en:'Want email reminders?'},
+  emailAskText:{ar:'إذا غبت ٣ أيام منبعتلك تذكير، وقبل امتحانك بيوم رسالة بالتوفيق. بتقدر توقفها بأي وقت.',
+                en:'If you are away for 3 days we send a reminder, and the day before your exam a good-luck note. Turn it off any time.'},
+  emailYes:{ar:'آه، ذكّرني',en:'Yes, remind me'},
+  emailNo:{ar:'لا شكراً',en:'No thanks'},
+  emailToggle:{ar:'ذكّرني بالإيميل',en:'Email reminders'},
+  emailToggleSub:{ar:'تذكير إذا غبت ٣ أيام، ورسالة بالتوفيق قبل امتحانك بيوم',
+                  en:'A nudge after 3 days away, and good luck the day before your exam'},
+  emailSaveFail:{ar:'ما قدرنا نحفظ الإعداد. جرّب كمان مرة.',en:'Could not save the setting. Please try again.'},
   chatEmpty:{ar:'اسأل المدرّس عن أي كلمة أو قاعدة. بعد ما تعمل امتحان، أغلاطك بتظهر هون جاهزة للشرح.',
              en:'Ask the tutor about any word or rule. After an exam, your mistakes appear here ready to be explained.'},
   mistakesTitle:{ar:'أغلاطك بآخر امتحان',en:'Your mistakes in the last exam'},
@@ -1570,7 +1606,7 @@ async function initSupabase(){
 
 async function onSession(session){
   sbUser = session ? session.user : null;
-  if(!sbUser){ showAuth(true); return; }
+  if(!sbUser){ emailPref = null; paintEmailPref(); showAuth(true); return; }
   showAuth(false);
   dbReady = true;
   try {
@@ -1579,6 +1615,7 @@ async function onSession(session){
     if(!found){ ['meta','schedule','srs'].forEach(p => dirty.add(p)); flush(); }
     localSave();
     applyLang();
+    loadEmailPref();
   } catch(e){
     console.warn(t('dbReadFail'), e && e.message);
     showLocalOnly();
@@ -2937,6 +2974,51 @@ function renderCalc(){
         '<span style="flex:1"><b>' + t('ofN', ar(x.right), ar(x.total)) + '</b><small>' + esc(x.date) + '</small></span></div>').join('')
     : '<div class="empty">' + t('noCalc') + '</div>';
 }
+
+/* ════════════════════════ تذكيرات الإيميل ════════════════════════
+   الموافقة بجدول email_prefs (RLS: كل طالب صفّه بس). الإرسال نفسه من سكربت
+   Google Apps Script بيقرأ الموافقات — شوف EMAIL.md. بس لحسابات Supabase؛ ولو
+   الجدول لسا مش موجود، البطاقة والخيار بيضلّوا مخفيين. */
+let emailPref = null;   /* null = ما انسأل بعد · true / false = قراره · 'unavailable' = الميزة مش مفعّلة */
+
+async function loadEmailPref(){
+  emailPref = null;
+  if(MODE === 'supabase' && sbUser){
+    try {
+      const { data, error } = await sb.from('email_prefs').select('reminders').eq('user_id', sbUser.id).maybeSingle();
+      if(error) throw error;
+      emailPref = data ? !!data.reminders : null;
+    } catch(e){
+      emailPref = 'unavailable';
+      console.warn('email_prefs unavailable', e && e.message);
+    }
+  }
+  paintEmailPref();
+}
+async function setEmailPref(on){
+  if(MODE !== 'supabase' || !sbUser) return;
+  const prev = emailPref;
+  emailPref = on;
+  paintEmailPref();
+  try {
+    const { error } = await sb.from('email_prefs')
+      .upsert({ user_id: sbUser.id, reminders: on, updated_at: new Date().toISOString() }, { onConflict: 'user_id' });
+    if(error) throw error;
+  } catch(e){
+    emailPref = prev;
+    paintEmailPref();
+    alert(t('emailSaveFail'));
+  }
+}
+function paintEmailPref(){
+  const ok = MODE === 'supabase' && !!sbUser && emailPref !== 'unavailable';
+  $('#emailAsk').hidden = !(ok && emailPref === null);
+  $('#emailToggleRow').hidden = !ok;
+  $('#emailToggle').checked = emailPref === true;
+}
+$('#emailYes').addEventListener('click', () => setEmailPref(true));
+$('#emailNo').addEventListener('click', () => setEmailPref(false));
+$('#emailToggle').addEventListener('change', e => setEmailPref(e.target.checked));
 
 /* ════════════════════════ schedule ════════════════════════ */
 let calRef = new Date(), calSel = todayKey();
