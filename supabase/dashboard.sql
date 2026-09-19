@@ -74,10 +74,13 @@ select * from (
                        count(distinct l.user_id)::text
                        from public.email_log l join public.app_state s on s.user_id = l.user_id
                        where l.kind = 'comeback' and s.updated_at > l.sent_at
-  union all select 28, '🤖 أسئلة للمدرّس اليوم',      coalesce(sum(count), 0)::text from public.tutor_usage, tz where day = tz.today
-  union all select 29, '   أسئلة للمدرّس آخر ٧ أيام', coalesce(sum(count), 0)::text from public.tutor_usage, tz where day > tz.today - 7
 ) x
 order by 1;
+
+-- استعمال المدرّس (بس إذا الجدول tutor_usage موجود، يعني نشرت دالة المدرّس):
+-- select coalesce(sum(count) filter (where day = current_date), 0) as "أسئلة اليوم",
+--        coalesce(sum(count) filter (where day > current_date - 7), 0) as "آخر ٧ أيام"
+-- from public.tutor_usage;
 
 
 -- ═══ ٢. يوم بيوم (آخر ٣٠ يوم): تسجيلات، امتحانات، إيميلات ═══
