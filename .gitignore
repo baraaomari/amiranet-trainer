@@ -14,6 +14,8 @@ app.html
 web/index.html
 web/robots.txt
 web/sitemap.xml
+web/manifest.webmanifest
+web/icon-*.png
 *.zip
 data/vocab.json
 data/exams.json

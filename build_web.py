@@ -67,6 +67,11 @@ SHELL = """<!doctype html>
 <meta name="twitter:card" content="summary">
 {{VERIFY}}<script type="application/ld+json">{{JSONLD}}</script>
 <meta name="theme-color" content="#F1F2F4">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="أميرنت">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%93%9A</text></svg>">
 <style>
   :root{color-scheme:light}
@@ -83,6 +88,61 @@ SHELL = """<!doctype html>
 </body>
 </html>
 """
+
+
+MANIFEST = {
+    "name": "مدرّب أميرنت",
+    "short_name": "أميرنت",
+    "description": "تحضير مجاني لامتحان أميرنت بالعربي",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "dir": "rtl",
+    "lang": "ar",
+    "background_color": "#F1F2F4",
+    "theme_color": "#F1F2F4",
+    "icons": [
+        {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+        {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+        {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
+    ],
+}
+
+
+def write_icon(size, path):
+    """أيقونة التطبيق: كتاب مفتوح على خلفية صفراء، مرسومة بالبايثون بلا مكتبات صور.
+    الخلفية تغطي المربع كله، فتنفع كأيقونة maskable بأندرويد."""
+    import struct
+    import zlib
+    bg, ink = (0xF7, 0xE6, 0xA4), (0x15, 0x17, 0x1B)
+    # صفحتان: (x يسار، x يمين، أعلى عند اليسار، أعلى عند اليمين، أسفل عند اليسار، أسفل عند اليمين)
+    pages = [(0.20, 0.485, 0.30, 0.355, 0.705, 0.76),
+             (0.515, 0.80, 0.355, 0.30, 0.76, 0.705)]
+
+    def inside(x, y):
+        for x0, x1, t0, t1, b0, b1 in pages:
+            if x0 <= x <= x1:
+                f = (x - x0) / (x1 - x0)
+                if t0 + (t1 - t0) * f <= y <= b0 + (b1 - b0) * f:
+                    return True
+        return False
+
+    rows = []
+    for py in range(size):
+        row = bytearray(b"\x00")
+        for px in range(size):
+            cover = sum(inside((px + sx) / size, (py + sy) / size)
+                        for sx, sy in ((.25, .25), (.75, .25), (.25, .75), (.75, .75))) / 4
+            row += bytes(round(bg[i] * (1 - cover) + ink[i] * cover) for i in range(3))
+        rows.append(bytes(row))
+
+    def chunk(kind, data):
+        return struct.pack(">I", len(data)) + kind + data + struct.pack(">I", zlib.crc32(kind + data) & 0xFFFFFFFF)
+
+    path.write_bytes(b"\x89PNG\r\n\x1a\n" +
+                     chunk(b"IHDR", struct.pack(">IIBBBBB", size, size, 8, 2, 0, 0, 0)) +
+                     chunk(b"IDAT", zlib.compress(b"".join(rows), 9)) +
+                     chunk(b"IEND", b""))
 
 
 def check_config(path):
@@ -144,6 +204,13 @@ def main():
     if not token:
         print("ملاحظة: لا يوجد رمز Google Search Console بعد (web/google-site-verification.txt).")
 
+    # تنزيل كتطبيق: manifest + أيقونات (تُرسم مرة وحدة وتُعاد استعمالها)
+    (WEB / "manifest.webmanifest").write_text(json.dumps(MANIFEST, ensure_ascii=False, indent=1), encoding="utf-8")
+    for size in (180, 192, 512):
+        icon = WEB / ("icon-%d.png" % size)
+        if not icon.exists():
+            write_icon(size, icon)
+
     cfg = WEB / "config.js"
     if not cfg.exists():
         # على خادم البناء لا يوجد config.js (مستثنى من المستودع)، فيُبنى
@@ -179,7 +246,8 @@ def main():
     # ملف واحد يُسحب إلى Netlify بدل مجلد
     zip_path = ROOT / "amirnet-site.zip"
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
-        for name in ("index.html", "config.js", "robots.txt", "sitemap.xml"):
+        for name in ("index.html", "config.js", "robots.txt", "sitemap.xml", "manifest.webmanifest",
+                     "icon-180.png", "icon-192.png", "icon-512.png"):
             z.write(WEB / name, name)
     print("وحُزم كل شيء في: %s  (%.0f KB)"
           % (zip_path.name, zip_path.stat().st_size / 1024))

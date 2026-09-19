@@ -539,6 +539,53 @@ body.feed-open{overflow:hidden}
 .feed-none{padding:14px; color:var(--muted); font-size:13px; text-align:center}
 @media (min-width:620px){ .reel-body{padding-inline:64px} }
 
+/* ───────── أول دخول ───────── */
+body.no-tabs .tabbar{display:none}
+.wz{max-width:440px; margin:8px auto 0; text-align:center}
+.wz-dots{display:flex; gap:6px; justify-content:center; margin-bottom:26px}
+.wz-dots i{width:26px; height:5px; border-radius:99px; background:var(--line)}
+.wz-dots i.on{background:var(--ink)}
+.wz-title{font-size:28px; letter-spacing:-.03em; margin-bottom:8px}
+.wz-sub{color:var(--muted); font-size:14px; line-height:1.7; margin-bottom:20px}
+.wz .field{width:100%; text-align:center}
+.wz-opts{display:flex; flex-direction:column; gap:10px; margin-bottom:18px}
+.wz-opt{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:16px 18px;
+  border-radius:var(--r-lg); background:var(--surface); box-shadow:var(--shadow); text-align:start; border:2px solid transparent}
+.wz-opt.on{border-color:var(--ink)}
+.wz-opt b{font-size:15.5px}
+.wz-opt small{color:var(--muted); font-size:12.5px}
+.wz-sum{list-style:none; padding:0; margin:0 0 20px; display:flex; flex-direction:column; gap:10px; text-align:start}
+.wz-sum li{background:var(--surface); border-radius:var(--r-md); padding:13px 16px; box-shadow:var(--shadow); font-size:14px}
+.wz-back{display:inline-flex; align-items:center; gap:4px; margin-top:16px; font-size:13px}
+.wz-done{font-size:56px; margin:10px 0 6px}
+.wz-mail{padding:16px 18px; text-align:start; margin-top:4px}
+.wz-mail b{display:block; font-size:15px}
+.wz-mail p{color:var(--muted); font-size:13px; line-height:1.7; margin-top:3px}
+
+/* ───────── خطة اليوم ───────── */
+.plan{padding:18px 18px 10px; margin-bottom:22px}
+.plan-head{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:10px}
+.plan-head h2{font-size:19px; margin-top:4px}
+.plan-chips{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end}
+.plan-list{display:flex; flex-direction:column}
+.plan-task{display:flex; align-items:center; gap:12px; width:100%; padding:11px 0; border-top:1px solid var(--line); text-align:start}
+.plan-task:first-child{border-top:0}
+.plan-ic{width:38px; height:38px; border-radius:50%; flex:none; display:grid; place-items:center; background:var(--surface-2)}
+.plan-task.done .plan-ic{background:var(--good); color:#fff}
+.plan-txt{flex:1; min-width:0}
+.plan-txt b{display:block; font-size:14.5px}
+.plan-task.done .plan-txt b{color:var(--muted); text-decoration:line-through}
+.plan-bar{display:block; height:5px; border-radius:99px; background:var(--line); margin-top:6px; overflow:hidden}
+.plan-bar i{display:block; height:100%; background:var(--ink); border-radius:99px}
+.plan-n{font-size:13px; color:var(--muted); font-weight:600}
+.plan-done{color:var(--good); font-size:13px; font-weight:600; padding:6px 0 4px}
+
+/* ───────── نزّل كتطبيق ───────── */
+.install-card{display:flex; gap:14px; align-items:flex-start; padding:16px 16px 16px 18px; margin:-8px 0 22px}
+.install-card b{display:block; font-size:15px}
+.install-card p{color:var(--muted); font-size:13px; line-height:1.7; margin-top:3px}
+.install-x{width:32px; height:32px; box-shadow:none; background:var(--surface-2); flex:none}
+
 /* ───────── تذكيرات الإيميل ───────── */
 .email-ask{display:flex; gap:14px; align-items:flex-start; padding:17px 18px; margin:-8px 0 22px}
 .email-ask b{display:block; font-size:15.5px}
@@ -639,7 +686,10 @@ body.feed-open{overflow:hidden}
       <div class="stat"><b class="num" id="hDays">—</b><span><span data-i18n="statDays">يوم للامتحان</span></span></div>
     </div>
 
-    <button class="btn wide" id="startToday" style="margin-bottom:24px">
+    <div class="card plan" id="plan" hidden></div>
+    <div class="card install-card" id="installCard" hidden></div>
+
+    <button class="btn wide" id="startToday" style="margin-bottom:24px" hidden>
       <span id="startTodayLabel"></span>
     </button>
 
@@ -739,6 +789,11 @@ body.feed-open{overflow:hidden}
     <div class="stack" id="recent"></div>
 
     <p id="credit" class="empty" style="padding:26px 6px 0; font-size:12px; line-height:1.8"></p>
+  </section>
+
+  <!-- ═══════════ أول دخول ═══════════ -->
+  <section id="s-welcome" hidden>
+    <div class="wz" id="welcomeBody"></div>
   </section>
 
   <!-- ═══════════ vocab ═══════════ -->
@@ -1291,6 +1346,45 @@ const STR = {
   emailToggleSub:{ar:'تذكير إذا غبت ٣ أيام، ورسالة بالتوفيق قبل امتحانك بيوم',
                   en:'A nudge after 3 days away, and good luck the day before your exam'},
   emailSaveFail:{ar:'ما قدرنا نحفظ الإعداد. جرّب كمان مرة.',en:'Could not save the setting. Please try again.'},
+  wzDateTitle:{ar:'متى امتحانك؟',en:'When is your exam?'},
+  wzDateSub:{ar:'منبني خطتك على الأيام الي ضايلة، ومنبعتلك رسالة بالتوفيق قبل بيوم.',en:'We plan around the days you have left, and wish you luck the day before.'},
+  wzNoDate:{ar:'لسا ما بعرف',en:"I don't know yet"},
+  wzGoalTitle:{ar:'كم وقت بدك تدرس باليوم؟',en:'How long do you want to study each day?'},
+  wzGoalSub:{ar:'الأهم إنك تدرس كل يوم، حتى لو شوي.',en:'Studying every day matters more than studying a lot.'},
+  wzGoal5:{ar:'٥ دقايق',en:'5 minutes'},   wzGoal5Sub:{ar:'خفيف، للأيام المشغولة',en:'Light, for busy days'},
+  wzGoal10:{ar:'١٠ دقايق',en:'10 minutes'}, wzGoal10Sub:{ar:'مستحسن',en:'Recommended'},
+  wzGoal20:{ar:'٢٠ دقيقة',en:'20 minutes'}, wzGoal20Sub:{ar:'جدّي، امتحانك قريب',en:'Serious, exam coming up'},
+  wzLvlTitle:{ar:'شو مستواك بالإنجليزي؟',en:'How is your English?'},
+  wzLvlSub:{ar:'منبلّش التدريب من المستوى المناسب إلك، وبتقدر تغيّره بأي وقت.',en:'Practice starts at the right level for you; you can change it any time.'},
+  wzLvl_easy:{ar:'مبتدئ',en:'Beginner'},       wzLvlSub_easy:{ar:'بفهم جمل بسيطة',en:'I understand simple sentences'},
+  wzLvl_medium:{ar:'متوسط',en:'Intermediate'}, wzLvlSub_medium:{ar:'بقرأ نصوص قصيرة بدون مشكلة',en:'I read short texts comfortably'},
+  wzLvl_hard:{ar:'قوي',en:'Advanced'},         wzLvlSub_hard:{ar:'بقرأ مقالات أكاديمية',en:'I read academic articles'},
+  wzReadyTitle:{ar:'خطتك جاهزة',en:'Your plan is ready'},
+  wzSumGoal:{ar:'{0} دراسة كل يوم',en:'{0} of study every day'},
+  wzSumDays:{ar:'{0} يوم للامتحان',en:'{0} days to your exam'},
+  wzSumNoDate:{ar:'بتقدر تحط تاريخ الامتحان بعدين من الجدول',en:'You can add your exam date later in the Planner'},
+  wzSumLevel:{ar:'التدريب بيبلّش من مستوى {0}',en:'Practice starts at {0} level'},
+  wzSumFirst:{ar:'أول جولة: ٥ كلمات، تقريباً دقيقتين',en:'First round: 5 words, about two minutes'},
+  wzStart:{ar:'يلا نبلّش',en:"Let's start"},
+  firstSession:{ar:'أول جولة',en:'First round'},
+  wzDoneTitle:{ar:'برافو! خلصت أول جولة',en:'Nice! First round done'},
+  wzDoneSub:{ar:'كل يوم بتلاقي خطة قصيرة بالرئيسية. خلّيك عليها يوم بيوم.',en:'A short plan waits on the home screen every day. Keep it up, day by day.'},
+  wzMailOn:{ar:'تمام، منذكّرك ✓',en:"Done — we'll remind you ✓"},
+  wzMailOff:{ar:'تمام، بتقدر تشغّلها بعدين من الجدول.',en:'OK — you can turn it on later in the Planner.'},
+  wzToPlan:{ar:'روح لخطة اليوم',en:"Go to today's plan"},
+  todayPlanTitle:{ar:'خطة اليوم',en:"Today's plan"},
+  planGoal:{ar:'{0} باليوم',en:'{0} a day'},
+  planAllDone:{ar:'خلصت خطة اليوم 🎉',en:"Today's plan is done 🎉"},
+  planDoneSub:{ar:'برافو! ارجع بكرا لتحافظ على السلسلة 🔥',en:'Well done! Come back tomorrow to keep your streak 🔥'},
+  daysLeftShort:{ar:'{0} يوم للامتحان',en:'{0} days left'},
+  task_words:{ar:'راجع كلمات',en:'Review words'},
+  task_drill:{ar:'جولة تدريب',en:'Practice round'},
+  task_exam:{ar:'امتحان محاكاة',en:'Mock exam'},
+  installTitle:{ar:'نزّل الموقع كتطبيق',en:'Install it as an app'},
+  installText:{ar:'أيقونة على شاشتك، بتفتح بكبسة زي أي تطبيق.',en:'An icon on your home screen that opens in one tap.'},
+  installIOS:{ar:'بـSafari: اضغط زر المشاركة ⬆️، وبعدين «إضافة إلى الشاشة الرئيسية».',en:'In Safari: tap Share ⬆️, then “Add to Home Screen”.'},
+  installBtn:{ar:'نزّل',en:'Install'},
+  installClose:{ar:'سكّر',en:'Close'},
   chatEmpty:{ar:'اسأل المدرّس عن أي كلمة أو قاعدة. بعد ما تعمل امتحان، أغلاطك بتظهر هون جاهزة للشرح.',
              en:'Ask the tutor about any word or rule. After an exam, your mistakes appear here ready to be explained.'},
   mistakesTitle:{ar:'أغلاطك بآخر امتحان',en:'Your mistakes in the last exam'},
@@ -1487,13 +1581,8 @@ function grade(w, correct){
   else { c.bad++; c.box = 1; }
   c.due = Date.now() + BOX_DAYS[c.box] * DAY;
   S.meta.totalReviews++;
-  const t = todayKey();
-  if(S.meta.lastStudy !== t){
-    const y = dayKey(new Date(Date.now() - DAY));
-    S.meta.streak = (S.meta.lastStudy === y) ? (S.meta.streak + 1) : 1;
-    S.meta.lastStudy = t;
-  }
-  save('srs'); save('meta');
+  save('srs');
+  bumpToday('words');   /* السلسلة، عدّاد خطة اليوم، وقياس النشاط */
 }
 
 /* ════════════════════════ storage ════════════════════════
@@ -1588,6 +1677,7 @@ async function initStore(){
   if(SB_CFG) return initSupabase();
   if(SB_PLACEHOLDER) return showSetupNeeded();
   showLocalOnly();
+  maybeOnboard();
 }
 
 async function loadArtifact(){
@@ -1611,6 +1701,7 @@ async function loadArtifact(){
     if(!found){ ['meta','schedule','srs'].forEach(p => dirty.add(p)); flush(); }
     localSave();
     applyLang();
+    maybeOnboard();
   } catch(e){
     console.warn(t('dbReadFail'), e && e.code);
     showLocalOnly();
@@ -1641,6 +1732,8 @@ async function onSession(session){
     localSave();
     applyLang();
     loadEmailPref();
+    logActivity(false);
+    maybeOnboard();
   } catch(e){
     console.warn(t('dbReadFail'), e && e.message);
     showLocalOnly();
@@ -1752,8 +1845,8 @@ const TABS = [
   {id:'practice', icon:'target'}, {id:'tutor', icon:'chat'}, {id:'schedule', icon:'cal'}
 ];
 const TAB_OF = { study:'vocab', levelTest:'vocab', feed:'vocab', examRun:'exams', examReview:'exams',
-                 drill:'practice', calc:'home' };
-const SCREENS = ['home','vocab','study','levelTest','feed','exams','practice','drill','examRun','examReview','tutor','schedule','calc'];
+                 drill:'practice', calc:'home', welcome:'home' };
+const SCREENS = ['home','welcome','vocab','study','levelTest','feed','exams','practice','drill','examRun','examReview','tutor','schedule','calc'];
 let current = 'home';
 
 /* التسميات تُضبط في applyLang حسب اللغة */
@@ -1772,6 +1865,8 @@ function go(name){
   });
   window.scrollTo({top:0, behavior:'instant'});
   document.body.classList.toggle('feed-open', name === 'feed');   /* الريلز تمرّر بحاويتها، لا بالصفحة */
+  document.body.classList.toggle('no-tabs', name === 'welcome');  /* أول دخول: بلا تشتيت */
+  logActivity(false);
   if(name !== 'feed' && window.speechSynthesis) speechSynthesis.cancel();
   if(name === 'vocab')    renderVocab();
   if(name === 'exams')    renderExams();
@@ -1881,6 +1976,9 @@ function renderHome(){
     ar((PRACTICE.sets || []).reduce((a, s) => a + (s.questions || []).length, 0)));
   $('#tileSchedule').textContent = d == null ? t('tileScheduleNone')
     : (d < 0 ? t('daysPassed') : t('tileScheduleSub', ar(d)));
+  renderPlan();
+  paintInstall();
+  paintEmailPref();
 
   const items = [];
   if(S.meta.streak > 0) items.push(['flame','butter', t('streakN', ar(S.meta.streak)), t('streakSub')]);
@@ -2201,9 +2299,9 @@ document.addEventListener('keydown', e => {
 
 /* ════════════════════════ study session ════════════════════════ */
 let sess = null;
-function startStudy(words, title){
+function startStudy(words, title, opts){
   if(!words || !words.length) return;
-  sess = { queue: shuffle(words).slice(0, 30), i: 0, flipped: false, done: 0 };
+  sess = { queue: shuffle(words).slice(0, 30), i: 0, flipped: false, done: 0, first: !!(opts && opts.first) };
   $('#studyTitle').textContent = title || t('studySession');
   go('study');
   paintCard();
@@ -2251,7 +2349,9 @@ function judge(ok){
 }
 function finishStudy(){
   const n = sess ? sess.done : 0;
+  const first = !!(sess && sess.first);
   sess = null;
+  if(first){ showFirstDone(); return; }
   $('#studyProg').style.width = '100%';
   $('#fc').innerHTML =
     '<div style="font-size:44px">' + svg('check',44) + '</div>' +
@@ -2646,6 +2746,7 @@ function submitExam(auto){
     auto: !!auto
   };
   S.attempts.unshift(attempt);
+  bumpToday('exams');
   if(MODE === 'artifact' && db){
     db.collection('attempts').doc(attempt.id).set(attempt).catch(e => {
       if(e && e.code === 'quota_exceeded') alert(t('quotaFull'));
@@ -2898,6 +2999,7 @@ function finishDrill(){
   const key = 'p:' + drill.set.id;
   S.meta.drills = S.meta.drills || {};
   if(pct > (S.meta.drills[key] || 0)){ S.meta.drills[key] = pct; save('meta'); }
+  bumpToday('drills');
 
   $('#drillProg').style.width = '100%';
   $('#drillBody').innerHTML =
@@ -3000,6 +3102,245 @@ function renderCalc(){
     : '<div class="empty">' + t('noCalc') + '</div>';
 }
 
+/* ════════════════════════ نشاط اليوم ════════════════════════
+   عدّاد لكل يوم (كلمات، جولات تدريب، امتحانات) لخطة اليوم، والسلسلة، وقياس
+   الرجوع بجدول activity_days (supabase/activity.sql). لو الجدول مش موجود، القياس
+   بيتوقف بصمت وباقي الأبب بيشتغل. */
+const hasStudied = () => !!(S.meta.totalReviews || (S.attempts || []).length || Object.keys(S.meta.drills || {}).length);
+
+function todayStats(){
+  const k = todayKey();
+  let st = S.meta.today;
+  if(!st || st.day !== k) st = { day: k, words: 0, drills: 0, exams: 0 };
+  else if(!Object.isExtensible(st)) st = Object.assign({}, st);
+  S.meta.today = st;
+  return st;
+}
+function touchStreak(){
+  const k = todayKey();
+  if(S.meta.lastStudy === k) return;
+  const y = dayKey(new Date(Date.now() - DAY));
+  S.meta.streak = (S.meta.lastStudy === y) ? (S.meta.streak || 0) + 1 : 1;
+  S.meta.lastStudy = k;
+}
+const liveStreak = () => {
+  const y = dayKey(new Date(Date.now() - DAY));
+  return (S.meta.lastStudy === todayKey() || S.meta.lastStudy === y) ? (S.meta.streak || 0) : 0;
+};
+function bumpToday(kind){
+  todayStats()[kind]++;
+  touchStreak();
+  save('meta');
+  logActivity(true);
+}
+
+let actDay = null, actStudied = null, actOff = false;
+function logActivity(studied){
+  if(actOff || MODE !== 'supabase' || !sbUser) return;
+  const day = todayKey();
+  if(studied ? actStudied === day : actDay === day) return;
+  actDay = day;
+  if(studied) actStudied = day;
+  /* زيارة: لا تكتب فوق studied=true لنفس اليوم · دراسة: بتحدّثه لـtrue */
+  sb.from('activity_days')
+    .upsert({ user_id: sbUser.id, day, studied: !!studied }, { onConflict: 'user_id,day', ignoreDuplicates: !studied })
+    .then(({ error }) => { if(error){ actOff = true; console.warn('activity_days unavailable', error.message); } });
+}
+
+/* ════════════════════════ أول دخول ════════════════════════
+   ٣ أسئلة سريعة وبعدها جولة أولى قصيرة فوراً، حتى يطلع الطالب من أول ٣ دقايق
+   وهو متقدّم، مش بس فاتح حساب. الي عنده تقدّم قبل هالتحديث بيتخطّاها. */
+const GOALS = [5, 10, 20];
+let wz = null;
+
+function maybeOnboard(){
+  if(S.meta.onboarded) return;
+  if(hasStudied()){ S.meta.onboarded = true; save('meta'); return; }
+  wz = { step: 0, date: S.schedule.examDate || '', goal: S.meta.dailyGoal || 10, level: S.meta.level || 'easy' };
+  go('welcome');
+  paintWelcome();
+}
+
+function paintWelcome(){
+  const dots = '<div class="wz-dots">' + [0, 1, 2, 3].map(i => '<i' + (i <= wz.step ? ' class="on"' : '') + '></i>').join('') + '</div>';
+  const opt = (attr, val, on, title, sub) =>
+    '<button class="wz-opt' + (on ? ' on' : '') + '" ' + attr + '="' + val + '"><b>' + title + '</b><small>' + sub + '</small></button>';
+  let html;
+  if(wz.step === 0){
+    html = '<h1 class="wz-title">' + t('wzDateTitle') + '</h1><p class="wz-sub">' + t('wzDateSub') + '</p>' +
+      '<input type="date" class="field" id="wzDate" value="' + esc(wz.date) + '" min="' + todayKey() + '">' +
+      '<button class="btn wide" id="wzNext" style="margin-top:18px">' + t('next') + '</button>' +
+      '<button class="btn ghost wide" id="wzSkipDate" style="margin-top:10px">' + t('wzNoDate') + '</button>';
+  } else if(wz.step === 1){
+    html = '<h1 class="wz-title">' + t('wzGoalTitle') + '</h1><p class="wz-sub">' + t('wzGoalSub') + '</p>' +
+      '<div class="wz-opts">' + GOALS.map(g => opt('data-goal', g, g === wz.goal, t('wzGoal' + g), t('wzGoal' + g + 'Sub'))).join('') + '</div>' +
+      '<button class="btn wide" id="wzNext">' + t('next') + '</button>';
+  } else if(wz.step === 2){
+    html = '<h1 class="wz-title">' + t('wzLvlTitle') + '</h1><p class="wz-sub">' + t('wzLvlSub') + '</p>' +
+      '<div class="wz-opts">' + DRILL_LEVELS.map(l => opt('data-level', l, l === wz.level, t('wzLvl_' + l), t('wzLvlSub_' + l))).join('') + '</div>' +
+      '<button class="btn wide" id="wzNext">' + t('next') + '</button>';
+  } else {
+    const days = wz.date ? Math.ceil((startOfDay(wz.date + 'T00:00:00') - startOfDay(Date.now())) / DAY) : null;
+    html = '<h1 class="wz-title">' + t('wzReadyTitle') + '</h1>' +
+      '<ul class="wz-sum">' +
+        '<li>⏱️ ' + t('wzSumGoal', t('wzGoal' + wz.goal)) + '</li>' +
+        '<li>📅 ' + (days != null && days >= 0 ? t('wzSumDays', ar(days)) : t('wzSumNoDate')) + '</li>' +
+        '<li>🎯 ' + t('wzSumLevel', t('level_' + wz.level)) + '</li>' +
+        '<li>📚 ' + t('wzSumFirst') + '</li>' +
+      '</ul>' +
+      '<button class="btn wide" id="wzStart">' + t('wzStart') + '</button>';
+  }
+  $('#welcomeBody').innerHTML = dots + html +
+    (wz.step > 0 ? '<button class="link wz-back" id="wzBack">' + svg('chevR', 16) + ' ' + t('back') + '</button>' : '');
+
+  const on = (sel, fn) => { const el = $(sel); if(el) el.addEventListener('click', fn); };
+  on('#wzNext', () => {
+    if(wz.step === 0) wz.date = $('#wzDate').value || '';
+    wz.step++; paintWelcome();
+  });
+  on('#wzSkipDate', () => { wz.date = ''; wz.step = 1; paintWelcome(); });
+  on('#wzBack', () => { wz.step--; paintWelcome(); });
+  on('#wzStart', finishWelcome);
+  $$('#welcomeBody [data-goal]').forEach(b => b.addEventListener('click', () => { wz.goal = +b.dataset.goal; paintWelcome(); }));
+  $$('#welcomeBody [data-level]').forEach(b => b.addEventListener('click', () => { wz.level = b.dataset.level; paintWelcome(); }));
+}
+
+function finishWelcome(){
+  S.schedule.examDate = wz.date || null;
+  S.meta.dailyGoal = wz.goal;
+  S.meta.level = wz.level;
+  S.meta.onboarded = true;
+  save('schedule'); save('meta');
+  wz = null;
+  const firstWords = ALL_WORDS.filter(w => LEVELS[0] && w.levelId === LEVELS[0].id).slice(0, 5);
+  if(firstWords.length) startStudy(firstWords, t('firstSession'), { first: true });
+  else go('home');
+}
+
+function showFirstDone(){
+  go('welcome');
+  const askMail = MODE === 'supabase' && !!sbUser && emailPref === null;
+  $('#welcomeBody').innerHTML =
+    '<div class="wz-done">🎉</div>' +
+    '<h1 class="wz-title">' + t('wzDoneTitle') + '</h1>' +
+    '<p class="wz-sub">' + t('wzDoneSub') + '</p>' +
+    (askMail
+      ? '<div class="card wz-mail"><b>' + t('emailAskTitle') + '</b><p>' + t('emailAskText') + '</p>' +
+          '<div class="row" style="gap:8px; margin-top:12px">' +
+            '<button class="btn sm" id="wzMailYes">' + t('emailYes') + '</button>' +
+            '<button class="btn ghost sm" id="wzMailNo">' + t('emailNo') + '</button>' +
+          '</div></div>'
+      : '') +
+    '<button class="btn wide" id="wzHome" style="margin-top:18px">' + t('wzToPlan') + '</button>';
+  if(askMail){
+    const answer = yes => {
+      setEmailPref(yes);
+      $('#welcomeBody .wz-mail').innerHTML = '<p>' + t(yes ? 'wzMailOn' : 'wzMailOff') + '</p>';
+    };
+    $('#wzMailYes').addEventListener('click', () => answer(true));
+    $('#wzMailNo').addEventListener('click', () => answer(false));
+  }
+  $('#wzHome').addEventListener('click', () => go('home'));
+}
+
+/* ════════════════════════ خطة اليوم ════════════════════════ */
+function planTasks(){
+  const goal = S.meta.dailyGoal || 10;
+  const st = todayStats();
+  const tasks = [{ id: 'words', icon: 'book', need: goal, done: st.words }];
+  if(goal >= 10) tasks.push({ id: 'drill', icon: 'target', need: goal >= 20 ? 2 : 1, done: st.drills });
+  const since = (Date.now() - ((S.attempts[0] && S.attempts[0].at) || 0)) / DAY;
+  const d = daysToExam();
+  if(st.exams || (goal >= 20 && since >= 7) || (d != null && d >= 0 && d <= 14 && since >= 3))
+    tasks.push({ id: 'exam', icon: 'doc', need: 1, done: st.exams });
+  return tasks;
+}
+
+function renderPlan(){
+  const box = $('#plan');
+  const tasks = planTasks();
+  const allDone = tasks.every(x => x.done >= x.need);
+  const streak = liveStreak();
+  const d = daysToExam();
+  box.hidden = false;
+  box.innerHTML =
+    '<div class="plan-head"><div><div class="eyebrow">' + t('todayPlanTitle') + '</div>' +
+      '<h2>' + (allDone ? t('planAllDone') : t('planGoal', t('wzGoal' + (S.meta.dailyGoal || 10)))) + '</h2></div>' +
+      '<div class="plan-chips">' +
+        (streak ? '<span class="chip">🔥 ' + ar(streak) + '</span>' : '') +
+        (d != null && d >= 0 ? '<span class="chip">' + t('daysLeftShort', ar(d)) + '</span>' : '') +
+      '</div></div>' +
+    '<div class="plan-list">' + tasks.map(x => {
+      const ok = x.done >= x.need;
+      return '<button class="plan-task' + (ok ? ' done' : '') + '" data-task="' + x.id + '">' +
+        '<span class="plan-ic">' + svg(ok ? 'check' : x.icon, 19) + '</span>' +
+        '<span class="plan-txt"><b>' + t('task_' + x.id) + '</b>' +
+          '<span class="plan-bar"><i style="width:' + Math.min(100, Math.round(x.done / x.need * 100)) + '%"></i></span></span>' +
+        '<span class="plan-n num">' + ar(Math.min(x.done, x.need)) + '/' + ar(x.need) + '</span>' +
+      '</button>';
+    }).join('') + '</div>' +
+    (allDone ? '<p class="plan-done">' + t('planDoneSub') + '</p>' : '');
+  $$('#plan [data-task]').forEach(b => b.addEventListener('click', () => startTask(b.dataset.task)));
+}
+
+function startTask(id){
+  if(id === 'words'){
+    const need = Math.max(5, (S.meta.dailyGoal || 10) - todayStats().words);
+    const due = dueWords();
+    const fresh = ALL_WORDS.filter(w => isUnlocked(w.levelId) && !isMastered(w));
+    const pool = due.length ? due : (fresh.length ? fresh : ALL_WORDS.filter(w => isUnlocked(w.levelId)));
+    startStudy(shuffle(pool).slice(0, need), t('todaySession'));
+  } else if(id === 'drill'){
+    const set = nextDrillSet();
+    if(set) startDrill(set.id); else go('practice');
+  } else go('exams');
+}
+
+/* جولة التدريب الجاية: مستوى الطالب أولاً، ومهارة مختلفة كل يوم، وأول جولة ما وصل فيها ٨٠٪ */
+function nextDrillSet(){
+  const sets = PRACTICE.sets || [];
+  if(!sets.length) return null;
+  const level = S.meta.level || 'easy';
+  const start = Math.floor(Date.now() / DAY) % DRILL_TYPES.length;
+  const types = DRILL_TYPES.slice(start).concat(DRILL_TYPES.slice(0, start));
+  for(const lv of [level].concat(DRILL_LEVELS.filter(l => l !== level)))
+    for(const ty of types){
+      const s = sets.find(x => x.type === ty && x.level === lv && setBest(x) < 80);
+      if(s) return s;
+    }
+  return sets[0];
+}
+
+/* ════════════════════════ نزّل كتطبيق ════════════════════════
+   بس بنسخة الموقع (فيها manifest). أندرويد وكروم: زر تنزيل مباشر؛ آيفون: شرح
+   الخطوتين بـSafari. بتطلع بعد أول دراسة، ومرة وحدة إذا سكّرها. */
+let installEvt = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; paintInstall(); });
+window.addEventListener('appinstalled', () => { installEvt = null; S.meta.installDismissed = true; save('meta'); paintInstall(); });
+const isStandalone = () => (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent);
+
+function paintInstall(){
+  const box = $('#installCard');
+  const show = !!document.querySelector('link[rel="manifest"]') && !isStandalone() &&
+               !S.meta.installDismissed && hasStudied() && (!!installEvt || isIOS());
+  box.hidden = !show;
+  if(!show) return;
+  box.innerHTML =
+    '<span class="rowcard-ic butter">' + svg('reels', 19) + '</span>' +
+    '<div style="flex:1; min-width:0"><b>' + t('installTitle') + '</b><p>' + t(installEvt ? 'installText' : 'installIOS') + '</p>' +
+      (installEvt ? '<button class="btn sm" id="installGo" style="margin-top:10px">' + t('installBtn') + '</button>' : '') +
+    '</div>' +
+    '<button class="icon-btn install-x" id="installX" aria-label="' + esc(t('installClose')) + '">' + svg('x', 16) + '</button>';
+  const go_ = $('#installGo');
+  if(go_) go_.addEventListener('click', () => {
+    const e = installEvt; installEvt = null;
+    e.prompt();
+    e.userChoice.finally(paintInstall);
+  });
+  $('#installX').addEventListener('click', () => { S.meta.installDismissed = true; save('meta'); paintInstall(); });
+}
+
 /* ════════════════════════ تذكيرات الإيميل ════════════════════════
    الموافقة بجدول email_prefs (RLS: كل طالب صفّه بس). الإرسال نفسه من سكربت
    Google Apps Script بيقرأ الموافقات — شوف EMAIL.md. بس لحسابات Supabase؛ ولو
@@ -3037,7 +3378,8 @@ async function setEmailPref(on){
 }
 function paintEmailPref(){
   const ok = MODE === 'supabase' && !!sbUser && emailPref !== 'unavailable';
-  $('#emailAsk').hidden = !(ok && emailPref === null);
+  /* بطاقة السؤال بعد أول دراسة، مش أول ما يفوت — وقتها بيوافق أكثر */
+  $('#emailAsk').hidden = !(ok && emailPref === null && hasStudied());
   $('#emailToggleRow').hidden = !ok;
   $('#emailToggle').checked = emailPref === true;
 }
