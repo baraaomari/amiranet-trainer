@@ -590,6 +590,10 @@ body.feed-open{overflow:hidden}
 }
 .auth-msg.ok{background:var(--good-bg); color:var(--good)}
 .auth-lang{display:block; margin:18px auto 0; font-size:12.5px; background:none}
+.auth-about{margin-top:24px; padding-top:18px; border-top:1px solid var(--line); text-align:start}
+.auth-about h2{font-size:16px; margin-bottom:6px}
+.auth-about p{color:var(--muted); font-size:13px; line-height:1.8}
+.auth-about ul{margin:10px 0 0; padding-inline-start:18px; font-size:13px; line-height:1.9}
 
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
@@ -986,6 +990,19 @@ body.feed-open{overflow:hidden}
       <button class="btn wide" id="authGo" type="submit" style="margin-top:18px" data-i18n="authSignIn">تسجيل دخول</button>
     </form>
 
+    <!-- تعريف بالموقع: أول ما يشوفه الزائر الجديد، وأول ما يقرأه جوجل -->
+    <section class="auth-about" aria-labelledby="aboutTitle">
+      <h2 id="aboutTitle" data-i18n="aboutTitle">تحضير مجاني لامتحان أميرنت</h2>
+      <p data-i18n="aboutText">أميرنت (אמירנט / AMIRNET) هو امتحان الإنجليزي المحوسب الي بتطلبه الجامعات والكليات بإسرائيل، وعلامته من ٥٠ لـ١٥٠. هون بتتحضّر إله بالعربي، ببلاش:</p>
+      <ul>
+        <li data-i18n="about1">٣٥٩ كلمة من كلمات الامتحان، مع ترجمة وجملة مثال ومراجعة ذكية</li>
+        <li data-i18n="about2">٥ امتحانات محاكاة بنفس مبنى أميرنت: ٦ أقسام و٢٣ سؤال، مع مؤقّت لكل قسم</li>
+        <li data-i18n="about3">٩٦ سؤال تدريب: إعادة صياغة، فهم مقروء، وإكمال جمل، بثلاث مستويات</li>
+        <li data-i18n="about4">شرح بالعربي لكل سؤال: ليش الجواب الصح صح، وليش كل خيار ثاني غلط</li>
+        <li data-i18n="about5">حاسبة علامة من ١٥٠، وجدول دراسة لحد يوم الامتحان</li>
+      </ul>
+    </section>
+
     <button class="link auth-lang" id="authLang">English</button>
   </div>
 </div>
@@ -1323,6 +1340,14 @@ const STR = {
 
   /* بوابة الحساب */
   authTitle:{ar:'مدرّب أميرنت',en:'Amiranet Trainer'},
+  aboutTitle:{ar:'تحضير مجاني لامتحان أميرنت',en:'Free Amiranet exam prep'},
+  aboutText:{ar:'أميرنت (אמירנט / AMIRNET) هو امتحان الإنجليزي المحوسب الي بتطلبه الجامعات والكليات بإسرائيل، وعلامته من ٥٠ لـ١٥٠. هون بتتحضّر إله بالعربي، ببلاش:',
+             en:'Amiranet (אמירנט / AMIRNET) is the computerised English exam required by universities and colleges in Israel, scored 50–150. Prepare for it here, free:'},
+  about1:{ar:'٣٥٩ كلمة من كلمات الامتحان، مع ترجمة وجملة مثال ومراجعة ذكية',en:'359 exam words with translation, an example sentence and spaced repetition'},
+  about2:{ar:'٥ امتحانات محاكاة بنفس مبنى أميرنت: ٦ أقسام و٢٣ سؤال، مع مؤقّت لكل قسم',en:'5 mock exams in the real format: 6 sections, 23 questions, a timer per section'},
+  about3:{ar:'٩٦ سؤال تدريب: إعادة صياغة، فهم مقروء، وإكمال جمل، بثلاث مستويات',en:'96 practice questions — restatement, reading, sentence completion — at three levels'},
+  about4:{ar:'شرح بالعربي لكل سؤال: ليش الجواب الصح صح، وليش كل خيار ثاني غلط',en:'An explanation for every question: why the answer is right and why each other option is wrong'},
+  about5:{ar:'حاسبة علامة من ١٥٠، وجدول دراسة لحد يوم الامتحان',en:'A score calculator out of 150 and a study planner up to exam day'},
   authSubIn:{ar:'سجّل دخولك لتتابع تقدّمك على كل أجهزتك',en:'Sign in to keep your progress on every device'},
   authSubUp:{ar:'أنشئ حساباً مجانياً ليُحفظ تقدّمك',en:'Create a free account so your progress is saved'},
   authSignIn:{ar:'تسجيل دخول',en:'Sign in'},

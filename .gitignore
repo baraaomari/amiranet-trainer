@@ -12,6 +12,8 @@ content/
 # تُولَّد كلها بأمر: python update.py
 app.html
 web/index.html
+web/robots.txt
+web/sitemap.xml
 *.zip
 data/vocab.json
 data/exams.json

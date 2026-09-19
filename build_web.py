@@ -24,12 +24,48 @@ ROOT = Path(__file__).parent
 APP = ROOT / "app.html"
 WEB = ROOT / "web"
 
+# عنوان الموقع النهائي — للـcanonical والـsitemap ومعاينات الروابط.
+# لو صار عندك دومين: SITE_URL=https://example.com python update.py
+SITE = os.environ.get("SITE_URL", "https://amiranet-trainer.netlify.app").rstrip("/")
+
+# رمز Google Search Console (طريقة HTML tag): الصق قيمة content فقط في هذا الملف.
+VERIFY_FILE = WEB / "google-site-verification.txt"
+
+TITLE = "مدرّب أميرنت — تحضير مجاني لامتحان أميرنت بالعربي | אמירנט · AMIRNET"
+DESCRIPTION = ("تحضير مجاني لامتحان أميرنت (אמירנט / AMIRNET) بالعربي: ٣٥٩ كلمة مع ترجمة ومراجعة ذكية، "
+               "٥ امتحانات محاكاة بنفس مبنى الامتحان مع مؤقّت، ٩٦ سؤال تدريب مع شرح بالعربي، "
+               "وحاسبة علامة من ١٥٠.")
+
+JSONLD = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "مدرّب أميرنت · Amiranet Trainer",
+    "alternateName": ["أميرنت", "اميرنت", "אמירנט", "AMIRNET"],
+    "url": SITE + "/",
+    "description": DESCRIPTION,
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web",
+    "inLanguage": ["ar", "en"],
+    "isAccessibleForFree": True,
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "ILS"},
+}
+
 SHELL = """<!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="تحضير لامتحان أميرنت: حفظ كلمات، امتحانات محاكاة، ومدرّس.">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<link rel="canonical" href="{{SITE}}/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="مدرّب أميرنت">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta property="og:url" content="{{SITE}}/">
+<meta property="og:locale" content="ar_AR">
+<meta name="twitter:card" content="summary">
+{{VERIFY}}<script type="application/ld+json">{{JSONLD}}</script>
 <meta name="theme-color" content="#F1F2F4">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%93%9A</text></svg>">
 <style>
@@ -85,7 +121,28 @@ def main():
         sys.exit("ملف مفقود: app.html — شغّل build.py أولاً")
     WEB.mkdir(exist_ok=True)
 
-    (WEB / "index.html").write_text(SHELL.replace("{{APP}}", APP.read_text(encoding="utf-8")), encoding="utf-8")
+    import html, json, datetime
+    token = VERIFY_FILE.read_text(encoding="utf-8").strip() if VERIFY_FILE.exists() else ""
+    head = (SHELL
+            .replace("{{TITLE}}", html.escape(TITLE))
+            .replace("{{DESCRIPTION}}", html.escape(DESCRIPTION))
+            .replace("{{SITE}}", SITE)
+            .replace("{{VERIFY}}", '<meta name="google-site-verification" content="%s">\n' % html.escape(token) if token else "")
+            .replace("{{JSONLD}}", json.dumps(JSONLD, ensure_ascii=False).replace("</", "<\\/")))
+    # عنوان القالب القصير خاص بنسخة Claude؛ هون العنوان الكامل بالـhead، فما بدنا عنوانين
+    import re
+    app = re.sub(r"^\s*<title>.*?</title>\s*", "", APP.read_text(encoding="utf-8"), count=1, flags=re.S)
+    (WEB / "index.html").write_text(head.replace("{{APP}}", app), encoding="utf-8")
+
+    # لمحرّكات البحث: مسموح الأرشفة، وهاي خريطة الموقع
+    (WEB / "robots.txt").write_text("User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n" % SITE, encoding="utf-8")
+    (WEB / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        '  <url><loc>%s/</loc><lastmod>%s</lastmod></url>\n'
+        '</urlset>\n' % (SITE, datetime.date.today().isoformat()), encoding="utf-8")
+    if not token:
+        print("ملاحظة: لا يوجد رمز Google Search Console بعد (web/google-site-verification.txt).")
 
     cfg = WEB / "config.js"
     if not cfg.exists():
@@ -122,7 +179,7 @@ def main():
     # ملف واحد يُسحب إلى Netlify بدل مجلد
     zip_path = ROOT / "amirnet-site.zip"
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
-        for name in ("index.html", "config.js"):
+        for name in ("index.html", "config.js", "robots.txt", "sitemap.xml"):
             z.write(WEB / name, name)
     print("وحُزم كل شيء في: %s  (%.0f KB)"
           % (zip_path.name, zip_path.stat().st_size / 1024))
