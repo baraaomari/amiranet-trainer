@@ -65,7 +65,14 @@ on `data/practice.json`, `data/exams_generated.json` or any drafts file.
 ```bash
 python tools/validate_content.py                       # everything in data/
 python tools/validate_content.py --require-explain drafts/new-sets.json
+python tools/merge_drafts.py drafts/*.json             # merge audited drafts into data/practice.json
 ```
+
+[`tools/merge_drafts.py`](../tools/merge_drafts.py) is the last step. It refuses:
+- set ids that already exist
+- questions without an explanation
+
+It orders sets by skill, level and number, and runs the validator on the result before it writes `data/practice.json`.
 
 ## Using the agents
 
@@ -89,6 +96,11 @@ in the agent prompts exist.
 | In many sentence completions the key was the only positive or negative word ("odd one out") | practice, sentence completion | Distractors replaced so one shares the key's direction |
 | **A was correct in 53 of 58 exam sentence completions**, and D was never correct in restatement | mock exams | Options swapped with their explanations; exam ids versioned so old attempts aren't misread |
 | Arabic explanations used "كلما … كلما" and named option letters | explanations | Rewritten; both now flagged by the validator |
+| **Second batch (135 items), first pass:** in every sentence-completion set, the Q5 answer letter matched Q1 | new practice sets | Q5 options reordered |
+| Keys that were the only two-word verb or the only negative word; a restatement key that added "money" | new practice sets | Distractors and keys rewritten |
+| Items that closely echoed existing exam or practice items (inversion patterns, "Far from…", the "minister … intensified" frame) | new practice sets | Replaced with new items |
+| A 24-line passage, and a line implying employment fell "not steadily" when the point was no long-term fall | new reading sets | Lines merged and reworded; references re-checked |
+| Explanations cited one line for quotes spanning two, and cut quotes before the key word | new reading explanations | Line ranges and quotes corrected |
 
 None of the audits found a wrong answer key. Every problem found made questions guessable,
 ambiguous or less accurate, and those are hard to spot when you review your own work.
