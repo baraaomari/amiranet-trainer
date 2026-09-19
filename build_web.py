@@ -31,6 +31,10 @@ SITE = os.environ.get("SITE_URL", "https://amiranet-trainer.netlify.app").rstrip
 # رمز Google Search Console (طريقة HTML tag): الصق قيمة content فقط في هذا الملف.
 VERIFY_FILE = WEB / "google-site-verification.txt"
 
+# سكربت إحصائيات (PostHog) — بيندرج بالـhead لنسخة الموقع بس؛ صفحة Claude بتمنع
+# السكربتات الخارجية أصلاً. عدّل هاد الملف بدل ملف الأبب الكبير.
+ANALYTICS_FILE = WEB / "analytics.html"
+
 TITLE = "مدرّب أميرنت — تحضير مجاني لامتحان أميرنت بالعربي | אמירנט · AMIRNET"
 DESCRIPTION = ("تحضير مجاني لامتحان أميرنت (אמירנט / AMIRNET) بالعربي: ٣٥٩ كلمة مع ترجمة ومراجعة ذكية، "
                "٥ امتحانات محاكاة بنفس مبنى الامتحان مع مؤقّت، ٩٦ سؤال تدريب مع شرح بالعربي، "
@@ -192,6 +196,8 @@ def main():
     # عنوان القالب القصير خاص بنسخة Claude؛ هون العنوان الكامل بالـhead، فما بدنا عنوانين
     import re
     app = re.sub(r"^\s*<title>.*?</title>\s*", "", APP.read_text(encoding="utf-8"), count=1, flags=re.S)
+    if ANALYTICS_FILE.exists():
+        head = head.replace("</head>", ANALYTICS_FILE.read_text(encoding="utf-8").strip() + "\n</head>", 1)
     (WEB / "index.html").write_text(head.replace("{{APP}}", app), encoding="utf-8")
 
     # لمحرّكات البحث: مسموح الأرشفة، وهاي خريطة الموقع
