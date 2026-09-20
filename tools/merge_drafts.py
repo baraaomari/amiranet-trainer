@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Merge audited draft sets into data/practice.json.
+"""Merge audited drafts into data/practice.json (sets) or data/exams_generated.json (exams).
 
 Usage:
   python tools/merge_drafts.py drafts/restatement.json drafts/reading.json ...
+  python tools/merge_drafts.py drafts/exam-g6.json drafts/exam-g7.json
   python tools/merge_drafts.py --dry-run drafts/*.json
 
 Every draft question must already carry its Arabic `explain` (added by the Arabic
-Tutor agent). Set ids must be new. The merged file is ordered by skill, then level,
-then set number, and runs through tools/validate_content.py before it is written.
+Tutor agent). Set and exam ids must be new. Practice sets are ordered by skill, then
+level, then set number; exams keep their given order. Both files run through
+tools/validate_content.py before anything is written.
 """
 import json
 import re
@@ -18,6 +20,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PRACTICE = ROOT / "data" / "practice.json"
+EXAMS = ROOT / "data" / "exams_generated.json"
 TYPE_ORDER = {"restatement": 0, "reading": 1, "sentence-completion": 2}
 LEVEL_ORDER = {"easy": 0, "medium": 1, "hard": 2}
 
@@ -42,50 +45,79 @@ def main(argv):
         print(__doc__)
         return 2
 
-    data = json.loads(PRACTICE.read_text(encoding="utf-8"))
-    existing = {s["id"] for s in data["sets"]}
-    added, problems = [], []
+    practice = json.loads(PRACTICE.read_text(encoding="utf-8"))
+    exams = json.loads(EXAMS.read_text(encoding="utf-8"))
+    ids = {s["id"] for s in practice["sets"]} | {e["id"] for e in exams["exams"]}
+    new_sets, new_exams, problems = [], [], []
+
+    def explained(item, questions):
+        missing = [i for i, q in enumerate(questions, 1) if not q.get("explain")]
+        if missing:
+            problems.append(f"{item} has no explanation for Q{missing}")
+        return not missing
+
     for path in drafts:
-        for s in json.loads(path.read_text(encoding="utf-8")).get("sets", []):
+        draft = json.loads(path.read_text(encoding="utf-8"))
+        for s in draft.get("sets", []):
             sid = s.get("id", "?")
-            if sid in existing:
+            if sid in ids:
                 problems.append(f"{path.name}: set id '{sid}' already exists")
-                continue
-            missing = [i for i, q in enumerate(s.get("questions", []), 1) if not q.get("explain")]
-            if missing:
-                problems.append(f"{path.name}: {sid} has no explanation for Q{missing}")
-                continue
-            existing.add(sid)
-            added.append(s)
+            elif explained(f"{path.name}: {sid}", s.get("questions", [])):
+                ids.add(sid)
+                new_sets.append(s)
+        for e in draft.get("exams", []):
+            eid = e.get("id", "?")
+            qs = [q for sec in e.get("sections", []) for q in sec.get("questions", [])]
+            if eid in ids:
+                problems.append(f"{path.name}: exam id '{eid}' already exists")
+            elif explained(f"{path.name}: {eid}", qs):
+                ids.add(eid)
+                new_exams.append(e)
+        if not draft.get("sets") and not draft.get("exams"):
+            problems.append(f'{path.name}: no top-level "sets" or "exams"')
     if problems:
         print("Not merged:")
         for p in problems:
             print("  ✗", p)
         return 1
 
-    data["sets"] = sorted(data["sets"] + added, key=sort_key)
-    text = dump(data)
+    practice["sets"] = sorted(practice["sets"] + new_sets, key=sort_key)
+    exams["exams"] = exams["exams"] + new_exams
+    texts = {PRACTICE: dump(practice), EXAMS: dump(exams)}
 
     # validate the result before touching data/
-    with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".json", delete=False) as tmp:
-        tmp.write(text)
+    tmps = {}
+    for path, text in texts.items():
+        with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".json", delete=False) as tmp:
+            tmp.write(text)
+        tmps[path] = tmp.name
     check = subprocess.run([sys.executable, str(ROOT / "tools" / "validate_content.py"), "--require-explain",
-                            tmp.name, str(ROOT / "data" / "exams_generated.json")],
-                           capture_output=True, text=True, encoding="utf-8")
-    Path(tmp.name).unlink(missing_ok=True)
+                            *tmps.values()], capture_output=True, text=True, encoding="utf-8")
+    for tmp in tmps.values():
+        Path(tmp).unlink(missing_ok=True)
     print(check.stdout.strip())
     if check.returncode != 0:
-        print("Validation failed — data/practice.json was not changed.")
+        print("Validation failed — nothing in data/ was changed.")
         return 1
 
     by_type = {}
-    for s in added:
+    for s in new_sets:
         by_type[s["type"]] = by_type.get(s["type"], 0) + len(s["questions"])
-    print(f"{'Would add' if dry else 'Added'} {len(added)} sets:", ", ".join(f"{k} {v} questions" for k, v in by_type.items()))
+    verb = "Would add" if dry else "Added"
+    if new_sets:
+        print(f"{verb} {len(new_sets)} practice sets:", ", ".join(f"{k} {v} questions" for k, v in by_type.items()))
+    if new_exams:
+        n = sum(len(sec["questions"]) for e in new_exams for sec in e["sections"])
+        print(f"{verb} {len(new_exams)} exams ({n} questions):", ", ".join(e["id"] for e in new_exams))
     if not dry:
-        PRACTICE.write_text(text, encoding="utf-8")
-        total = sum(len(s["questions"]) for s in data["sets"])
-        print(f"data/practice.json now has {len(data['sets'])} sets, {total} questions.")
+        if new_sets:
+            PRACTICE.write_text(texts[PRACTICE], encoding="utf-8")
+            total = sum(len(s["questions"]) for s in practice["sets"])
+            print(f"data/practice.json now has {len(practice['sets'])} sets, {total} questions.")
+        if new_exams:
+            EXAMS.write_text(texts[EXAMS], encoding="utf-8")
+            total = sum(len(sec["questions"]) for e in exams["exams"] for sec in e["sections"])
+            print(f"data/exams_generated.json now has {len(exams['exams'])} exams, {total} questions.")
     return 0
 
 
